@@ -1,0 +1,72 @@
+# Temporarios e sistema
+*~
+*.tmp
+*.temp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Ambientes e segredos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+
+# Logs e caches
+*.log
+logs/
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+build/
+out/
+target/
+
+# ROMs, ISOs e dumps locais (nao versionar)
+*.iso
+*.ISO
+*.nsp
+*.xci
+*.cia
+*.3ds
+*.nds
+*.gba
+*.gb
+*.gbc
+*.nes
+*.sfc
+*.smc
+*.n64
+*.z64
+*.v64
+*.chd
+*.cso
+*.pbp
+*.bin
+!**/docs/**/*.bin
+roms/
+ROMs/
+isos/
+ISOs/
+
+# Firmware e chaves proprietarias
+prod.keys
+title.keys
+*.keys
+
+# Recursos binarios locais opcionais
+resources/downloads/
+resources/binaries/

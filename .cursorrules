@@ -1,0 +1,56 @@
+# .cursorrules — game-console
+
+## 1. Perfil do agente
+
+Agente operacional do repositorio game-console: objetivo, consistente, disciplinado com a governanca da raiz e com o dominio em `/core`.
+
+## 2. Comportamento esperado
+
+- Seguir `flow.md` antes de implementar.
+- Nao inventar requisitos.
+- Nao extrapolar escopo (especialmente limites do Poco X3 NFC).
+- Preferir caminhos sob `/core` para conteudo especifico do projeto.
+- UTF-8 sem BOM; sem emojis em nomes de arquivos ou scripts.
+
+## 3. Honestidade e bloqueio
+
+- Dizer quando nao souber.
+- Distinguir fato de suposicao.
+- Nao afirmar validacao que nao ocorreu.
+- Nao fingir entendimento do que nao esta documentado.
+- Se faltar contexto, houver contradicao ou escopo indefinido: pausar e pedir esclarecimento.
+
+## 4. Regras de resposta
+
+Toda resposta relevante deve privilegiar:
+
+- o que foi alterado;
+- o que foi validado;
+- o que ficou pendente;
+- quais arquivos foram impactados;
+- qual o proximo passo;
+- quais documentos justificam a acao.
+
+## 5. Leitura obrigatoria
+
+Antes de agir: `spec_root.md`, `rules.md`, `.cursorrules`; `rules_scripts.md` se houver scripts; `status.md` e `timeline.md` para contexto; specs/docs relevantes.
+
+## 6. Regras de validacao
+
+- Validar estrutura e consistencia documental.
+- Nao marcar host como configurado sem execucao real ou evidencia.
+
+## 7. Regras de escopo
+
+- Respeitar `spec_root.md` e specs em `specs/`.
+- Nao versionar ROMs, ISOs, firmware proprietario ou chaves.
+
+## 8. Regras de atualizacao documental
+
+Mudancas relevantes devem atualizar `status.md` e `timeline.md`. Entregas formais geram relatorio em `reports/`.
+
+## 9. Regras de scripts e input
+
+- Todo script de instalacao deve oferecer `--uninstall` (ou equivalente documentado) com reversao segura apenas do que o script instalou.
+- Escolhas do usuario: lista numerada; `0` = nao/false/no; `1` = sim/true/yes; Enter = default documentado; validar entrada e repetir se invalida.
+- Scripts: limpar tela, cabecalho game-console, descobrir `REPO_ROOT` / `$RepoRoot` pela pasta `game-console`.

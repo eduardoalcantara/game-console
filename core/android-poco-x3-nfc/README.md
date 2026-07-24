@@ -1,42 +1,57 @@
-# Android — Poco X3 NFC (jogos legados)
+# Android — celular e tablet (ES-DE + ADB)
 
-## Escopo do hardware
+Documentacao e preparacao de recursos para emulacao legada em aparelhos Android.
 
-O Poco X3 NFC utiliza o chipset Snapdragon 732G. Limite a configuracao a sistemas de 8-bit ate PlayStation 1, Nintendo 64 e PSP. Nao tente configurar emuladores de Switch ou PS2 neste dispositivo.
+Ordem de implantacao:
 
-## Softwares e emuladores (download e configuracao)
+1. **Celular** — Poco X3 NFC (Snapdragon 732G)
+2. **Tablet** — mesmo fluxo ADB/APK e mesma arvore de ROMs (modelo a registrar na checklist)
 
-### 1. Frontend Daijisho
+## Escopo de hardware
 
-Instale o frontend **Daijisho** (disponivel na Google Play Store).
+Limite pratico no Poco X3 NFC: sistemas da biblioteca documentada (8-bit ate PS1 / arcade leve). Nao configurar Switch ou PS2 nestes aparelhos.
 
-### 2. RetroArch (AArch64)
+Biblioteca atual do operador: ver `docs/rom-layout.md`. Pasta `PC` da origem fica fora deste passo. N64 e PSP nao constam na biblioteca atual.
 
-Baixe o **RetroArch (AArch64)** via site oficial (build noturna) ou Play Store.
+## Caminho primario: ADB + APKs oficiais
 
-- Configure os seguintes cores (nucleos): `Snes9x` (SNES), `Genesis Plus GX` (Mega Drive), `Mupen64Plus-Next` (N64).
-- Defina a API de video para `Vulkan` em `Configuracoes > Video`.
+Play Store e apenas fallback restrito. Motivos principais:
 
-### 3. DuckStation (PS1)
+- RetroArch na loja e limitado (Core Downloader restrito; doc Libretro nao recomenda).
+- ES-DE Android e pago e **nao** esta na Play Store.
+- DuckStation Android sem suporte ativo do autor; arquivar APK oficial.
 
-Instale o **DuckStation** (Play Store) para PS1.
+## Stack
 
-- Configure a resolucao interna para 2x (720p).
-- Defina o renderizador da GPU para `Vulkan`.
+| Papel | Software | Obtencao |
+|---|---|---|
+| Frontend | ES-DE (pago, canal oficial) | `es-de.org` / Patreon / Galaxy Store / AppGallery |
+| Multi-sistema | RetroArch AArch64 | APK em `retroarch.com` |
+| PS1 | DuckStation | APK em `duckstation.org/android/` |
 
-### 4. PPSSPP (PSP)
+Daijisho e PPSSPP nao entram no caminho primario desta entrega.
 
-Instale o **PPSSPP** (Play Store) para PSP.
+## Ordem recomendada de leitura
 
-- Configure o pulo de quadros (Frameskip) para 0.
-- Ative o buffer de graficos.
+1. [docs/resources-inventory.md](docs/resources-inventory.md) — o que baixar e onde colocar em `resources/android/`
+2. [docs/rom-layout.md](docs/rom-layout.md) — mapeamento da biblioteca → pastas ES-DE
+3. [docs/setup-adb.md](docs/setup-adb.md) — instalacao primaria
+4. [docs/checklist.md](docs/checklist.md) — aceite celular / tablet
+5. [docs/setup-play-store.md](docs/setup-play-store.md) — fallback (opcional)
 
-## Integracao
+Contrato da pasta de binarios locais: [resources/android/README.md](../../../resources/android/README.md).
 
-No Daijisho, aponte os caminhos das pastas de ROMs e selecione os emuladores instalados acima como os "Players" padrao para cada plataforma. Sincronize a biblioteca para baixar as artes automaticamente.
+Ferramentas ADB na raiz do repo: [tools-android.md](../../../tools-android.md).
 
-## Notas
+## Fora de escopo (este passo)
 
-- Nao versionar ROMs neste repositorio.
-- Documentacao complementar pode ser adicionada em `docs/`.
-- Autoridade do projeto: `spec_root.md`. Fonte de dominio: `specs/spec-domain-emulation.md`.
+- Configuracao ao vivo ja marcada como concluida sem evidencia
+- Scripts ADB automatizados (fase seguinte)
+- Pasta `PC` da biblioteca
+- Alvos Windows 11 e Linux Ubuntu 26
+- Versionar ROMs, BIOS ou APKs
+
+## Autoridade
+
+- `spec_root.md`
+- Spec de dominio historica: `specs/done/spec-domain-emulation.md` (frontend antigo: Daijisho; **decisao atual do operador: ES-DE**)

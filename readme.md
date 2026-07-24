@@ -8,7 +8,7 @@ Operadores e o agente Cursor usam este repositorio para montar, validar e manter
 
 ## Escopo
 
-- Frontend e emuladores no Poco X3 NFC (ate PS1, N64 e PSP).
+- Android (celular Poco X3 NFC, depois tablet): ES-DE pago + RetroArch AArch64 + DuckStation via ADB/APKs oficiais; biblioteca de ROMs documentada (sem pasta `PC` neste passo).
 - Emulacao moderna e jogos PC no Windows 11 (Ryujinx, ES-DE, Blur).
 - Bootstrap de emulacao no Linux Ubuntu 26 via Flatpak, Lutris e Proton.
 
@@ -37,9 +37,10 @@ Operadores e o agente Cursor usam este repositorio para montar, validar e manter
 1. Ler `spec_root.md`, `rules.md`, `.cursorrules` e `flow.md`.
 2. Consultar `status.md` e `timeline.md`.
 3. Seguir o guia do alvo desejado em `core/`.
-4. No Linux, executar o script documentado em `core/pc-modern-emulation/linux-ubuntu-26/`.
+4. No Android: inventariar APKs em `resources/android/` e seguir `core/android-poco-x3-nfc/docs/setup-adb.md`.
+5. No Linux, executar o script documentado em `core/pc-modern-emulation/linux-ubuntu-26/`.
 
-Detalhes de ambiente: `setup.md`, `tools-linux.md`, `tools-windows.md`.
+Detalhes de ambiente: `setup.md`, `tools-android.md`, `tools-linux.md`, `tools-windows.md`.
 
 ## Documentacao relacionada
 
@@ -54,4 +55,4 @@ Detalhes de ambiente: `setup.md`, `tools-linux.md`, `tools-windows.md`.
 
 ## Estado atual
 
-Ver `status.md`. Bootstrap documental concluido; execucao real nos hosts permanece pendente.
+Ver `status.md`. Pacote documental Android (passo 1) concluido; instalacao real no celular/tablet pendente.

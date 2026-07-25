@@ -6,7 +6,7 @@
 
 ## Resumo do estado atual
 
-Pacote documental Android (passo 1) concluido. Biblioteca de ROMs dividida em `resources/roms/android/` e `resources/roms/pc-only/`. Temas oficiais ES-DE (grupo GitLab) passam a ser versionados em `resources/es-de/themes/` (~530 MB; sem `.git` aninhado). BIOS PS1 `SCPH1001.BIN` arquivada localmente (fora do Git). Instalacao real no celular/tablet ainda nao realizada.
+Pacote documental Android (passo 1) concluido. Biblioteca de ROMs dividida em `resources/roms/android/` e `resources/roms/pc-only/`. Temas oficiais ES-DE (grupo GitLab) versionados em `resources/es-de/themes/` (~530 MB). BIOS PS1 `SCPH1001.BIN` arquivada localmente (fora do Git). **Instalacao Android executada no Motorola Razr 50 Ultra** (RetroArch + DuckStation + ES-DE instalados, BIOS e ROMs enviadas e conferidas). Poco X3 NFC bloqueado pelo MIUI (Instalar via USB exige verificacao Mi/SIM). Falta configuracao na GUI (first-run ES-DE, cores, layout, smoke test).
 
 ## Tarefas concluidas
 
@@ -33,6 +33,8 @@ Pacote documental Android (passo 1) concluido. Biblioteca de ROMs dividida em `r
 
 ## Riscos
 
+- Poco X3 NFC (MIUI 14) bloqueia install via ADB sem "Instalar via USB" (conta Mi + verificacao por SIM). Aparelho primario documentado nao esta operacional para ADB no momento.
+- Razr 50 Ultra (SD 8s Gen 3) e muito mais forte que o Poco: a faixa de sistemas de `rules.md` (ate PS1/N64/PSP) foi definida para o Poco; se o Razr virar alvo oficial, revisar escopo antes de expandir.
 - ES-DE Android e pago e nao redistribuivel; o APK esta local e coberto por `.gitignore` (nunca commitar).
 - Package ids do ES-DE podem variar por canal (Patreon vs Galaxy Store).
 - DuckStation Android sem suporte ativo; regressoes futuras de OS sao risco.
@@ -43,12 +45,18 @@ Pacote documental Android (passo 1) concluido. Biblioteca de ROMs dividida em `r
 
 ## Proximos passos
 
-1. Definir DuckStation (Play Store ou APK proprio).
-2. Instalar ES-DE + RetroArch no celular via ADB; enviar BIOS `SCPH1001.BIN`; preencher a checklist.
-3. Apos aceite no celular, repetir no tablet.
+1. No Razr: first-run do ES-DE — Application data = `game-console/ES-DE`; ROMs = `game-console/ROMs`.
+2. Instalar cores no RetroArch, apontar BIOS em `game-console/Games/BIOS`, calibrar layout paisagem e smoke test (checklist).
+3. Quando houver dumps: executar `docs/stage-razr-50-ultra-test.md` (Mario / Zelda / Mario Kart em N64·GC·Wii).
+4. Poco X3 NFC: resolver "Instalar via USB" (conta Mi + SIM) e repetir a faixa Android padrao (mesma raiz `game-console/`).
 
 ## Mudancas recentes
 
+- Etapa extra documentada: `stage-razr-50-ultra-test.md` (Mario / Zelda / Mario Kart no Razr via N64·GC·Wii; Switch fora).
+- First-run ES-DE documentado em `setup-adb.md` 7.1; pasta `/storage/emulated/0/ES-DE` criada no Razr.
+- Instalacao Android realizada no Razr 50 Ultra via ADB: RetroArch, DuckStation (APKM split) e ES-DE; BIOS + ROMs (10 sistemas, 1.976 arquivos) conferidas por contagem recursiva.
+- Poco X3 NFC bloqueado por restricao de install do MIUI 14 (documentado na checklist).
+- Platform-tools 37.0.0 arquivado localmente (`platform-tools-latest-{windows,linux}.zip`; hashes no inventario; fora do Git).
 - Temas ES-DE: removidos `.git` aninhados; conteudo passa a ser versionado no repo (~530 MB).
 - BIOS PS1 `SCPH1001.BIN` registrada no inventario (SHA-256; arquivo local, nao commitado).
 - Documentado layout paisagem RetroArch (GUI + ADB pull/push do cfg) em `setup-adb.md` secao 8; pasta `resources/android/config/`.

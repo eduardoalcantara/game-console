@@ -71,6 +71,10 @@ title.keys
 resources/downloads/
 resources/binaries/
 
+# Platform-tools extraidos (manter so os ZIPs locais; pasta de trabalho)
+resources/android/platform-tools-win/
+resources/android/platform-tools-linux/
+
 # Pacotes Android locais (nao versionar; manter README e .gitkeep)
 *.apk
 *.apks

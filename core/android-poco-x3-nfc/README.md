@@ -4,8 +4,9 @@ Documentacao e preparacao de recursos para emulacao legada em aparelhos Android.
 
 Ordem de implantacao:
 
-1. **Celular** — Poco X3 NFC (Snapdragon 732G)
-2. **Tablet** — mesmo fluxo ADB/APK e mesma arvore de ROMs (modelo a registrar na checklist)
+1. **Celular primario** — Poco X3 NFC (Snapdragon 732G) — bloqueado por MIUI ate haver SIM / "Instalar via USB"
+2. **Bancada de teste temporaria** — Motorola Razr 50 Ultra — ver [docs/stage-razr-50-ultra-test.md](docs/stage-razr-50-ultra-test.md) (Mario / Zelda / Mario Kart em N64·GC·Wii; **sem** Switch)
+3. **Tablet** — mesmo fluxo ADB/APK e mesma arvore de ROMs (modelo a registrar na checklist)
 
 ## Escopo de hardware
 
@@ -37,7 +38,8 @@ Daijisho e PPSSPP nao entram no caminho primario desta entrega.
 2. [docs/rom-layout.md](docs/rom-layout.md) — mapeamento da biblioteca → pastas ES-DE
 3. [docs/setup-adb.md](docs/setup-adb.md) — instalacao primaria (inclui secao 8: layout paisagem RetroArch via GUI + replicacao ADB do cfg)
 4. [docs/checklist.md](docs/checklist.md) — aceite celular / tablet
-5. [docs/setup-play-store.md](docs/setup-play-store.md) — fallback (opcional)
+5. [docs/stage-razr-50-ultra-test.md](docs/stage-razr-50-ultra-test.md) — etapa extra temporaria (Mario / Zelda / Mario Kart no Razr)
+6. [docs/setup-play-store.md](docs/setup-play-store.md) — fallback (opcional)
 
 Contrato da pasta de binarios locais: [resources/android/README.md](../../../resources/android/README.md) (APKs, BIOS, `config/` para `retroarch.cfg`).
 

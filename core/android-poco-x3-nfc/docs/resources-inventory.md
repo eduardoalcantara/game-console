@@ -38,7 +38,7 @@ sha256sum resources/android/apk/arquivo.apk
 | RetroArch AArch64 | **Automatizavel** | Emulador multi-sistema | `https://buildbot.libretro.com/stable/1.22.2/android/RetroArch_aarch64.apk` | `resources/android/apk/` | `retroarch-aarch64-1.22.2.apk` |
 | DuckStation | **Manual** (ver nota) | Emulador PS1 | Play Store: `com.github.stenzek.duckstation` | `resources/android/apk/` (se tiver APK) **ou** install direto no aparelho | `duckstation-android.apk` |
 | BIOS PS1 | **Manual** | Boot PS1 | Dump do console proprio | `resources/android/bios/` | ex.: `ps1-scphXXXX.bin` |
-| Android platform-tools | **Manual** (maquina) | `adb` | `https://developer.android.com/tools/releases/platform-tools` | PATH do PC (nao no repo) | platform-tools |
+| Android platform-tools | **Automatizavel** | `adb` | `https://developer.android.com/tools/releases/platform-tools` (ZIP: `dl.google.com/android/repository/platform-tools-latest-{windows,linux}.zip`) | `resources/android/` (ZIP local) → extrair e PATH | `platform-tools-latest-windows.zip` / `platform-tools-latest-linux.zip` |
 | Temas ES-DE (grupo GitLab) | **Automatizavel** | UI do frontend | [gitlab.com/es-de/themes](https://gitlab.com/es-de/themes) | `resources/es-de/themes/` | clones shallow; ver README da pasta |
 
 ### Nota DuckStation (2026-07-24)
@@ -75,20 +75,32 @@ Conclusao: ate reaparecer um APK publico oficial, DuckStation fica **Manual** vi
 1. Comprar/baixar **ES-DE Android** (acesso pago) e salvar em `resources/android/apk/` — ja feito para 3.4.1-58.
 2. Instalar **DuckStation** pela Play Store no celular/tablet **ou** fornecer APK local se tiver.
 3. Colocar **BIOS PS1** (e outras BIOS se necessario) em `resources/android/bios/` — PS1: `SCPH1001.BIN` ja presente.
-4. Garantir **platform-tools** (`adb`) no PC.
-5. Preencher hashes de DuckStation (se APK) / BIOS adicionais na tabela (ES-DE e BIOS PS1 ja registrados).
+4. Garantir **platform-tools** (`adb`) no PC — ZIPs ja em `resources/android/`; extrair e colocar no PATH (ver `tools-android.md`).
+5. Preencher hashes de DuckStation (se APK) / BIOS adicionais na tabela (ES-DE, BIOS PS1 e platform-tools ja registrados).
 
 ### Automatizavel (feito / a repetir)
 
 1. Baixar **RetroArch AArch64** stable do buildbot Libretro.
-2. Calcular SHA-256 e registrar na tabela.
+2. Baixar **platform-tools** (Windows/Linux) de `dl.google.com/android/repository/`.
+3. Calcular SHA-256 e registrar na tabela.
 
-Comando de referencia (repetir em nova versao):
+Comando de referencia RetroArch (repetir em nova versao):
 
 ```powershell
 curl.exe -L -o resources/android/apk/retroarch-aarch64-1.22.2.apk `
   https://buildbot.libretro.com/stable/1.22.2/android/RetroArch_aarch64.apk
 Get-FileHash -Algorithm SHA256 resources/android/apk/retroarch-aarch64-1.22.2.apk
+```
+
+Comando de referencia platform-tools:
+
+```powershell
+curl.exe -L -o resources/android/platform-tools-latest-windows.zip `
+  https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+curl.exe -L -o resources/android/platform-tools-latest-linux.zip `
+  https://dl.google.com/android/repository/platform-tools-latest-linux.zip
+Get-FileHash -Algorithm SHA256 resources/android/platform-tools-latest-windows.zip
+Get-FileHash -Algorithm SHA256 resources/android/platform-tools-latest-linux.zip
 ```
 
 ---
@@ -121,16 +133,26 @@ Get-FileHash -Algorithm SHA256 resources/android/apk/ES-DE_3.4.1-58.apk
 - Play Store = nao recomendada.
 - Se a build da loja ja estiver no aparelho, desinstalar antes do APK oficial.
 
-### DuckStation (manual por indisponibilidade do APK)
+### DuckStation (manual por indisponibilidade do APK no site)
 
-- Preferir Play Store enquanto o APK oficial estiver offline.
+- Preferir Play Store enquanto o APK oficial no site estiver offline **ou** usar APK local arquivado.
 - Sem suporte ativo do autor no Android.
+- Presente: `resources/android/apk/duckstation-0.1-8969-g611bb8fb4.apk` (2026-07-25).
 
 ### BIOS PS1 (manual)
 
 - Arquivo local: `resources/android/bios/SCPH1001.BIN` (operador, 2026-07-25).
 - **Nao versionar** (`.gitignore` cobre `*.bin`; firmware proprietario).
 - Hash registrado so no inventario local do operador para conferencia apos copia/perda.
+
+### Platform-tools (automatizavel)
+
+- ZIPs oficiais em `resources/android/` (operador, 2026-07-25):
+  - `platform-tools-latest-windows.zip`
+  - `platform-tools-latest-linux.zip`
+- `Pkg.Revision=37.0.0` em ambos (`source.properties` dentro do ZIP).
+- **Nao versionar** (`.gitignore` cobre `*.zip`). Extrair fora do Git e colocar a pasta `platform-tools/` no PATH — detalhes em `tools-android.md`.
+- Redownload: `https://dl.google.com/android/repository/platform-tools-latest-windows.zip` e `.../platform-tools-latest-linux.zip` (pagina: [platform-tools releases](https://developer.android.com/tools/releases/platform-tools)).
 
 ---
 
@@ -140,11 +162,13 @@ Get-FileHash -Algorithm SHA256 resources/android/apk/ES-DE_3.4.1-58.apk
 |---|---|---|---|---|---|
 | `apk/ES-DE_3.4.1-58.apk` | Manual | **3.4.1-58** (build indicada pelo nome do arquivo) | `4B8C06F1CF505945EDD77F9B8FA523E8F580A13EAEF1A02F0092390F3739B387` | 2026-07-24 | ~79 MB; URL: `https://packages.es-de.org/android/b829bd05/ES-DE_3.4.1-58.apk`; versao nao conferida via `aapt` |
 | `apk/retroarch-aarch64-1.22.2.apk` | Automatizavel | **1.22.2** (stable, 2025-11-20 buildbot) | `7BD5D208DFE93CC8E2EA6C04608948CE1A045980F160A58CA2D0993AA20AD213` | 2026-07-24 | ~175 MB; baixado do buildbot |
-| `apk/duckstation-android.apk` | Manual | _(pendente — APK oficial 404)_ | | | Instalar via Play Store ou fornecer APK |
+| `apk/duckstation-0.1-8969-g611bb8fb4.apk` | Manual | **0.1-8969-g611bb8fb4** (nome do arquivo; build Git) | `A629FD2CFC3CEF05904F056A3257ACBD7BEA3A812CC7390E9AF512526670F385` | 2026-07-25 | ~33 MB; APK Android do operador; renomeado de `DunckStation-...` (typo); **fora do Git** |
 | `bios/SCPH1001.BIN` | Manual | SCPH-1001 (nome do arquivo) | `71AF94D1E47A68C11E8FDB9F8368040601514A42A5A399CDA48C7D3BFF1E99D3` | 2026-07-25 | 512 KB; **fora do Git**; dump/arquivo do operador |
 | `bios/...` (Neo Geo) | Manual | _(pendente se usado)_ | | | dump proprio |
+| `platform-tools-latest-windows.zip` | Automatizavel | **37.0.0** (`Pkg.Revision`) | `4FE305812DB074CEA32903A489D061EB4454CBC90A49E8FEA677F4B7AF764918` | 2026-07-25 | ~7,7 MB; **fora do Git**; contem `adb.exe` |
+| `platform-tools-latest-linux.zip` | Automatizavel | **37.0.0** (`Pkg.Revision`) | `198AE156AB285FA555987219AF237B31102FEFE8B9D2BC274708A8D4F2865A07` | 2026-07-25 | ~8,7 MB; **fora do Git**; contem `adb` |
 
 ## Proximo passo
 
-1. Operador: DuckStation (Play Store ou APK proprio). ES-DE, RetroArch e BIOS PS1 ja arquivados localmente.
-2. Seguir `setup-adb.md` (ES-DE e RetroArch em `apk/`; BIOS em `bios/`).
+1. Extrair platform-tools (ja feito no Windows se pasta `platform-tools-win` existir) e garantir `adb` no PATH ou usar caminho completo.
+2. Seguir `setup-adb.md` no Poco (depuracao USB → install APKs → BIOS → ROMs).

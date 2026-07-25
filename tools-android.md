@@ -11,14 +11,44 @@ Ferramentas e comandos relevantes para o alvo Android (celular Poco X3 NFC, depo
 
 ## Instalacao do platform-tools
 
-Fonte oficial: `https://developer.android.com/tools/releases/platform-tools`
+Fonte oficial: [platform-tools releases](https://developer.android.com/tools/releases/platform-tools).
 
-Extrair e adicionar o diretorio ao PATH do usuario, ou invocar `adb` pelo caminho completo.
+Espelho local (fora do Git; ver inventario):
+
+| Arquivo | SO | Versao (`Pkg.Revision`) |
+|---|---|---|
+| `resources/android/platform-tools-latest-windows.zip` | Windows | 37.0.0 |
+| `resources/android/platform-tools-latest-linux.zip` | Linux | 37.0.0 |
+
+### Windows (PowerShell)
+
+```powershell
+Expand-Archive -Path "resources\android\platform-tools-latest-windows.zip" -DestinationPath "resources\android\platform-tools-win" -Force
+# Adicionar ao PATH do usuario a pasta:
+#   <repo>\resources\android\platform-tools-win\platform-tools
+```
+
+### Linux
+
+```bash
+unzip -o resources/android/platform-tools-latest-linux.zip -d resources/android/platform-tools-linux
+# Adicionar ao PATH:
+#   export PATH="$PATH:/caminho/para/game-console/resources/android/platform-tools-linux/platform-tools"
+```
+
+A pasta extraida `platform-tools/` (e o diretorio-pai sugerido acima) tambem fica fora do versionamento se estiver sob padroes locais; o essencial e o `adb` no PATH.
 
 Verificacao:
 
 ```bash
 adb version
+```
+
+Redownload (quando `latest` mudar de revisao):
+
+```text
+https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+https://dl.google.com/android/repository/platform-tools-latest-linux.zip
 ```
 
 ## Comandos uteis
@@ -37,9 +67,9 @@ adb uninstall <package.id>
 adb shell pm list packages
 
 # Pastas e transferencia
-adb shell mkdir -p /storage/emulated/0/ROMs/snes
-adb push <origem> /storage/emulated/0/ROMs/snes/
-adb pull /storage/emulated/0/ROMs/snes/ ./backup-snes/
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/snes
+adb push <origem> /storage/emulated/0/game-console/ROMs/snes/
+adb pull /storage/emulated/0/game-console/ROMs/snes/ ./backup-snes/
 
 # Shell
 adb shell

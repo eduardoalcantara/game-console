@@ -4,6 +4,46 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-07-25 — Raiz unica `game-console/` no aparelho
+
+**Evento:** Reorganizacao no Razr: `ES-DE`, `ROMs` e `Games` movidos para `/storage/emulated/0/game-console/`.
+
+**Resultado:** Conteudo preservado (ex.: snes = 790 arquivos). Docs (`setup-adb.md`, `rom-layout.md`, etapa Razr, checklist, tools) atualizados para a nova raiz.
+
+**Arquivos afetados:** `setup-adb.md`, `rom-layout.md`, `stage-razr-50-ultra-test.md`, `checklist.md`, `tools-android.md`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-25 — Etapa Razr (Mario/Zelda/MK) + first-run ES-DE
+
+**Evento:** Documentacao da bancada temporaria no Razr 50 Ultra e esclarecimento das pastas do ES-DE.
+
+**Resultado:** Novo `stage-razr-50-ultra-test.md` (N64/GC/Wii para Mario, Zelda e Mario Kart; Switch fora por legalidade/desempenho). Secao 7.1 em `setup-adb.md`. Pasta `/storage/emulated/0/ES-DE` criada no Razr via ADB (Application data); ROMs ja em `/storage/emulated/0/ROMs`.
+
+**Arquivos afetados:** `stage-razr-50-ultra-test.md`, `setup-adb.md`, `README.md` (hub Android), `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-25 — Instalacao Android no Razr 50 Ultra (Poco bloqueado)
+
+**Evento:** Execucao real do `setup-adb.md`. Poco X3 NFC reconhecido por ADB, mas MIUI 14 barrou os installs (RetroArch `VERIFICATION_FAILURE`; ES-DE `USER_RESTRICTED`; "Instalar via USB" exige conta Mi + verificacao por SIM). Migrado para Motorola Razr 50 Ultra (`ZY22JXF44B`, Android 16, arm64-v8a).
+
+**Resultado (Razr):** RetroArch (`com.retroarch.aarch64`), ES-DE (`org.es_de.frontend`) e DuckStation (`com.github.stenzek.duckstation`) instalados. DuckStation vinha como bundle **APKM** (APKMirror) — extraido `base.apk` + `split_config.arm64_v8a.apk` e instalado via `adb install-multiple`. BIOS `SCPH1001.BIN` e ROMs de 10 sistemas enviadas; contagem recursiva local == device (1.976 arquivos). Config na GUI ainda pendente.
+
+**Arquivos afetados:** `checklist.md`, `status.md`, `timeline.md` (aparelho e binarios fora do Git).
+
+---
+
+## 2026-07-25 — Platform-tools local (Windows + Linux)
+
+**Evento:** Operador colocou `platform-tools-latest-windows.zip` e `platform-tools-latest-linux.zip` em `resources/android/`.
+
+**Resultado:** Ambos `Pkg.Revision=37.0.0`. Hashes registrados no inventario; ZIPs fora do Git (`*.zip`). Instrucoes de extracao/PATH em `tools-android.md`.
+
+**Arquivos afetados:** `resources-inventory.md`, `tools-android.md`, `resources/android/README.md`, `checklist.md`, `status.md`, `timeline.md` (ZIPs locais nao versionados).
+
+---
+
 ## 2026-07-25 — Temas ES-DE versionados + BIOS PS1 local
 
 **Evento:** Operador pediu versionar `resources/es-de/themes/` no remoto e registrou BIOS PS1.

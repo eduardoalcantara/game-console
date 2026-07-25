@@ -6,7 +6,7 @@ Inventario de APKs: `resources-inventory.md`. Layout: `rom-layout.md`. ADB: `set
 
 ## A. Preparacao de recursos (PC)
 
-- [ ] platform-tools (`adb`) instalado
+- [ ] platform-tools (`adb`) — ZIPs em `resources/android/` (rev. 37.0.0); extrair + PATH (`tools-android.md`)
 - [ ] ES-DE APK em `resources/android/apk/` + hash registrado
 - [ ] RetroArch AArch64 APK em `resources/android/apk/` + hash registrado (ja baixado: `retroarch-aarch64-1.22.2.apk`)
 - [ ] DuckStation instalado (Play Store no aparelho **ou** APK local se disponivel)
@@ -17,15 +17,17 @@ Inventario de APKs: `resources-inventory.md`. Layout: `rom-layout.md`. ADB: `set
 
 Modelo esperado: Poco X3 NFC (Snapdragon 732G / Adreno 618).
 
-- [ ] Depuracao USB autorizada (`adb devices` = device)
-- [ ] ABI confirmada (`arm64-v8a`)
-- [ ] Pastas `/storage/emulated/0/ROMs/<sistema>/` criadas
-- [ ] RetroArch instalado (APK oficial)
-- [ ] DuckStation instalado
-- [ ] ES-DE instalado (build paga oficial)
-- [ ] Package ids anotados (se divergirem da referencia)
-- [ ] BIOS enviada
-- [ ] ROMs enviadas a partir de `resources/roms/android/` (nunca `pc-only/`; pular pastas vazias)
+> **Desvio 2026-07-25:** o Poco X3 NFC bloqueou a instalacao via ADB (MIUI 14 exige "Instalar via USB" com conta Mi + verificacao por SIM, indisponivel no aparelho). A instalacao foi feita no **Motorola Razr 50 Ultra** (`ZY22JXF44B`, `arcfox`, Android 16, `arm64-v8a`). O restante deste bloco foi executado nele. Poco fica pendente ate resolver a restricao MIUI.
+
+- [x] Depuracao USB autorizada (`adb devices` = device) — Razr `ZY22JXF44B`
+- [x] ABI confirmada (`arm64-v8a`) — Razr
+- [x] Pastas sob `/storage/emulated/0/game-console/` (`ES-DE`, `ROMs/<sistema>/`, `Games/BIOS`) — Razr (10 sistemas com ROMs)
+- [x] RetroArch instalado (`com.retroarch.aarch64`) — Razr
+- [x] DuckStation instalado (`com.github.stenzek.duckstation`, via `install-multiple` do bundle APKM) — Razr
+- [x] ES-DE instalado (`org.es_de.frontend`, build paga) — Razr
+- [x] Package ids anotados (ver acima)
+- [x] BIOS enviada (`game-console/Games/BIOS/SCPH1001.BIN`, 512 KB) — Razr
+- [x] ROMs enviadas a partir de `resources/roms/android/` — Razr (contagem recursiva conferida = 1.976 arquivos, 10 sistemas; raiz reorganizada para `game-console/` em 2026-07-25)
 - [ ] ES-DE first-run + diretorio de ROMs confirmado
 - [ ] Scrapers / artes (opcional nesta fase, se desejado)
 - [ ] RetroArch: video Vulkan
@@ -57,7 +59,15 @@ Um titulo por pasta; marcar so apos teste real. Sistemas sem ROM na biblioteca a
 Notas do celular (desvios, fallback OpenGL, falhas):
 
 ```text
-(data / observacoes)
+2026-07-25 — Instalacao migrada do Poco X3 NFC para Motorola Razr 50 Ultra.
+  Poco (M2007J20CG / surya, Android 12, MIUI 14 V14.0.2.0): adb devices=device,
+  mas installs falharam: RetroArch INSTALL_FAILED_VERIFICATION_FAILURE;
+  ES-DE INSTALL_FAILED_USER_RESTRICTED; toggle "Instalar via USB" exige SIM/verificacao Mi.
+  DuckStation: arquivo era bundle APKM (APKMirror), nao APK unico -> extraido base.apk +
+  split_config.arm64_v8a.apk e instalado com adb install-multiple.
+  Razr 50 Ultra (arcfox / ZY22JXF44B, Android 16): 3 installs OK, BIOS+ROMs enviadas,
+  contagem recursiva local==device para os 10 sistemas.
+  2026-07-25 — Pastas reorganizadas sob /storage/emulated/0/game-console/{ES-DE,ROMs,Games}.
 ```
 
 ## C. Tablet

@@ -36,24 +36,34 @@ Se houver mais de um dispositivo: `adb -s <serial> ...` ou desconecte o outro.
 
 Estado `unauthorized`: revogue autorizacoes USB no aparelho, reconecte e aceite novamente.
 
-## 3. Criar arvore de pastas ES-DE
+## 3. Criar arvore sob `game-console/`
+
+Raiz unica no armazenamento interno (organizacao neste projeto):
+
+```text
+/storage/emulated/0/game-console/
+  ES-DE/          # Application data do frontend (settings, scrapes)
+  ROMs/<sistema>/ # jogos (nomes canonicos minusculos)
+  Games/BIOS/     # dumps de BIOS
+```
 
 ```bash
-adb shell mkdir -p /storage/emulated/0/ROMs/atari2600
-adb shell mkdir -p /storage/emulated/0/ROMs/atarilynx
-adb shell mkdir -p /storage/emulated/0/ROMs/wonderswan
-adb shell mkdir -p /storage/emulated/0/ROMs/gb
-adb shell mkdir -p /storage/emulated/0/ROMs/gbc
-adb shell mkdir -p /storage/emulated/0/ROMs/gba
-adb shell mkdir -p /storage/emulated/0/ROMs/nes
-adb shell mkdir -p /storage/emulated/0/ROMs/snes
-adb shell mkdir -p /storage/emulated/0/ROMs/mastersystem
-adb shell mkdir -p /storage/emulated/0/ROMs/megadrive
-adb shell mkdir -p /storage/emulated/0/ROMs/pcengine
-adb shell mkdir -p /storage/emulated/0/ROMs/neogeo
-adb shell mkdir -p /storage/emulated/0/ROMs/mame
-adb shell mkdir -p /storage/emulated/0/ROMs/psx
-adb shell mkdir -p /storage/emulated/0/Games/BIOS
+adb shell mkdir -p /storage/emulated/0/game-console/ES-DE
+adb shell mkdir -p /storage/emulated/0/game-console/Games/BIOS
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/atari2600
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/atarilynx
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/wonderswan
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/gb
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/gbc
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/gba
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/nes
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/snes
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/mastersystem
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/megadrive
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/pcengine
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/neogeo
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/mame
+adb shell mkdir -p /storage/emulated/0/game-console/ROMs/psx
 ```
 
 ## 4. Instalar APKs (ordem)
@@ -68,7 +78,7 @@ adb install -r resources/android/apk/ES-DE_3.4.1-58.apk
 DuckStation: se houver APK local:
 
 ```bash
-adb install -r resources/android/apk/duckstation-android.apk
+adb install -r resources/android/apk/duckstation-0.1-8969-g611bb8fb4.apk
 ```
 
 Se o APK oficial estiver indisponivel (situacao em 2026-07-24), instalar DuckStation pela Play Store no aparelho e seguir com o restante via ADB.
@@ -107,7 +117,7 @@ Se o id divergir, registrar o valor real em `reports/` / checklist.
 BIOS (exemplo):
 
 ```bash
-adb push resources/android/bios/SCPH1001.BIN /storage/emulated/0/Games/BIOS/
+adb push resources/android/bios/SCPH1001.BIN /storage/emulated/0/game-console/Games/BIOS/
 ```
 
 ROMs: usar **somente** o espelho Android `resources/roms/android/`, ja com nomes canonicos ES-DE (ver `rom-layout.md`). A faixa `resources/roms/pc-only/` nao entra neste fluxo.
@@ -115,16 +125,16 @@ ROMs: usar **somente** o espelho Android `resources/roms/android/`, ja com nomes
 A partir da raiz do repositorio:
 
 ```bash
-adb push resources/roms/android/gb/. /storage/emulated/0/ROMs/gb/
-adb push resources/roms/android/gbc/. /storage/emulated/0/ROMs/gbc/
-adb push resources/roms/android/gba/. /storage/emulated/0/ROMs/gba/
-adb push resources/roms/android/nes/. /storage/emulated/0/ROMs/nes/
-adb push resources/roms/android/snes/. /storage/emulated/0/ROMs/snes/
-adb push resources/roms/android/mastersystem/. /storage/emulated/0/ROMs/mastersystem/
-adb push resources/roms/android/megadrive/. /storage/emulated/0/ROMs/megadrive/
-adb push resources/roms/android/pcengine/. /storage/emulated/0/ROMs/pcengine/
-adb push resources/roms/android/neogeo/. /storage/emulated/0/ROMs/neogeo/
-adb push resources/roms/android/mame/. /storage/emulated/0/ROMs/mame/
+adb push resources/roms/android/gb/. /storage/emulated/0/game-console/ROMs/gb/
+adb push resources/roms/android/gbc/. /storage/emulated/0/game-console/ROMs/gbc/
+adb push resources/roms/android/gba/. /storage/emulated/0/game-console/ROMs/gba/
+adb push resources/roms/android/nes/. /storage/emulated/0/game-console/ROMs/nes/
+adb push resources/roms/android/snes/. /storage/emulated/0/game-console/ROMs/snes/
+adb push resources/roms/android/mastersystem/. /storage/emulated/0/game-console/ROMs/mastersystem/
+adb push resources/roms/android/megadrive/. /storage/emulated/0/game-console/ROMs/megadrive/
+adb push resources/roms/android/pcengine/. /storage/emulated/0/game-console/ROMs/pcengine/
+adb push resources/roms/android/neogeo/. /storage/emulated/0/game-console/ROMs/neogeo/
+adb push resources/roms/android/mame/. /storage/emulated/0/game-console/ROMs/mame/
 ```
 
 Nao enviar neste passo:
@@ -138,13 +148,38 @@ Scoped storage: se o push falhar por permissao, liberar acesso a pastas no apare
 
 ADB nao substitui o first-run nem a calibracao ergonômica na GUI. No aparelho:
 
-1. Abrir ES-DE (first-run); confirmar diretorio de ROMs.
+1. Abrir ES-DE (first-run) — ver secao 7.1.
 2. Configurar scrapers / artes.
 3. Definir players: RetroArch para os sistemas da tabela; DuckStation para `psx`.
 4. No RetroArch: baixar cores (Online Updater / Core Downloader do APK oficial); video Vulkan.
 5. No RetroArch: calibrar layout paisagem (jogo no centro, overlay nas laterais) — secao 8.
 6. No DuckStation: resolucao interna 2x (720p); GPU Vulkan; apontar BIOS.
 7. Validar um jogo por sistema conforme `checklist.md`.
+
+### 7.1 First-run ES-DE (pastas)
+
+Raiz unica neste projeto: `/storage/emulated/0/game-console/`.
+
+| Passo no configurador | O que escolher | Caminho |
+|---|---|---|
+| Permissao de armazenamento | Conceder | — |
+| **Pasta de configuracao / Application data** | Entrar em `game-console` → selecionar `ES-DE` | `/storage/emulated/0/game-console/ES-DE` |
+| **Pasta de ROMs** | Entrar em `game-console` → selecionar `ROMs` | `/storage/emulated/0/game-console/ROMs` |
+
+- Application data: settings, scrapes, colecoes — **nao** e onde ficam os jogos.
+- ROMs: subpastas minusculas (`snes`, `gb`, …).
+- BIOS (DuckStation / cores): `/storage/emulated/0/game-console/Games/BIOS/` (nao e escolhida no first-run do ES-DE).
+- Se o seletor mostrar so "Armazenamento interno", abra-o e navegue ate `game-console`.
+- Se voce ja tiver escolhido um caminho antigo (`/ROMs` ou `/ES-DE` na raiz): Main Menu → Settings → Application Paths, ou limpar dados do app ES-DE e refazer o first-run.
+
+Criar a raiz via ADB:
+
+```bash
+adb shell mkdir -p /storage/emulated/0/game-console/ES-DE
+adb shell mkdir -p /storage/emulated/0/game-console/Games/BIOS
+```
+
+Etapa extra (Mario / Zelda / Mario Kart no Razr, depois de ter os dumps): `stage-razr-50-ultra-test.md`.
 
 ## 8. RetroArch — layout paisagem (overlay + video)
 

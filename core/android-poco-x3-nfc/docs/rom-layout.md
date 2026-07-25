@@ -18,9 +18,16 @@ Toda a arvore `resources/roms/` e ignorada pelo Git (regra `roms/` / `ROMs/` em 
 
 Nomes de pasta = canon ES-DE (minusculo). Referencia: tabela *Supported game systems* do [ANDROID.md](https://gitlab.com/es-de/emulationstation-de/-/blob/master/ANDROID.md) do ES-DE.
 
-Destino no aparelho Android:
+Destino no aparelho Android (raiz unica deste projeto):
 
-`/storage/emulated/0/ROMs/<sistema>/`
+```text
+/storage/emulated/0/game-console/
+  ES-DE/                 # Application data do frontend
+  ROMs/<sistema>/        # jogos
+  Games/BIOS/            # BIOS
+```
+
+Caminho tipico de ROMs: `/storage/emulated/0/game-console/ROMs/<sistema>/`
 
 ---
 
@@ -103,15 +110,17 @@ GC/Wii/PS2 podem rodar de forma parcial em Android high-end com tuning; neste re
 ## Arvore Android no aparelho (espelho das pastas da faixa)
 
 ```text
-/storage/emulated/0/ROMs/
-  amiga/ atari2600/ atari5200/ atari7800/ atarilynx/
-  c64/ colecovision/ dreamcast/ fds/ gamegear/
-  gb/ gba/ gbc/ intellivision/ mame/ mastersystem/
-  megadrive/ msx/ msx2/ n64/ nds/ neogeo/ neogeocd/
-  nes/ ngp/ ngpc/ pcengine/ psp/ psx/ saturn/ scummvm/
-  sega32x/ segacd/ sg-1000/ snes/ virtualboy/
-  wonderswan/ wonderswancolor/
-/storage/emulated/0/Games/BIOS/
+/storage/emulated/0/game-console/
+  ES-DE/
+  Games/BIOS/
+  ROMs/
+    amiga/ atari2600/ atari5200/ atari7800/ atarilynx/
+    c64/ colecovision/ dreamcast/ fds/ gamegear/
+    gb/ gba/ gbc/ intellivision/ mame/ mastersystem/
+    megadrive/ msx/ msx2/ n64/ nds/ neogeo/ neogeocd/
+    nes/ ngp/ ngpc/ pcengine/ psp/ psx/ saturn/ scummvm/
+    sega32x/ segacd/ sg-1000/ snes/ virtualboy/
+    wonderswan/ wonderswancolor/
 ```
 
 No `adb push`, enviar so pastas **com ROMs**; pastas vazias podem existir no aparelho se o ES-DE gerar a estrutura, mas nao precisam ser copiadas do PC.

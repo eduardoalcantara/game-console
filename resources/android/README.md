@@ -4,11 +4,12 @@ Contrato da pasta de recursos locais para o alvo Android (celular, depois tablet
 
 ## O que entra aqui
 
-| Subpasta | Conteudo |
+| Subpasta / arquivo | Conteudo |
 |---|---|
 | `apk/` | APKs: RetroArch (automatizavel), ES-DE (manual), DuckStation se disponivel |
 | `bios/` | BIOS dumpadas pelo operador (manual) |
 | `config/` | `retroarch.cfg` (e overrides) puxados apos calibracao na GUI; ver `config/README.md` |
+| `platform-tools-latest-*.zip` | SDK Platform-Tools (Windows/Linux); extrair conforme `tools-android.md` |
 
 Biblioteca de ROMs:
 

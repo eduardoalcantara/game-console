@@ -1,0 +1,273 @@
+<!--
+    Variant 04 - Textlist and carousel with reflections
+-->
+
+<theme>
+    <transitions>instantAndSlide</transitions>
+
+    <include>./navigationsounds.xml</include>
+    <include>./colors.xml</include>
+
+    <!-- Per-system band colors and platform info -->
+    <include>./${system.theme}/colors.xml</include>
+    <include>./${system.theme}/systeminfo.xml</include>
+
+    <variables>
+        <systemConsoleImage>./${system.theme}/images/consolegame.svg</systemConsoleImage>
+        <systemControllerImage>./${system.theme}/images/controller.svg</systemControllerImage>
+        <systemLogo>./${system.theme}/images/logo.svg</systemLogo>
+    </variables>
+
+    <view name="system, gamelist">
+        <image name="background">
+            <pos>0 0</pos>
+            <size>1 1</size>
+            <path>./core/images/background.png</path>
+            <tile>true</tile>
+            <color>${backgroundColor}</color>
+            <zIndex>0</zIndex>
+        </image>
+        <image name="logo">
+            <path>${systemLogo}</path>
+        </image>
+        <image name="band1">
+            <pos>0.80 0</pos>
+            <size>0.03 1</size>
+            <path>./core/images/band.png</path>
+            <zIndex>5</zIndex>
+        </image>
+        <image name="band2">
+            <pos>0.829 0</pos>
+            <size>0.03 1</size>
+            <path>./core/images/band.png</path>
+            <zIndex>5</zIndex>
+        </image>
+        <image name="band3">
+            <pos>0.858 0</pos>
+            <size>0.03 1</size>
+            <path>./core/images/band.png</path>
+            <zIndex>5</zIndex>
+        </image>
+        <image name="band4">
+            <pos>0.887 0</pos>
+            <size>0.03 1</size>
+            <path>./core/images/band.png</path>
+            <zIndex>5</zIndex>
+        </image>
+    </view>
+
+    <view name="system">
+        <textlist name="systemTextlist">
+            <pos>0.025 0.201</pos>
+            <size>0.39 0.711</size>
+            <selectorColor>${gamelistTextlistSelectorColor}</selectorColor>
+            <selectedColor>${gamelistTextlistSelectedColor}</selectedColor>
+            <primaryColor>${gamelistTextlistPrimaryColor}</primaryColor>
+            <secondaryColor>${gamelistTextlistSecondaryColor}</secondaryColor>
+            <fontPath>./core/fonts/Exo2-BoldCondensed.otf</fontPath>
+            <fontSize>0.025</fontSize>
+            <horizontalAlignment>left</horizontalAlignment>
+            <horizontalMargin>0.01</horizontalMargin>
+            <letterCase>uppercase</letterCase>
+        </textlist>
+        <image name="consolegame">
+            <pos>0.45 0.29</pos>
+            <maxSize>0.35 0.28</maxSize>
+            <origin>0 0</origin>
+            <path>${systemConsoleImage}</path>
+        </image>
+        <image name="controller">
+            <pos>0.94 0.29</pos>
+            <maxSize>0.12 0.28</maxSize>
+            <origin>1 0</origin>
+            <path>${systemControllerImage}</path>
+        </image>
+        <image name="backframe2">
+            <pos>0.02 0.19</pos>
+            <size>0.4 0.735</size>
+            <path>./core/images/frame.png</path>
+            <color>${gamelistBackFrameColor}</color>
+            <zIndex>10</zIndex>
+        </image>
+        <image name="backframe3">
+            <pos>0.44 0.19</pos>
+            <size>0.54 0.735</size>
+            <path>./core/images/frame.png</path>
+            <color>${gamelistBackFrameColor}</color>
+            <zIndex>10</zIndex>
+        </image>
+        <image name="logo">
+            <pos>0.02 0.17</pos>
+            <maxSize>0.32 0.13</maxSize>
+            <origin>0 1</origin>
+        </image>
+        <text name="gameCounter">
+            <pos>0.45 0.225</pos>
+            <size>0.4 0.056</size>
+            <origin>0 0.5</origin>
+            <systemdata>gamecount</systemdata>
+            <fontPath>./core/fonts/Exo2-RegularCondensed.otf</fontPath>
+            <fontSize>0.035</fontSize>
+            <horizontalAlignment>left</horizontalAlignment>
+            <backgroundColor>00000000</backgroundColor>
+            <letterCase>uppercase</letterCase>
+            <zIndex>50</zIndex>
+        </text>
+        <text name="info1, info2, info3, info4, info5, info6, info7, info8, info9, info10">
+            <size>0.4 0.03</size>
+            <fontPath>./core/fonts/Exo2-SemiBoldCondensed.otf</fontPath>
+            <fontSize>0.021</fontSize>
+            <horizontalAlignment>left</horizontalAlignment>
+            <color>${systemInfoTextColor}</color>
+        </text>
+        <text name="info1">
+            <pos>0.45 0.665</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info2">
+            <pos>0.45 0.686</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info3">
+            <pos>0.45 0.707</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info4">
+            <pos>0.45 0.728</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info5">
+            <pos>0.45 0.769</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info6">
+            <pos>0.45 0.790</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info7">
+            <pos>0.45 0.811</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info8">
+            <pos>0.45 0.832</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info9">
+            <pos>0.45 0.853</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <text name="info10">
+            <pos>0.45 0.874</pos>
+            <horizontalAlignment>left</horizontalAlignment>
+        </text>
+        <helpsystem name="help">
+            <pos>0.012 0.955</pos>
+            <textColor>${gamelistHelpColor}</textColor>
+            <iconColor>${gamelistHelpColor}</iconColor>
+            <textColorDimmed>${gamelistHelpColorDimmed}</textColorDimmed>
+            <iconColorDimmed>${gamelistHelpColorDimmed}</iconColorDimmed>
+        </helpsystem>
+    </view>
+
+    <view name="gamelist">
+        <carousel name="gamelistCarousel">
+            <pos>0.025 0.231</pos>
+            <size>0.95 0.692</size>
+            <type>horizontal</type>
+            <imageType>cover</imageType>
+            <maxItemCount>5</maxItemCount>
+            <itemSize>0.105 0.235</itemSize>
+            <itemScale>1.53</itemScale>
+            <imageInterpolation>linear</imageInterpolation>
+            <imageCornerRadius>0.006</imageCornerRadius>
+            <itemVerticalAlignment>center</itemVerticalAlignment>
+            <verticalOffset>0.1</verticalOffset>
+            <reflections>true</reflections>
+            <reflectionsOpacity>0.3</reflectionsOpacity>
+            <reflectionsFalloff>1.2</reflectionsFalloff>
+            <unfocusedItemOpacity>1</unfocusedItemOpacity>
+            <color>00000000</color>
+            <textColor>949494</textColor>
+            <textBackgroundColor>323232CC</textBackgroundColor>
+            <fontPath>./core/fonts/Exo2-RegularCondensed.otf</fontPath>
+            <fontSize>0.032</fontSize>
+            <letterCase>uppercase</letterCase>
+            <lineSpacing>1.2</lineSpacing>
+            <zIndex>60</zIndex>
+        </carousel>
+        <image name="consolegame">
+            <pos>0.02 0.17</pos>
+            <maxSize>0.4 0.15</maxSize>
+            <origin>0 1</origin>
+            <path>${systemConsoleImage}</path>
+        </image>
+        <image name="logo">
+            <pos>0.78 0.17</pos>
+            <maxSize>0.32 0.13</maxSize>
+            <origin>1 1</origin>
+        </image>
+        <image name="backframe2">
+            <pos>0.5 0.19</pos>
+            <size>0.96 0.735</size>
+            <origin>0.5 0</origin>
+            <path>./core/images/frame.png</path>
+            <color>181818</color>
+            <zIndex>10</zIndex>
+        </image>
+        <text name="gameName">
+            <pos>0.5 0.77</pos>
+            <size>0.95 0.08</size>
+            <origin>0.5 0</origin>
+            <metadata>name</metadata>
+            <fontPath>./core/fonts/Exo2-RegularCondensed.otf</fontPath>
+            <fontSize>0.045</fontSize>
+            <horizontalAlignment>center</horizontalAlignment>
+            <verticalAlignment>center</verticalAlignment>
+            <color>D6D6D6</color>
+            <letterCase>none</letterCase>
+            <zIndex>80</zIndex>
+        </text>
+        <gamelistinfo name="gamelistInfo">
+            <pos>0.773 0.192</pos>
+            <size>0.2 0.042</size>
+            <fontPath>./core/fonts/Exo2-BoldCondensed.otf</fontPath>
+            <fontSize>0.025</fontSize>
+            <horizontalAlignment>right</horizontalAlignment>
+            <color>888888</color>
+        </gamelistinfo>
+        <badges name="badges">
+            <pos>0.03 0.205</pos>
+            <size>0.38 0.08</size>
+            <horizontalAlignment>left</horizontalAlignment>
+            <direction>row</direction>
+            <lines>1</lines>
+            <itemsPerLine>10</itemsPerLine>
+            <slots>collection, folder, favorite, completed, kidgame, broken, controller, altemulator, manual</slots>
+            <controllerPos>0.5 0.572</controllerPos>
+            <controllerSize>0.81</controllerSize>
+            <folderLinkPos>0.54 0.64</folderLinkPos>
+            <folderLinkSize>0.31</folderLinkSize>
+            <itemMargin>-1.0 0.005</itemMargin>
+        </badges>
+        <helpsystem name="help">
+            <pos>0.012 0.955</pos>
+            <textColor>${gamelistHelpColor}</textColor>
+            <iconColor>${gamelistHelpColor}</iconColor>
+            <textColorDimmed>${gamelistHelpColorDimmed}</textColorDimmed>
+            <iconColorDimmed>${gamelistHelpColorDimmed}</iconColorDimmed>
+        </helpsystem>
+    </view>
+
+    <aspectRatio name="4:3">
+        <view name="system, gamelist">
+            <helpsystem name="help">
+                <fontSize>0.034</fontSize>
+            </helpsystem>
+        </view>
+        <view name="gamelist">
+            <carousel name="gamelistCarousel">
+                <itemSize>0.12 0.225</itemSize>
+            </carousel>
+        </view>
+    </aspectRatio>
+</theme>

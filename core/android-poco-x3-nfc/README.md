@@ -35,11 +35,11 @@ Daijisho e PPSSPP nao entram no caminho primario desta entrega.
 
 1. [docs/resources-inventory.md](docs/resources-inventory.md) — o que baixar e onde colocar em `resources/android/`
 2. [docs/rom-layout.md](docs/rom-layout.md) — mapeamento da biblioteca → pastas ES-DE
-3. [docs/setup-adb.md](docs/setup-adb.md) — instalacao primaria
+3. [docs/setup-adb.md](docs/setup-adb.md) — instalacao primaria (inclui secao 8: layout paisagem RetroArch via GUI + replicacao ADB do cfg)
 4. [docs/checklist.md](docs/checklist.md) — aceite celular / tablet
 5. [docs/setup-play-store.md](docs/setup-play-store.md) — fallback (opcional)
 
-Contrato da pasta de binarios locais: [resources/android/README.md](../../../resources/android/README.md).
+Contrato da pasta de binarios locais: [resources/android/README.md](../../../resources/android/README.md) (APKs, BIOS, `config/` para `retroarch.cfg`).
 
 Ferramentas ADB na raiz do repo: [tools-android.md](../../../tools-android.md).
 

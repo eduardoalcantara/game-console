@@ -4,6 +4,48 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-07-25 — Temas ES-DE versionados + BIOS PS1 local
+
+**Evento:** Operador pediu versionar `resources/es-de/themes/` no remoto e registrou BIOS PS1.
+
+**Resultado:** Removidos os 11 diretorios `.git` aninhados; regra de ignore dos temas retirada do `.gitignore`. BIOS `resources/android/bios/SCPH1001.BIN` (512 KB, SHA-256 `71AF94D1...`) registrada no inventario e **nao** commitada (`*.bin` continua ignorado).
+
+**Arquivos afetados:** `resources/es-de/themes/**`, `.gitignore`, `resources/es-de/themes/README.md`, `resources-inventory.md`, `checklist.md`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-25 — RetroArch layout paisagem (GUI + ADB)
+
+**Evento:** Documentacao do layout jogo-no-centro / overlays laterais no Android.
+
+**Resultado:** Em `setup-adb.md`, secao 8: calibracao obrigatoria na GUI; ADB apenas para `pull`/`push` do `retroarch.cfg` (e overrides). Checklist e `resources/android/config/` atualizados. Sem validacao em aparelho nesta entrega (so documentacao).
+
+**Arquivos afetados:** `setup-adb.md`, `checklist.md`, `core/android-poco-x3-nfc/README.md`, `resources/android/README.md`, `resources/android/config/README.md`, `resources/android/config/poco-x3-nfc/.gitkeep`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-24 — ES-DE Android arquivado pelo operador
+
+**Evento:** Operador colocou `ES-DE_3.4.1-58.apk` (~79 MB) em `resources/android/apk/`.
+
+**Resultado:** SHA-256 `4B8C06F1CF505945EDD77F9B8FA523E8F580A13EAEF1A02F0092390F3739B387` registrado no inventario; nome original do canal oficial preservado; `setup-adb.md` passa a citar o arquivo real. Versao lida do nome do arquivo (nao conferida via `aapt`). URL de redownload anotada: `https://packages.es-de.org/android/b829bd05/ES-DE_3.4.1-58.apk` (path com token; builds futuras mudam o segmento).
+
+**Correcao associada:** `.gitignore` nao cobria `.7z`; `retroarch-aarch64-1.22.2.7z` (152 MB) e `ES-DE_3.4.1-58.7z` (33 MB) apareciam como untracked e quebrariam o push (limite de 100 MB). Adicionados `*.7z`, `*.rar`, `*.gz`, `*.bz2`, `*.xz`, `*.zst` e instaladores desktop (`*.AppImage`, `*.exe`, `*.msi`, `*.dmg`, `*.deb`, `*.rpm`).
+
+**Arquivos afetados:** `resources-inventory.md`, `setup-adb.md`, `resources/android/README.md`, `.gitignore`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-24 — Espelho local temas ES-DE (GitLab)
+
+**Evento:** Shallow clone dos 11 projetos do grupo [es-de/themes](https://gitlab.com/es-de/themes) para `resources/es-de/themes/`.
+
+**Resultado:** Modern, Slate, themes-list, packs de assets e exemplos (~530 MB). Conteudo em `.gitignore`; so `README.md` versionavel. Temas de terceiros da lista curada (maioria no GitHub) nao clonados.
+
+**Arquivos afetados:** `resources/es-de/themes/**` (local), `resources/es-de/themes/README.md`, `.gitignore`, `status.md`, `timeline.md`.
+
+---
+
 ## 2026-07-24 — Inventario APKs (manual vs automatizavel)
 
 **Evento:** Reescrita de `resources-inventory.md`; download de RetroArch AArch64 1.22.2.

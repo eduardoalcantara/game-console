@@ -78,3 +78,28 @@ resources/binaries/
 *.apkm
 *.aab
 *.obb
+
+# Arquivos compactados
+*.zip
+*.7z
+*.rar
+*.gz
+*.bz2
+*.xz
+*.zst
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.lzma
+*.tar.lz
+*.tar.zst
+*.tar.zstd
+
+# Instaladores desktop locais (ES-DE PC etc.)
+*.AppImage
+*.exe
+*.msi
+*.dmg
+*.deb
+*.rpm

@@ -10,7 +10,7 @@ Inventario de APKs: `resources-inventory.md`. Layout: `rom-layout.md`. ADB: `set
 - [ ] ES-DE APK em `resources/android/apk/` + hash registrado
 - [ ] RetroArch AArch64 APK em `resources/android/apk/` + hash registrado (ja baixado: `retroarch-aarch64-1.22.2.apk`)
 - [ ] DuckStation instalado (Play Store no aparelho **ou** APK local se disponivel)
-- [ ] BIOS PS1 em `resources/android/bios/` (dump proprio)
+- [ ] BIOS PS1 em `resources/android/bios/` (dump proprio) — presente: `SCPH1001.BIN` (hash no inventario; fora do Git)
 - [ ] BIOS Neo Geo em `resources/android/bios/` (se `NEOGEO` for usada)
 
 ## B. Celular — Poco X3 NFC
@@ -30,6 +30,8 @@ Modelo esperado: Poco X3 NFC (Snapdragon 732G / Adreno 618).
 - [ ] Scrapers / artes (opcional nesta fase, se desejado)
 - [ ] RetroArch: video Vulkan
 - [ ] RetroArch: cores instalados (Stella, Handy, Beetle Cygne, Gambatte/SameBoy, mGBA, Mesen/Nestopia, Snes9x, Genesis Plus GX, Beetle PCE, FBNeo/MAME conforme uso)
+- [ ] RetroArch: layout paisagem calibrado na GUI (overlay + video no centro; `setup-adb.md` secao 8)
+- [ ] RetroArch: cfg arquivado em `resources/android/config/poco-x3-nfc/` (path real do aparelho anotado abaixo se divergir)
 - [ ] DuckStation: 2x (720p), GPU Vulkan, BIOS apontada
 - [ ] Players ES-DE: RetroArch para sistemas RetroArch; DuckStation para `psx`
 
@@ -66,6 +68,8 @@ Serial ADB: _(preencher)_
 
 - [ ] Mesmo fluxo ADB das secoes B (install + pastas + push)
 - [ ] Mesmos APKs do inventario
+- [ ] RetroArch: cfg do Poco usado so como base; viewport/escala revalidados na GUI do tablet
+- [ ] RetroArch: cfg do tablet arquivado em `resources/android/config/<modelo>/`
 - [ ] Smoke test dos sistemas usados no tablet
 - [ ] Desvios vs celular registrados abaixo
 

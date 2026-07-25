@@ -24,7 +24,6 @@ Em conflito, prevalece o nivel mais alto. Se a contradicao persistir, pausar e p
 - Android: limitar a sistemas 8-bit ate PS1, N64 e PSP. Sem Switch/PS2 no Poco X3 NFC.
 - Windows 11: Ryujinx, ES-DE, Blur e dependencias documentadas.
 - Linux Ubuntu 26: Flatpak para emuladores; Lutris/Proton para PC games.
-- Nao versionar ROMs, ISOs, firmware proprietario ou chaves.
 
 ## 4. Regras de qualidade
 

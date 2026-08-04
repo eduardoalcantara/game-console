@@ -47,7 +47,8 @@ Antes de agir: `spec_root.md`, `rules.md`, `.cursorrules`; `rules_scripts.md` se
 
 ## 8. Regras de atualizacao documental
 
-Mudancas relevantes devem atualizar `status.md` e `timeline.md`. Entregas formais geram relatorio em `reports/`.
+- Mudancas relevantes devem atualizar `status.md` e `timeline.md`. Entregas formais geram relatorio em `reports/`.
+- Incluir regra no `.cursorrules`: - Sempre que terminar uma resposta ou tarefa de um prompt, Diga: "Prompt Nº XX - LLM: {llm} - Duração: mm:ss"
 
 ## 9. Regras de scripts e input
 

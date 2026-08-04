@@ -101,7 +101,28 @@ Fora do envio Android. No Poco X3 NFC esses alvos sao fragis ou inadequados; no 
 | `ps3/` | PlayStation 3 | RPCS3 | vazia |
 | `xbox/` | Xbox original | xemu | vazia |
 | `xbox360/` | Xbox 360 | Xenia (Windows) | vazia |
-| `switch/` | Nintendo Switch | Ryujinx | vazia |
+| `switch/` | Nintendo Switch | Ryujinx / Eden (bancada Razr) | presente (local; fora do Git) |
+
+### Switch — base vs updates
+
+Espelho operacional (fora do Git; nao faz parte da faixa Android do Poco):
+
+```text
+resources/roms/switch/            # jogos base (.nsp / .xci) — visiveis no ES-DE
+resources/roms/switch/updates/    # UPD / DLC — NAO lancar como jogo
+```
+
+No aparelho (Razr / raiz `game-console/`):
+
+```text
+/storage/emulated/0/game-console/ROMs/switch/
+/storage/emulated/0/game-console/ROMs/switch/updates/
+```
+
+- Nomes limpos (ex.: `Mario Kart 8 Deluxe.nsp`); tags `[UPD]` / Title ID / `[vN]` sao opcionais e so para organizacao humana.
+- O Eden identifica base/update pelo conteudo interno do NSP.
+- Updates: instalar no Eden (Install Files / Install to NAND), nao abrir pelo carrossel do ES-DE. Tutorial: `eden-install-updates.md`.
+- No push ADB: bases → `ROMs/switch/`; updates → `ROMs/switch/updates/`.
 
 GC/Wii/PS2 podem rodar de forma parcial em Android high-end com tuning; neste repositorio permanecem em `pc-only/` por decisao de escopo do Poco X3 NFC.
 

@@ -54,7 +54,7 @@ Conclusao: ate reaparecer um APK publico oficial, DuckStation fica **Manual** vi
 
 | Item | Origem | Quando | Fonte | Destino |
 |---|---|---|---|---|
-| BIOS Neo Geo | **Manual** | Usar `android/neogeo` ou `neogeocd` | Dump proprio | `resources/android/bios/` |
+| BIOS Neo Geo | **Manual** | Usar `android/neogeo` ou `neogeocd` | Dump proprio | `resources/roms/android/neogeo/neogeo.zip` (junto aos jogos; padrao FBNeo) **ou** `resources/android/bios/` |
 | BIOS Saturn / Sega CD / FDS / etc. | **Manual** | Ao popular pastas que exigem BIOS | Dump proprio | `resources/android/bios/` |
 | PPSSPP APK | **Automatizavel** | Quando houver ISOs em `android/psp/` | `https://www.ppsspp.org/` | `resources/android/apk/` |
 
@@ -164,7 +164,7 @@ Get-FileHash -Algorithm SHA256 resources/android/apk/ES-DE_3.4.1-58.apk
 | `apk/retroarch-aarch64-1.22.2.apk` | Automatizavel | **1.22.2** (stable, 2025-11-20 buildbot) | `7BD5D208DFE93CC8E2EA6C04608948CE1A045980F160A58CA2D0993AA20AD213` | 2026-07-24 | ~175 MB; baixado do buildbot |
 | `apk/duckstation-0.1-8969-g611bb8fb4.apk` | Manual | **0.1-8969-g611bb8fb4** (nome do arquivo; build Git) | `A629FD2CFC3CEF05904F056A3257ACBD7BEA3A812CC7390E9AF512526670F385` | 2026-07-25 | ~33 MB; APK Android do operador; renomeado de `DunckStation-...` (typo); **fora do Git** |
 | `bios/SCPH1001.BIN` | Manual | SCPH-1001 (nome do arquivo) | `71AF94D1E47A68C11E8FDB9F8368040601514A42A5A399CDA48C7D3BFF1E99D3` | 2026-07-25 | 512 KB; **fora do Git**; dump/arquivo do operador |
-| `bios/...` (Neo Geo) | Manual | _(pendente se usado)_ | | | dump proprio |
+| `bios/...` (Neo Geo) | Manual | _(incompativel com FBNeo atual)_ | ver nota | 2026-07-26 | `resources/roms/android/neogeo/neogeo.zip` presente, mas CRCs diferem do set exigido pelo core (ex.: `sm1.sm1` calc `0x97cf998b` vs exigido `0x94416d67`; `sfix.sfx` / `000-lo.lo` tambem). Substituir por dump proprio alinhado ao FBNeo; manter o ZIP na pasta `ROMs/neogeo/` |
 | `platform-tools-latest-windows.zip` | Automatizavel | **37.0.0** (`Pkg.Revision`) | `4FE305812DB074CEA32903A489D061EB4454CBC90A49E8FEA677F4B7AF764918` | 2026-07-25 | ~7,7 MB; **fora do Git**; contem `adb.exe` |
 | `platform-tools-latest-linux.zip` | Automatizavel | **37.0.0** (`Pkg.Revision`) | `198AE156AB285FA555987219AF237B31102FEFE8B9D2BC274708A8D4F2865A07` | 2026-07-25 | ~8,7 MB; **fora do Git**; contem `adb` |
 

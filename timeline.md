@@ -4,6 +4,96 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-08-04 — Limpeza Razr: so Mega Drive + SNES
+
+**Evento:** Remover do celular ROMs e media ES-DE de todos os sistemas exceto `megadrive` e `snes`.
+
+**Resultado:** `ROMs/` no Razr = megadrive + snes (~2 GB). `downloaded_media/` e `gamelists/` no aparelho idem (~3,1 GB media). Repo PC intacto. Keys/firmware Eden em `game-console/switch/` preservados. Operador reportou tela preta em Neo Geo e MAME antes da remocao — documentado (CRC FBNeo ja conhecido; MAME sem fix neste ciclo). Push Neon Apex adiado.
+
+**Arquivos afetados:** aparelho; `status.md`, `timeline.md`, `checklist.md`.
+
+---
+
+## 2026-08-04 — Pull capas/metadados ES-DE do Razr
+
+**Evento:** Espelhar scrape do ES-DE no repo local.
+
+**Resultado:** `adb pull` de `downloaded_media/` (12.821 arquivos, ~10,8 GB; sistemas: gb, gba, gbc, mame, mastersystem, megadrive, nes, pcengine, snes, switch) e `gamelists/` (11 XMLs) para `resources/es-de/`. Pastas adicionadas ao `.gitignore`. README em `resources/es-de/README.md`.
+
+**Arquivos afetados:** `resources/es-de/downloaded_media/`, `resources/es-de/gamelists/` (fora do Git), `.gitignore`, `resources/es-de/README.md`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-27 — Pendente: Neon Apex Beyond the Limit (Switch)
+
+**Evento:** Novos dumps locais renomeados e enfileirados para push ADB.
+
+**Resultado:** Base `resources/roms/switch/Neon Apex Beyond the Limit.xci` (~1,86 GB) e update `resources/roms/switch/updates/Neon Apex Beyond the Limit.nsp` (~246 MB). Razr desconectado — push para `game-console/ROMs/switch[/updates]/` registrado em `status.md` como pendente.
+
+**Arquivos afetados:** `resources/roms/switch/**` (fora do Git), `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-26 — Temas ES-DE enviados ao Razr
+
+**Evento:** Push de `resources/es-de/themes/` (~530 MB) para `/storage/emulated/0/game-console/ES-DE/themes/`.
+
+**Resultado:** Temas oficiais (modern, slate, carousel-icons, system-*, etc.) disponiveis no aparelho para selecionar no ES-DE. Capas de jogos (`downloaded_media`) continuam a depender de scrape ScreenScraper (conta do operador).
+
+**Arquivos afetados:** aparelho; `timeline.md`.
+
+---
+
+## 2026-07-26 — Push biblioteca Switch completa no Razr
+
+**Evento:** Renomear NSMBU Deluxe; conferir device (so Odyssey); push de bases pendentes + pasta `updates/`.
+
+**Resultado:** 12 bases (~81 GB novos + Odyssey) e 4 updates (~17 GB) em `game-console/ROMs/switch[/updates]/`. Totais no aparelho: ~98 GB na pasta switch (inclui updates).
+
+**Arquivos afetados:** aparelho (fora do Git); `timeline.md`, `status.md`.
+
+---
+
+## 2026-07-26 — Tutorial Eden: instalar update NSP
+
+**Evento:** Documentar o fluxo de update (base em `ROMs/switch/`, UPD em `updates/`, Install to NAND no Eden).
+
+**Resultado:** Novo `docs/eden-install-updates.md`; links no hub Android e em `rom-layout.md`.
+
+**Arquivos afetados:** `eden-install-updates.md`, `README.md` (hub), `rom-layout.md`, `timeline.md`.
+
+---
+
+## 2026-07-26 — Remocao dos NCA soltos em resources/switch
+
+**Evento:** Apos existir `firmware.zip`, apagar as 238 copias soltas `.nca` / `.cnmt.nca` em `resources/switch/`.
+
+**Resultado:** Pasta local ficou com `firmware.zip`, `prod.keys` e `title.keys`. Git ainda marca as 238 exclusoes como unstaged (firmware fora indevidamente no historico — commit de remocao pendente se o operador pedir).
+
+**Arquivos afetados:** `resources/switch/*.nca` (disco); status Git working tree.
+
+---
+
+## 2026-07-26 — Switch updates/ + diagnostico Neo Geo FBNeo
+
+**Evento:** Reorganizacao dos dumps Switch e analise do erro FBNeo no Metal Slug.
+
+**Resultado:** Criada `resources/roms/switch/updates/` (README local). Bases renomeadas sem Title ID; 3 UPD movidos (DOOM, Mario Kart 8 Deluxe, Wolfenstein II). Convencao documentada em `rom-layout.md`. Razr desconectado — push ADB pendente. `neogeo.zip` local tem `sm1.sm1` / `sfix.sfx` / `000-lo.lo`, mas CRCs diferem do exigido pelo FBNeo (ex.: sm1 `0x97cf998b` vs `0x94416d67`); precisa dump proprio compativel.
+
+**Arquivos afetados:** `resources/roms/switch/**` (fora do Git), `rom-layout.md`, `resources-inventory.md`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-07-25 — Smoke test Eden / Switch no Razr 50 Ultra
+
+**Evento:** Instalacao e configuracao do Eden Android v0.2.1-standard no Razr (`ZY22JXF44B`) com keys, firmware e Super Mario Odyssey.
+
+**Resultado:** Eden instalado (`dev.eden.eden_emulator`). Keys em `game-console/switch/keys/` e espelho na pasta do app. Firmware enviado como `game-console/switch/firmware/firmware.zip` (238 NCAs; Install Firmware via seletor de arquivo — pasta solta nao funciona). NSP Odyssey em `game-console/ROMs/switch/`. Operador confirmou instalacao de firmware OK. ES-DE 3.4.1-58 ja inclui sistema `switch` com player padrao Eden (Standalone). Proximo: dumps adicionais do operador.
+
+**Arquivos afetados:** aparelho (fora do Git); `resources/switch/firmware.zip` local (gitignore); `status.md`, `timeline.md`.
+
+---
+
 ## 2026-07-25 — Raiz unica `game-console/` no aparelho
 
 **Evento:** Reorganizacao no Razr: `ES-DE`, `ROMs` e `Games` movidos para `/storage/emulated/0/game-console/`.

@@ -66,10 +66,16 @@ ISOs/
 prod.keys
 title.keys
 *.keys
+*.nca
+*.cnmt.nca
 
 # Recursos binarios locais opcionais
 resources/downloads/
 resources/binaries/
+
+# Capas/metadados ES-DE scrapados (espelho local; fora do Git)
+resources/es-de/downloaded_media/
+resources/es-de/gamelists/
 
 # Platform-tools extraidos (manter so os ZIPs locais; pasta de trabalho)
 resources/android/platform-tools-win/

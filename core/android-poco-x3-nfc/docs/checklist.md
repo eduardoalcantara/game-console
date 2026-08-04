@@ -21,7 +21,7 @@ Modelo esperado: Poco X3 NFC (Snapdragon 732G / Adreno 618).
 
 - [x] Depuracao USB autorizada (`adb devices` = device) — Razr `ZY22JXF44B`
 - [x] ABI confirmada (`arm64-v8a`) — Razr
-- [x] Pastas sob `/storage/emulated/0/game-console/` (`ES-DE`, `ROMs/<sistema>/`, `Games/BIOS`) — Razr (10 sistemas com ROMs)
+- [x] Pastas sob `/storage/emulated/0/game-console/` (`ES-DE`, `ROMs/<sistema>/`, `Games/BIOS`) — Razr (desde 2026-08-04: so `megadrive` + `snes` no aparelho)
 - [x] RetroArch instalado (`com.retroarch.aarch64`) — Razr
 - [x] DuckStation instalado (`com.github.stenzek.duckstation`, via `install-multiple` do bundle APKM) — Razr
 - [x] ES-DE instalado (`org.es_de.frontend`, build paga) — Razr
@@ -68,6 +68,11 @@ Notas do celular (desvios, fallback OpenGL, falhas):
   Razr 50 Ultra (arcfox / ZY22JXF44B, Android 16): 3 installs OK, BIOS+ROMs enviadas,
   contagem recursiva local==device para os 10 sistemas.
   2026-07-25 — Pastas reorganizadas sob /storage/emulated/0/game-console/{ES-DE,ROMs,Games}.
+  2026-08-04 — Limpeza no Razr: ROMs + downloaded_media + gamelists removidos de todos
+  os sistemas exceto megadrive e snes (~2 GB ROMs + ~3,1 GB media no aparelho).
+  Espelho local no PC intacto. Operador reportou tela preta em Neo Geo e MAME/arcade
+  antes da remocao; Neo Geo: neogeo.zip com CRC incompativel com FBNeo (ja diagnosticado);
+  MAME: falha observada (core/BIOS/romset) — sem fix neste ciclo.
 ```
 
 ## C. Tablet

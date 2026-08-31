@@ -1,0 +1,40 @@
+# Manifesto Dreamcast — RG43H (Tier C, ~10 titulos)
+# Match: resources/roms/android/dreamcast/ | SD: dreamcast/
+
+system: dreamcast
+sd_folder: dreamcast
+tier: C
+target_count: 10
+
+games:
+  - base: "Sonic Adventure"
+  - base: "Sonic Adventure 2"
+  - base: "Crazy Taxi"
+  - base: "Crazy Taxi 2"
+  - base: "Jet Set Radio"
+  - base: "Power Stone"
+  - base: "Power Stone 2"
+  - base: "Marvel vs. Capcom 2"
+  - base: "Soulcalibur"
+  - base: "Resident Evil"
+  - base: "Resident Evil 2"
+  - base: "Resident Evil 3"
+  - base: "Resident Evil Code"
+  - base: "Skies of Arcadia"
+  - base: "Grandia II"
+  - base: "Shenmue"
+  - base: "Phantasy Star Online"
+  - base: "Ikaruga"
+  - base: "Giga Wing"
+  - base: "Giga Wing 2"
+  - base: "Street Fighter III"
+  - base: "Third Strike"
+  - base: "Dead or Alive 2"
+  - base: "Virtua Tennis"
+  - base: "Virtua Tennis 2"
+  - base: "Sega Rally 2"
+  - base: "Daytona USA"
+  - base: "Metropolis Street Racer"
+  - base: "Space Channel 5"
+  - base: "Rez"
+  - base: "Samba de Amigo"

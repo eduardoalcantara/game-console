@@ -1,0 +1,48 @@
+# Manifesto PC Engine — RG43H (Tier A, ~30 titulos)
+# Match: resources/roms/android/pcengine/ | SD: pcengine/ ou tg16/
+
+system: pcengine
+sd_folder: pcengine
+tier: A
+target_count: 30
+
+games:
+  - base: "Bonk's Adventure"
+  - base: "Bonk's Revenge"
+  - base: "Bonk 3"
+  - base: "R-Type"
+  - base: "R-Type II"
+  - base: "Super Star Soldier"
+  - base: "Soldier Blade"
+  - base: "Blazing Lazers"
+  - base: "Gunhed"
+  - base: "Gradius"
+  - base: "Parodius"
+    include_all_regions: true
+  - base: "Parodius Da!"
+    include_all_regions: true
+  - base: "Salamander"
+  - base: "Neutopia"
+  - base: "Neutopia II"
+  - base: "Ys I & II"
+  - base: "Ys III"
+  - base: "Dragon's Curse"
+  - base: "Legendary Axe"
+  - base: "Legendary Axe II"
+  - base: "Gate of Thunder"
+  - base: "Lords of Thunder"
+  - base: "Spriggan Mark 2"
+  - base: "Final Soldier"
+  - base: "Bomberman"
+  - base: "Bomberman '93"
+  - base: "Bomberman '94"
+  - base: "Devil's Crush"
+  - base: "Alien Crush"
+  - base: "Military Madness"
+  - base: "Cadash"
+  - base: "Dungeon Explorer"
+  - base: "Ninja Spirit"
+  - base: "Valkyrie no Densetsu"
+    region_prefer: ["Japan"]
+  - base: "Darius Plus"
+    region_prefer: ["Japan"]

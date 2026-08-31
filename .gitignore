@@ -76,6 +76,8 @@ resources/binaries/
 # Capas/metadados ES-DE scrapados (espelho local; fora do Git)
 resources/es-de/downloaded_media/
 resources/es-de/gamelists/
+resources/rg43h/sd-original/
+resources/rg43h/staging/
 
 # Platform-tools extraidos (manter so os ZIPs locais; pasta de trabalho)
 resources/android/platform-tools-win/

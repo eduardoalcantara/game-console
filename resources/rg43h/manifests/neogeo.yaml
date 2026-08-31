@@ -1,0 +1,99 @@
+# Manifesto Neo Geo — RG43H (Tier B)
+# Match: rom_set = stem MAME/FBNeo em resources/roms/android/neogeo/
+
+system: neogeo
+sd_folder: neogeo
+tier: B
+target_count: 45
+
+games:
+  - base: "Metal Slug"
+    rom_set: mslug
+  - base: "Metal Slug 2"
+    rom_set: mslug2
+  - base: "Metal Slug X"
+    rom_set: mslugx
+  - base: "Metal Slug 3"
+    rom_set: mslug3
+  - base: "King of Fighters '94"
+    rom_set: kof94
+  - base: "King of Fighters '95"
+    rom_set: kof95
+  - base: "King of Fighters '96"
+    rom_set: kof96
+  - base: "King of Fighters '97"
+    rom_set: kof97
+  - base: "King of Fighters '98"
+    rom_set: kof98
+  - base: "King of Fighters '99"
+    rom_set: kof99
+  - base: "King of Fighters 2000"
+    rom_set: kof2000
+  - base: "King of Fighters 2001"
+    rom_set: kof2001
+  - base: "King of Fighters 2002"
+    rom_set: kof2002
+  - base: "Fatal Fury"
+    rom_set: fatfury1
+  - base: "Fatal Fury 2"
+    rom_set: fatfury2
+  - base: "Fatal Fury 3"
+    rom_set: fatfury3
+  - base: "Garou"
+    rom_set: garou
+  - base: "Real Bout Fatal Fury"
+    rom_set: rbff1
+  - base: "Real Bout Fatal Fury Special"
+    rom_set: rbffspec
+  - base: "Samurai Shodown"
+    rom_set: samsho
+  - base: "Samurai Shodown II"
+    rom_set: samsho2
+  - base: "Samurai Shodown III"
+    rom_set: samsho3
+  - base: "Samurai Shodown IV"
+    rom_set: samsho4
+  - base: "Art of Fighting"
+    rom_set: aof
+  - base: "Art of Fighting 2"
+    rom_set: aof2
+  - base: "Art of Fighting 3"
+    rom_set: aof3
+  - base: "World Heroes"
+    rom_set: wh1
+  - base: "World Heroes 2"
+    rom_set: wh2
+  - base: "World Heroes 2 Jet"
+    rom_set: wh2j
+  - base: "World Heroes Perfect"
+    rom_set: whp
+  - base: "Pulstar"
+    rom_set: pulstar
+  - base: "Blazing Star"
+    rom_set: blazstar
+  - base: "Last Blade"
+    rom_set: lastblad
+  - base: "Last Blade 2"
+    rom_set: lastbld2
+  - base: "Shock Troopers"
+    rom_set: shocktro
+  - base: "Shock Troopers 2nd Squad"
+    rom_set: shocktr2
+  - base: "Twinkle Star Sprites"
+    rom_set: twinspri
+  - base: "Magical Drop II"
+    rom_set: magdrop2
+  - base: "Magical Drop III"
+    rom_set: magdrop3
+  - base: "Neo Turf Masters"
+    rom_set: turfmast
+  - base: "Baseball Stars Professional"
+    rom_set: bstars
+  - base: "Windjammers"
+    rom_set: wjammers
+  - base: "Super Sidekicks"
+    rom_set: ssideki
+  - base: "Prehistoric Isle 2"
+    rom_set: preisle2
+  - base: "Nightmare in the Dark"
+    rom_set: nitd

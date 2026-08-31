@@ -1,0 +1,82 @@
+# Manifesto NES — RG43H (Tier A, ~60 titulos)
+# Match: resources/roms/android/nes/ | SD: nes/ ou famicom/
+
+system: nes
+sd_folder: nes
+tier: A
+target_count: 60
+
+games:
+  # --- Nintendo ---
+  - base: "Super Mario Bros."
+  - base: "Super Mario Bros. 2"
+  - base: "Super Mario Bros. 3"
+  - base: "Super Mario Bros. / Duck Hunt"
+  - base: "Dr. Mario"
+  - base: "The Legend of Zelda"
+  - base: "Zelda II"
+  - base: "Metroid"
+  - base: "Kid Icarus"
+  - base: "Punch-Out!!"
+  - base: "Excitebike"
+  - base: "Ice Climber"
+  - base: "Kirby's Adventure"
+
+  # --- Plataforma / acao ---
+  - base: "Mega Man"
+  - base: "Mega Man 2"
+  - base: "Mega Man 3"
+  - base: "Mega Man 4"
+  - base: "Mega Man 5"
+  - base: "Mega Man 6"
+  - base: "Castlevania"
+  - base: "Castlevania II"
+  - base: "Castlevania III"
+  - base: "Contra"
+  - base: "Super C"
+  - base: "Life Force"
+  - base: "Ninja Gaiden"
+  - base: "Ninja Gaiden II"
+  - base: "Ninja Gaiden III"
+  - base: "DuckTales"
+  - base: "DuckTales 2"
+  - base: "Chip 'n Dale"
+  - base: "Batman"
+  - base: "Sunset Riders"
+
+  # --- RPG ---
+  - base: "Final Fantasy"
+  - base: "Final Fantasy II"
+  - base: "Final Fantasy III"
+  - base: "Dragon Warrior"
+  - base: "Dragon Warrior II"
+  - base: "Dragon Warrior III"
+  - base: "Dragon Warrior IV"
+  - base: "Crystalis"
+
+  # --- Luta / esporte / corrida ---
+  - base: "Double Dragon"
+  - base: "Double Dragon II"
+  - base: "Double Dragon III"
+  - base: "River City Ransom"
+  - base: "Teenage Mutant Ninja Turtles"
+  - base: "Teenage Mutant Ninja Turtles II"
+  - base: "Teenage Mutant Ninja Turtles III"
+  - base: "Mike Tyson's Punch-Out!!"
+  - base: "Tecmo Super Bowl"
+  - base: "RC Pro-Am"
+  - base: "Blades of Steel"
+
+  # --- Puzzle / misc ---
+  - base: "Tetris"
+  - base: "Bubble Bobble"
+  - base: "Adventure Island"
+  - base: "Bionic Commando"
+  - base: "Metal Gear"
+  - base: "Blaster Master"
+  - base: "Startropics"
+  - base: "Zoda's Revenge"
+
+  # --- Parodius ---
+  - base: "Parodius"
+    include_all_regions: true

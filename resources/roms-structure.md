@@ -30,3 +30,11 @@ Dedupe No-Intro (faixa Android):
 ```bash
 python scripts/tooling/dedupe_roms.py --root resources/roms/android
 ```
+
+Mesclagem de fontes externas (move, prioridade USA):
+
+```bash
+python scripts/tooling/merge_roms.py --execute --yes
+```
+
+Fontes: `resources/new-roms/`, biblioteca externa (`G:\Meu Drive\Recursos\Jogos\roms`), destino `resources/roms/`.

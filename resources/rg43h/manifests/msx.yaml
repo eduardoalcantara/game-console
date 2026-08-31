@@ -1,0 +1,12 @@
+# Manifesto MSX — RG43H (Tier A, Parodius)
+# Match: resources/roms/android/msx/ | SD: msx/ ou msx1/
+
+system: msx
+sd_folder: msx
+tier: A
+target_count: 5
+notes: "MSX no RG43H; ROMs recuperados do SD original"
+
+games:
+  - base: "Parodius"
+    include_all_regions: true

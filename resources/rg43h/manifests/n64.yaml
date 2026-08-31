@@ -1,0 +1,46 @@
+# Manifesto N64 — RG43H (Tier B, ~25 titulos)
+# Match: resources/roms/android/n64/ | SD: n64/
+# Hardware RG43H: desempenho parcial — lista conservadora
+
+system: n64
+sd_folder: n64
+tier: B
+target_count: 25
+
+games:
+  - base: "Super Mario 64"
+  - base: "The Legend of Zelda"
+  - base: "Ocarina of Time"
+  - base: "Majora's Mask"
+  - base: "Mario Kart 64"
+  - base: "Super Smash Bros."
+  - base: "Paper Mario"
+  - base: "Mario Party"
+  - base: "Mario Party 2"
+  - base: "Mario Party 3"
+  - base: "Mario Tennis"
+  - base: "Mario Golf"
+  - base: "Donkey Kong 64"
+  - base: "Banjo-Kazooie"
+  - base: "Banjo-Tooie"
+  - base: "Conker's Bad Fur Day"
+  - base: "Star Fox 64"
+  - base: "F-Zero X"
+  - base: "Wave Race 64"
+  - base: "1080"
+  - base: "GoldenEye 007"
+  - base: "Perfect Dark"
+  - base: "Diddy Kong Racing"
+  - base: "Pilotwings 64"
+  - base: "Kirby 64"
+  - base: "Pokemon Snap"
+  - base: "Pokemon Stadium"
+  - base: "Pokemon Stadium 2"
+  - base: "Sin and Punishment"
+    region_prefer: ["Japan"]
+  - base: "Blast Corps"
+  - base: "Jet Force Gemini"
+  - base: "Space Station Silicon Valley"
+  - base: "Goemon"
+  - base: "Mystical Ninja"
+  - base: "Harvest Moon 64"

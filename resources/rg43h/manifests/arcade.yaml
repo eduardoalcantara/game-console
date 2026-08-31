@@ -1,0 +1,229 @@
+# Manifesto Arcade — RG43H (Tier B)
+# Match: rom_set = stem MAME/FBNeo em mame/ + fbneo/
+# sd_folder = pasta destino no SD EmuELEC
+
+system: arcade
+sd_folder: fbneo
+tier: B
+target_count: 60
+notes: "rom_set obrigatorio; sets CPS2/CPS3 ausentes no espelho PC ficam missing"
+
+games:
+  # --- CPS2 (sets nao presentes no espelho — missing esperado) ---
+  - base: "Street Fighter II"
+    rom_set: sf2
+    sd_folder: cps2
+  - base: "Super Street Fighter II"
+    rom_set: ssf2
+    sd_folder: cps2
+  - base: "Street Fighter Alpha"
+    rom_set: sfa
+    sd_folder: cps2
+  - base: "Street Fighter Alpha 2"
+    rom_set: sfa2
+    sd_folder: cps2
+  - base: "Street Fighter Alpha 3"
+    rom_set: sfa3
+    sd_folder: cps2
+  - base: "Marvel vs. Capcom"
+    rom_set: mvsc
+    sd_folder: cps2
+  - base: "X-Men vs. Street Fighter"
+    rom_set: xmvsf
+    sd_folder: cps2
+  - base: "Darkstalkers"
+    rom_set: dstlk
+    sd_folder: cps2
+  - base: "Mega Man"
+    rom_set: megaman
+    sd_folder: cps2
+    note: "Power Battle"
+
+  # --- CPS1 (fonte mame/ ou fbneo/) ---
+  - base: "Final Fight"
+    rom_set: ffight
+    sd_folder: cps1
+  - base: "Final Fight 2"
+    rom_set: ffight2
+    sd_folder: cps1
+  - base: "Final Fight 3"
+    rom_set: ffight3
+    sd_folder: cps1
+  - base: "Captain Commando"
+    rom_set: captcomm
+    sd_folder: cps1
+  - base: "Knights of the Round"
+    rom_set: knights
+    sd_folder: cps1
+  - base: "The King of Dragons"
+    rom_set: kod
+    sd_folder: cps1
+  - base: "Cadillacs and Dinosaurs"
+    rom_set: dino
+    sd_folder: cps1
+  - base: "Punisher"
+    rom_set: punisher
+    sd_folder: cps1
+  - base: "Ghouls'n Ghosts"
+    rom_set: gng
+    sd_folder: cps1
+  - base: "Strider"
+    rom_set: strider
+    sd_folder: cps1
+  - base: "Forgotten Worlds"
+    rom_set: forgottn
+    sd_folder: cps1
+  - base: "Mercs"
+    rom_set: mercs
+    sd_folder: cps1
+  - base: "Magic Sword"
+    rom_set: msword
+    sd_folder: cps1
+  - base: "Carrier Air Wing"
+    rom_set: uawing
+    sd_folder: cps1
+
+  # --- CPS3 (ausentes no espelho) ---
+  - base: "Red Earth"
+    rom_set: redearth
+    sd_folder: cps3
+  - base: "JoJo's Venture"
+    rom_set: jojo
+    sd_folder: cps3
+  - base: "JoJo's Bizarre Adventure"
+    rom_set: jojoba
+    sd_folder: cps3
+
+  # --- MAME / FBNeo classics (sets presentes no espelho) ---
+  - base: "Pac-Man"
+    rom_set: 25pacman
+    sd_folder: mame
+  - base: "Ms. Pac-Man"
+    rom_set: 20pacgal
+    sd_folder: mame
+  - base: "Galaga"
+    rom_set: galaga
+    sd_folder: mame
+  - base: "Galaxian"
+    rom_set: galaxian
+    sd_folder: mame
+  - base: "Donkey Kong"
+    rom_set: dkong
+    sd_folder: mame
+  - base: "Donkey Kong Jr."
+    rom_set: dkongjr
+    sd_folder: mame
+  - base: "Mario Bros."
+    rom_set: mario
+    sd_folder: mame
+  - base: "Dig Dug"
+    rom_set: digdug
+    sd_folder: mame
+  - base: "Frogger"
+    rom_set: frogger
+    sd_folder: mame
+  - base: "Centipede"
+    rom_set: centiped
+    sd_folder: mame
+  - base: "Defender"
+    rom_set: defender
+    sd_folder: mame
+  - base: "Robotron"
+    rom_set: robotron
+    sd_folder: mame
+  - base: "Joust"
+    rom_set: joust
+    sd_folder: mame
+  - base: "Tempest"
+    rom_set: tempest
+    sd_folder: mame
+  - base: "Asteroids"
+    rom_set: asteroid
+    sd_folder: mame
+  - base: "Space Invaders"
+    rom_set: invaders
+    sd_folder: mame
+  - base: "Q*bert"
+    rom_set: qbert
+    sd_folder: mame
+  - base: "BurgerTime"
+    rom_set: burgertime
+    sd_folder: mame
+  - base: "Double Dragon"
+    rom_set: doubledr
+    sd_folder: mame
+  - base: "Teenage Mutant Ninja Turtles"
+    rom_set: tmnt
+    sd_folder: mame
+  - base: "The Simpsons"
+    rom_set: simpsons
+    sd_folder: mame
+  - base: "X-Men"
+    rom_set: xmen
+    sd_folder: mame
+  - base: "Sunset Riders"
+    rom_set: sunsetr
+    sd_folder: mame
+  - base: "Cadash"
+    rom_set: cadash
+    sd_folder: mame
+  - base: "Gang Wars"
+    rom_set: gangwars
+    sd_folder: mame
+  - base: "Contra"
+    rom_set: contra
+    sd_folder: mame
+  - base: "R-Type"
+    rom_set: rtype
+    sd_folder: mame
+  - base: "Truxton"
+    rom_set: truxton
+    sd_folder: mame
+  - base: "Raiden"
+    rom_set: raiden
+    sd_folder: mame
+  - base: "1942"
+    rom_set: "1942"
+    sd_folder: mame
+  - base: "1943"
+    rom_set: "1943"
+    sd_folder: mame
+  - base: "Ghosts'n Goblins"
+    rom_set: gng
+    sd_folder: mame
+  - base: "Bubble Bobble"
+    rom_set: bublbobl
+    sd_folder: mame
+  - base: "Snow Bros."
+    rom_set: snowbros
+    sd_folder: mame
+  - base: "Pang"
+    rom_set: pang
+    sd_folder: mame
+  - base: "Arkanoid"
+    rom_set: arkanoid
+    sd_folder: mame
+  - base: "Breakout"
+    rom_set: breakout
+    sd_folder: mame
+  - base: "Popeye"
+    rom_set: popeye
+    sd_folder: mame
+  - base: "Three Wonders"
+    rom_set: 3wonders
+    sd_folder: mame
+  - base: "Knights of Valour"
+    rom_set: kov
+    sd_folder: mame
+  - base: "Oriental Legend"
+    rom_set: orlegend
+    sd_folder: mame
+  - base: "Mortal Kombat II"
+    rom_set: mk2
+    sd_folder: mame
+  - base: "NBA Jam"
+    rom_set: nbajam
+    sd_folder: mame
+  - base: "Shinobi"
+    rom_set: shinobi
+    sd_folder: mame

@@ -1,0 +1,65 @@
+# Manifesto Game Boy — RG43H (Tier A, ~45 titulos)
+# Match: resources/roms/android/gb/ | SD: gb/
+
+system: gb
+sd_folder: gb
+tier: A
+target_count: 45
+
+games:
+  - base: "Tetris"
+  - base: "Super Mario Land"
+  - base: "Super Mario Land 2"
+  - base: "Wario Land"
+  - base: "Wario Land II"
+  - base: "The Legend of Zelda"
+  - base: "Link's Awakening"
+  - base: "Metroid II"
+  - base: "Kirby's Dream Land"
+  - base: "Kirby's Dream Land 2"
+  - base: "Kirby's Pinball Land"
+  - base: "Donkey Kong"
+  - base: "Mega Man"
+  - base: "Mega Man II"
+  - base: "Mega Man III"
+  - base: "Mega Man IV"
+  - base: "Mega Man V"
+  - base: "Castlevania"
+  - base: "Castlevania II"
+  - base: "Castlevania Legends"
+  - base: "Final Fantasy Legend"
+  - base: "Final Fantasy Legend II"
+  - base: "Final Fantasy Legend III"
+  - base: "Final Fantasy Adventure"
+  - base: "Dragon Warrior"
+  - base: "Dragon Warrior II"
+  - base: "Dragon Warrior III"
+  - base: "Gargoyle's Quest"
+  - base: "Gargoyle's Quest II"
+  - base: "Operation C"
+  - base: "R-Type"
+  - base: "Gradius"
+  - base: "Nemesis"
+  - base: "SolarStriker"
+  - base: "Kid Icarus"
+  - base: "Balloon Kid"
+  - base: "Dr. Mario"
+  - base: "Pokemon Red"
+  - base: "Pokemon Blue"
+  - base: "Pokemon Yellow"
+  - base: "Super Mario Bros."
+  - base: "DuckTales"
+  - base: "DuckTales 2"
+  - base: "Teenage Mutant Ninja Turtles"
+  - base: "Teenage Mutant Ninja Turtles II"
+  - base: "Batman"
+  - base: "Batman Returns"
+  - base: "Motocross Maniacs"
+  - base: "Bionic Commando"
+  - base: "Kid Dracula"
+
+  # --- Parodius (serie) ---
+  - base: "Parodius"
+    include_all_regions: true
+  - base: "Parodius Da!"
+    include_all_regions: true

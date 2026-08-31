@@ -1,0 +1,48 @@
+# Manifesto Game Gear — RG43H (Tier A, ~30 titulos)
+# Match: resources/roms/android/gamegear/ | SD: gamegear/
+
+system: gamegear
+sd_folder: gamegear
+tier: A
+target_count: 30
+
+games:
+  - base: "Sonic the Hedgehog"
+  - base: "Sonic the Hedgehog 2"
+  - base: "Sonic Chaos"
+  - base: "Sonic Triple Trouble"
+  - base: "Sonic Drift"
+  - base: "Sonic Drift 2"
+  - base: "Sonic Labyrinth"
+  - base: "Tails Adventure"
+  - base: "Tails' Skypatrol"
+  - base: "Shinobi"
+  - base: "Shinobi II"
+  - base: "Streets of Rage"
+  - base: "Streets of Rage 2"
+  - base: "Defenders of Oasis"
+  - base: "Legend of Illusion"
+  - base: "Deep Duck Trouble"
+  - base: "Land of Illusion"
+  - base: "Crystal Warriors"
+  - base: "Crystal Warriors II"
+  - base: "Shining Force Gaiden"
+  - base: "Shining Force Gaiden II"
+  - base: "G-LOC"
+  - base: "OutRun"
+  - base: "Super Monaco GP"
+  - base: "Columns"
+  - base: "Bust-A-Move"
+  - base: "Mortal Kombat"
+  - base: "Mortal Kombat II"
+  - base: "Virtua Fighter"
+  - base: "Virtua Fighter Mini"
+  - base: "Gear Works"
+  - base: "Kinetic Connection"
+  - base: "Aerial Assault"
+  - base: "R-Type"
+  - base: "Power Strike"
+  - base: "Power Strike II"
+  - base: "Ninja Gaiden"
+  - base: "Batman Returns"
+  - base: "The GG Shinobi"

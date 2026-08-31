@@ -1,0 +1,47 @@
+# Manifesto Master System — RG43H (Tier A, ~30 titulos)
+# Match: resources/roms/android/mastersystem/ | SD: mastersystem/
+
+system: mastersystem
+sd_folder: mastersystem
+tier: A
+target_count: 30
+
+games:
+  - base: "Sonic the Hedgehog"
+  - base: "Sonic the Hedgehog 2"
+  - base: "Alex Kidd"
+  - base: "Alex Kidd in Miracle World"
+  - base: "Alex Kidd"
+    note: "Lost Stars / BMX / High-Tech World — match por subtitulo"
+  - base: "Wonder Boy"
+  - base: "Wonder Boy in Monster Land"
+  - base: "Wonder Boy III"
+  - base: "Phantasy Star"
+  - base: "Golvellius"
+  - base: "Golden Axe Warrior"
+  - base: "Golden Axe"
+  - base: "Shinobi"
+  - base: "Kenseiden"
+  - base: "R-Type"
+  - base: "Fantasy Zone"
+  - base: "Fantasy Zone II"
+  - base: "OutRun"
+  - base: "Space Harrier"
+  - base: "Hang-On"
+  - base: "After Burner"
+  - base: "Psycho Fox"
+  - base: "Quartet"
+  - base: "Cloud Master"
+  - base: "Spellcaster"
+  - base: "Miracle Warriors"
+  - base: "Master of Darkness"
+  - base: "Castle of Illusion"
+  - base: "Land of Illusion"
+  - base: "Deep Duck Trouble"
+  - base: "Lucky Dime Caper"
+  - base: "Captain Silver"
+  - base: "Black Belt"
+  - base: "Cyborg Hunter"
+  - base: "TransBot"
+  - base: "Power Strike"
+  - base: "Power Strike II"

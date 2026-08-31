@@ -4,6 +4,36 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-08-31 — RG43H curadoria v2 (rom_set Neo Geo / arcade)
+
+**Evento:** Corrigir match MAME/FBNeo via campo `rom_set` nos manifestos; re-curadoria e redeploy SD.
+
+**Resultado:** `curate_rg43h_roms.py` passa a priorizar `rom_set` (stem exacto do zip). `neogeo.yaml` 45/45 matched; `arcade.yaml` 20/70 (sets CPS2/CPS3/classics ausentes no espelho). Total **526** jogos matched (+60 vs v1). Redeploy `H:` FAT32 EEROMS sem reformatar (`-SkipFormat`), 3447 ficheiros (~8,9 GB). Neo Geo no SD: 45 ROMs + BIOS.
+
+**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `resources/rg43h/manifests/neogeo.yaml`, `resources/rg43h/manifests/arcade.yaml`, staging, SD `H:\`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-08-31 — Curadoria RG43H + deploy SD 128 GB
+
+**Evento:** Gerar staging EmuELEC a partir de 16 manifestos YAML e copiar para cartao novo 128 GB.
+
+**Resultado:** `curate_rg43h_roms.py` executado (`--execute --yes`): 466 matched, 291 missing, ~7,46 GB ROMs. Staging em `resources/rg43h/staging/` (gitignored). `deploy_rg43h_sd.ps1`: formatacao FAT32 via `fat32format -c128` (Windows nao suporta FAT32 nativo >32 GB), rotulo EEROMS, robocopy 3375 ficheiros para `H:\`. Favoritos SNES OK (Metal Warriors, Rock n' Roll Racing, Parodius). Arcade largely missing (nomes MAME). SNES sem gamelist.xml filtrado (paths sd-original incompativeis — ROMs presentes).
+
+**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `scripts/tooling/windows/deploy_rg43h_sd.ps1`, `resources/rg43h/staging/`, SD `H:\`; `reports/2026-08-30-rg43h-curate-deploy.md`, `status.md`, `timeline.md`, `resources/rg43h/docs/curation-plan.md`.
+
+---
+
+## 2026-08-30 — Mesclagem biblioteca ROMs (new-roms + externa)
+
+**Evento:** Mover ROMs de `resources/new-roms/` e `G:\Meu Drive\Recursos\Jogos\roms\` para espelho `resources/roms/` com prioridade USA.
+
+**Resultado:** Script `scripts/tooling/merge_roms.py` criado e executado (~62 min). 60.029 movidos; 26.432 descartados (JP/EU inferiores); 19.067 substituicoes. Espelho final: ~40,4k ROMs em `android/` (~62,5 GB), ~675 em `pc-only/`, BIOS em `resources/roms/bios/`. Dedupe pos-merge: 1 apagado, 5.469 renomeados (remocao `(USA)`). `new-roms` esvaziado (so placeholders). Biblioteca externa esvaziada exceto pasta `ROMs/` (6 arquivos, nao mapeada).
+
+**Arquivos afetados:** `resources/roms/**`, `resources/new-roms/**`, biblioteca externa; `scripts/tooling/merge_roms.py`, `reports/2026-08-30-merge-roms.md`, `status.md`, `timeline.md`.
+
+---
+
 ## 2026-08-04 — Limpeza Razr: so Mega Drive + SNES
 
 **Evento:** Remover do celular ROMs e media ES-DE de todos os sistemas exceto `megadrive` e `snes`.

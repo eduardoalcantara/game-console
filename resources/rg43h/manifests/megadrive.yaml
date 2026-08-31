@@ -1,0 +1,106 @@
+# Manifesto Mega Drive — RG43H (Tier A, ~80 titulos)
+# Match: resources/roms/android/megadrive/ | SD: megadrive/
+
+system: megadrive
+sd_folder: megadrive
+tier: A
+target_count: 80
+
+games:
+  # --- Sega / plataforma ---
+  - base: "Sonic the Hedgehog"
+  - base: "Sonic the Hedgehog 2"
+  - base: "Sonic the Hedgehog 3"
+  - base: "Sonic & Knuckles"
+  - base: "Knuckles' Chaotix"
+    region_prefer: ["Japan", "World"]
+  - base: "Sonic Spinball"
+  - base: "Ristar"
+  - base: "Comix Zone"
+  - base: "Gunstar Heroes"
+  - base: "Alien Soldier"
+    region_prefer: ["Japan", "Europe"]
+  - base: "Thunder Force IV"
+  - base: "Thunder Force III"
+  - base: "MUSHA"
+  - base: "Gaiares"
+  - base: "Elemental Master"
+  - base: "Granada"
+
+  # --- RPG / estrategia ---
+  - base: "Phantasy Star II"
+  - base: "Phantasy Star III"
+  - base: "Phantasy Star IV"
+  - base: "Shining Force"
+  - base: "Shining Force II"
+  - base: "Shining in the Darkness"
+  - base: "Landstalker"
+  - base: "Beyond Oasis"
+  - base: "Crusader of Centy"
+  - base: "Light Crusader"
+  - base: "Wonder Boy in Monster World"
+
+  # --- Acao / aventura ---
+  - base: "Castlevania Bloodlines"
+  - base: "Contra Hard Corps"
+  - base: "Rocket Knight Adventures"
+  - base: "Sparkster"
+  - base: "Shinobi III"
+  - base: "Revenge of Shinobi"
+  - base: "Streets of Rage"
+  - base: "Streets of Rage 2"
+  - base: "Streets of Rage 3"
+  - base: "Golden Axe"
+  - base: "Golden Axe II"
+  - base: "Altered Beast"
+  - base: "Ghouls'n Ghosts"
+  - base: "Strider"
+  - base: "Mega Man The Wily Wars"
+    region_prefer: ["Europe", "Japan"]
+  - base: "Mega Turrican"
+  - base: "Turrican"
+
+  # --- Luta ---
+  - base: "Street Fighter II"
+  - base: "Super Street Fighter II"
+  - base: "Mortal Kombat"
+  - base: "Mortal Kombat II"
+  - base: "Mortal Kombat 3"
+  - base: "Ultimate Mortal Kombat 3"
+  - base: "Eternal Champions"
+
+  # --- Corrida / esporte ---
+  - base: "OutRun"
+  - base: "Super Hang-On"
+  - base: "Road Rash"
+  - base: "Road Rash II"
+  - base: "Road Rash 3"
+  - base: "Micro Machines"
+  - base: "Micro Machines 2"
+  - base: "NBA Jam"
+  - base: "NHL 94"
+  - base: "PGA Tour Golf"
+
+  # --- Disney / licenciados ---
+  - base: "Aladdin"
+  - base: "The Lion King"
+  - base: "Castle of Illusion"
+  - base: "QuackShot"
+  - base: "World of Illusion"
+  - base: "Toy Story"
+  - base: "Boogerman"
+  - base: "Earthworm Jim"
+  - base: "Earthworm Jim 2"
+  - base: "Cool Spot"
+  - base: "ToeJam & Earl"
+  - base: "ToeJam & Earl in Panic on Funkotron"
+
+  # --- Puzzle / misc ---
+  - base: "Columns"
+  - base: "Puyo Puyo"
+  - base: "Dr. Robotnik's Mean Bean Machine"
+  - base: "Desert Strike"
+  - base: "Jungle Strike"
+  - base: "Sub-Terrania"
+  - base: "Ecco the Dolphin"
+  - base: "Ecco II"

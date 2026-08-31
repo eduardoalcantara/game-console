@@ -1,0 +1,177 @@
+# Manifesto SNES — RG43H (Tier A, ~120 titulos)
+# Match: resources/roms/android/snes/ | SD: snes/
+
+system: snes
+sd_folder: snes
+tier: A
+target_count: 120
+notes: "Console favorito do operador — biblioteca generosa curada"
+
+games:
+  # --- Nintendo first-party ---
+  - base: "Super Mario World"
+  - base: "Super Mario All-Stars"
+  - base: "Super Mario Kart"
+  - base: "Super Mario RPG"
+  - base: "Yoshi's Island"
+  - base: "Donkey Kong Country"
+  - base: "Donkey Kong Country 2"
+  - base: "Donkey Kong Country 3"
+  - base: "Super Metroid"
+  - base: "A Link to the Past"
+  - base: "Star Fox"
+  - base: "F-Zero"
+  - base: "Pilotwings"
+  - base: "Stunt Race FX"
+  - base: "Kirby Super Star"
+  - base: "Kirby's Dream Course"
+  - base: "Kirby's Avalanche"
+  - base: "Wario's Woods"
+
+  # --- RPG ---
+  - base: "Chrono Trigger"
+  - base: "Final Fantasy II"
+  - base: "Final Fantasy III"
+  - base: "Final Fantasy V"
+  - base: "Final Fantasy VI"
+  - base: "EarthBound"
+  - base: "Breath of Fire"
+  - base: "Breath of Fire II"
+  - base: "Secret of Mana"
+  - base: "Secret of Evermore"
+  - base: "Illusion of Gaia"
+  - base: "Lufia"
+  - base: "Lufia II"
+  - base: "Soul Blazer"
+  - base: "Robotrek"
+  - base: "Ogre Battle"
+  - base: "Tactics Ogre"
+  - base: "Shadowrun"
+  - base: "E.V.O."
+  - base: "7th Saga"
+  - base: "Brain Lord"
+  - base: "Mystic Quest"
+  - base: "Terranigma"
+    region_prefer: ["Europe", "Japan"]
+  - base: "Seiken Densetsu 3"
+    region_prefer: ["Japan"]
+    note: "JP exclusivo; aceitar traducao se existir no espelho"
+  - base: "Fire Emblem"
+    region_prefer: ["Japan"]
+    note: "Genealogy of the Holy War / JP"
+
+  # --- Acao / plataforma ---
+  - base: "Mega Man X"
+  - base: "Mega Man X2"
+  - base: "Mega Man X3"
+  - base: "Castlevania IV"
+  - base: "Contra III"
+  - base: "Super Ghouls'n Ghosts"
+  - base: "Demon's Crest"
+  - base: "ActRaiser"
+  - base: "ActRaiser 2"
+  - base: "Gunstar Heroes"
+  - base: "Sunset Riders"
+  - base: "Wild Guns"
+  - base: "Hagane"
+  - base: "Metal Warriors"
+    note: "favorito operador — mecha; piloto a pe"
+  - base: "Pocky & Rocky"
+  - base: "Pocky & Rocky 2"
+  - base: "Super Adventure Island"
+  - base: "Super Adventure Island II"
+  - base: "Joe & Mac"
+  - base: "Joe & Mac 2"
+  - base: "Aero the Acro-Bat"
+  - base: "Aero the Acro-Bat 2"
+  - base: "Sparkster"
+  - base: "Plok"
+  - base: "Cool Spot"
+  - base: "Zombies Ate My Neighbors"
+
+  # --- Shoot'em up ---
+  - base: "R-Type III"
+  - base: "Axelay"
+  - base: "Gradius III"
+  - base: "U.N. Squadron"
+
+  # --- Parodius (serie completa no espelho SNES; todas as regioes) ---
+  - base: "Jikkyou Oshaberi Parodius"
+    include_all_regions: true
+  - base: "Gokujou Parodius"
+    include_all_regions: true
+  - base: "Parodius Da!"
+    include_all_regions: true
+  - base: "Parodius Non-Sense Fantasy"
+    include_all_regions: true
+  - base: "Parodius"
+    include_all_regions: true
+    note: "Fantastic Journey / EU; incluir .smc e .zip JP se existirem"
+
+  # --- Luta ---
+  - base: "Street Fighter II"
+  - base: "Super Street Fighter II"
+  - base: "Street Fighter Alpha 2"
+  - base: "Mortal Kombat II"
+  - base: "Killer Instinct"
+
+  # --- Beat'em up / licenciados ---
+  - base: "Teenage Mutant Ninja Turtles"
+  - base: "Aladdin"
+  - base: "The Lion King"
+  - base: "Goof Troop"
+  - base: "Magical Quest"
+  - base: "Batman Returns"
+  - base: "Spider-Man"
+  - base: "X-Men"
+
+  # --- Star Wars / Indiana ---
+  - base: "Super Star Wars"
+  - base: "Empire Strikes Back"
+  - base: "Return of the Jedi"
+  - base: "Indiana Jones"
+
+  # --- Corrida / esporte ---
+  - base: "Top Gear"
+  - base: "Top Gear 2"
+  - base: "Uniracers"
+  - base: "Rock n' Roll Racing"
+    note: "favorito operador"
+  - base: "Rock 'N' Roll Racing"
+    include_all_regions: true
+  - base: "Rock & Roll Racing"
+    include_all_regions: true
+  - base: "Super Off Road"
+  - base: "Super Punch-Out"
+  - base: "NBA Jam"
+  - base: "NBA Jam Tournament Edition"
+  - base: "Super Tennis"
+  - base: "Ken Griffey"
+  - base: "Super Baseball 2020"
+
+  # --- Strike / sim ---
+  - base: "Jungle Strike"
+  - base: "Desert Strike"
+  - base: "Harvest Moon"
+  - base: "SimCity"
+  - base: "SimEarth"
+
+  # --- Puzzle / party ---
+  - base: "Tetris Attack"
+  - base: "Tetris & Dr. Mario"
+  - base: "Bust-a-Move"
+  - base: "Super Bomberman"
+  - base: "Super Bomberman 2"
+  - base: "Vegas Stakes"
+
+  # --- Extras / hidden gems ---
+  - base: "Super Scope 6"
+  - base: "Lamborghini American Challenge"
+  - base: "Out of This World"
+  - base: "Flashback"
+  - base: "Prince of Persia"
+  - base: "Young Merlin"
+  - base: "Equinox"
+  - base: "Hook"
+  - base: "Super Conflict"
+  - base: "King Arthur's World"

@@ -1,0 +1,50 @@
+# Manifesto PSP — RG43H (Tier C, ~18 titulos)
+# Match: resources/roms/android/psp/ | SD: psp/
+# Desempenho parcial no RG43H — ISOs leves preferidas
+
+system: psp
+sd_folder: psp
+tier: C
+target_count: 18
+
+games:
+  - base: "God of War"
+  - base: "God of War"
+    note: "Chains of Olympus — match por subtitulo"
+  - base: "Crisis Core"
+  - base: "Final Fantasy"
+    note: "Crisis Core ou Tactics — match manual se ambiguo"
+  - base: "Final Fantasy IV"
+  - base: "Final Fantasy Tactics"
+  - base: "Kingdom Hearts"
+  - base: "Birth by Sleep"
+  - base: "Metal Gear Solid"
+  - base: "Peace Walker"
+  - base: "Patapon"
+  - base: "Patapon 2"
+  - base: "Patapon 3"
+  - base: "LocoRoco"
+  - base: "LocoRoco 2"
+  - base: "Grand Theft Auto"
+  - base: "Liberty City Stories"
+  - base: "Vice City Stories"
+  - base: "Burnout Legends"
+  - base: "Burnout Dominator"
+  - base: "Wipeout Pure"
+  - base: "Wipeout Pulse"
+  - base: "Tekken"
+  - base: "Darkstalkers Chronicle"
+  - base: "Street Fighter Alpha 3 MAX"
+  - base: "Mega Man Powered Up"
+  - base: "Mega Man Maverick Hunter X"
+  - base: "Daxter"
+  - base: "Ratchet & Clank"
+  - base: "Secret Agent Clank"
+  - base: "Syphon Filter"
+  - base: "Dark Mirror"
+  - base: "Lumines"
+  - base: "Every Extend Extra"
+  - base: "Gitaroo Man"
+  - base: "Persona 3"
+  - base: "Valkyria Chronicles II"
+    note: "verificar se set PSP existe no espelho"

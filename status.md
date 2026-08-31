@@ -6,11 +6,11 @@
 
 ## Resumo do estado atual
 
-Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em `resources/es-de/` (~10,8 GB; fora do Git). **Biblioteca ROMs mesclada (2026-08-30):** `new-roms` + biblioteca externa movidos para `resources/roms/` (~40k ROMs android, ~675 pc-only, BIOS em `resources/roms/bios/`); prioridade USA aplicada (26k descartados JP/EU). **Razr (2026-08-04):** no aparelho restam so ROMs + media ES-DE de **megadrive** e **snes**; demais sistemas removidos do celular (repo PC intacto). Apps (RetroArch, ES-DE, Eden, DuckStation) mantidos. Neo Geo: BIOS `new-roms` com CRC FBNeo correto (`94416D67`); smoke test pendente. Switch ROMs tirados do aparelho; Neon Apex push **adiado** ate nova decisao. Poco X3 NFC bloqueado pelo MIUI. **RG43H PRO (2026-08-31):** curadoria concluida — **526** ROMs matched (Neo Geo 45/45, rom_set v2), staging ~8,5 GB, SD 128 GB (`H:`) **FAT32 EEROMS** (3447 ficheiros). Proximo passo = smoke test no aparelho.
+Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em `resources/es-de/` (~10,8 GB; fora do Git). **Biblioteca ROMs mesclada (2026-08-30):** `new-roms` + biblioteca externa movidos para `resources/roms/` (~40k ROMs android, ~675 pc-only, BIOS em `resources/roms/bios/`); prioridade USA aplicada (26k descartados JP/EU). **Razr (2026-08-04):** no aparelho restam so ROMs + media ES-DE de **megadrive** e **snes**; demais sistemas removidos do celular (repo PC intacto). Apps (RetroArch, ES-DE, Eden, DuckStation) mantidos. Neo Geo: BIOS `new-roms` com CRC FBNeo correto (`94416D67`); smoke test pendente. Switch ROMs tirados do aparelho; Neon Apex push **adiado** ate nova decisao. Poco X3 NFC bloqueado pelo MIUI. **RG43H PRO (2026-08-31):** 526 ROMs no SD; SNES OK no aparelho; scrape in-device **indisponivel** (RGBox). Capas via `apply_esde_media_rg43h.py`: **126/458** no staging (media ES-DE parcialmente sincronizada no Drive). Cartao H: desmontado no ultimo deploy de midia — reinserir e `--deploy`. Guia: `resources/rg43h/docs/operator-guide.md`.
 
 ## Tarefas pendentes
 
-- **RG43H:** smoke test no aparelho (SNES visivel? 2 jogos/sistema); ajustar manifesto arcade se necessario.
+- **RG43H:** sincronizar `resources/es-de/downloaded_media/` offline no Google Drive; reexecutar `apply_esde_media_rg43h.py --execute --yes --deploy H:\`; smoke test outros sistemas.
 - Smoke test PC (RetroArch/DuckStation): 2 jogos por sistema (complementar).
 - Verificar pasta externa `Recursos/Jogos/roms/ROMs/` (6 arquivos nao mapeados).
 - Limpar placeholders vazios em `resources/new-roms/` (opcional).
@@ -37,13 +37,15 @@ Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em 
 
 ## Proximos passos
 
-1. Operador: inserir SD 128 GB no RG43H; confirmar SNES + smoke test 2 jogos/sistema.
-2. Operador: rescan/reabrir ES-DE no Razr (so Mega Drive + SNES).
-3. Ajustar `arcade.yaml` com nomes de set MAME/FBNeo se arcade for prioridade.
+1. Operador: Google Drive → `downloaded_media` disponivel offline → `apply_esde_media_rg43h.py --execute --yes --deploy H:\`.
+2. Operador RG43H: smoke test 2 jogos/sistema (MD, NES, Neo Geo, …).
+3. Operador: rescan/reabrir ES-DE no Razr (so Mega Drive + SNES).
 4. Poco X3 NFC: resolver "Instalar via USB" e repetir faixa Android padrao.
 
 ## Mudancas recentes
 
+- **RG43H capas ES-DE:** `apply_esde_media_rg43h.py` — 126/458 capas no staging; SNES 14/115 (Drive parcial A–E). Relatorio: `reports/2026-08-31-rg43h-esde-media.md`.
+- **RG43H guia operador:** `resources/rg43h/docs/operator-guide.md` (saves/savestates + scrape/capas); SNES confirmado no aparelho; scrape in-device bloqueado no RGBox.
 - **RG43H curadoria v2 (rom_set):** suporte `rom_set` em manifestos Neo Geo/arcade; re-curadoria 526 matched (+60); Neo Geo 45/45; redeploy SD `H:` (3447 ficheiros, ~8,9 GB).
 - **RG43H curadoria + deploy SD 128 GB:** `curate_rg43h_roms.py` + `deploy_rg43h_sd.ps1`; staging EmuELEC FAT32 EEROMS. Relatorio: `reports/2026-08-30-rg43h-curate-deploy.md`.
 - Mesclagem ROMs: `merge_roms.py` moveu `new-roms` + biblioteca externa → `resources/roms/` (60k movidos, 26k JP/EU descartados); dedupe pos-merge (5.469 renomeados). Relatorio: `reports/2026-08-30-merge-roms.md`.

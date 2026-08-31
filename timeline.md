@@ -4,6 +4,26 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-08-31 — Capas ES-DE → staging RG43H
+
+**Evento:** Implementar copia de capas do ES-DE PC para layout EmuELEC (RGBox sem scraper).
+
+**Resultado:** Script `apply_esde_media_rg43h.py` (dry-run/execute/uninstall/deploy). Staging: 126/458 ROMs com capa; NES quase completo (44/45); SNES 14/115 por sincronizacao parcial do Google Drive (pastas A–E). H: nao montado — deploy SD pendente. Relatorio `reports/2026-08-31-rg43h-esde-media.md`.
+
+**Arquivos afetados:** `scripts/tooling/apply_esde_media_rg43h.py`, `resources/rg43h/staging/**/images/`, `gamelist.xml`, `media-report.*`, docs RG43H, `status.md`, `timeline.md`.
+
+---
+
+## 2026-08-31 — RG43H: SNES OK + guia saves/scrape
+
+**Evento:** Operador confirmou SNES no RG43H Pro; documentar saves e scrape de capas no launcher.
+
+**Resultado:** Criado `resources/rg43h/docs/operator-guide.md` (SRAM vs savestate SELECT+R1/L1; scrape EmulationStation via ScreenScraper + Update Game Lists). README e plano de curadoria actualizados.
+
+**Arquivos afetados:** `resources/rg43h/docs/operator-guide.md`, `resources/rg43h/README.md`, `resources/rg43h/docs/curation-plan.md`, `status.md`, `timeline.md`.
+
+---
+
 ## 2026-08-31 — RG43H curadoria v2 (rom_set Neo Geo / arcade)
 
 **Evento:** Corrigir match MAME/FBNeo via campo `rom_set` nos manifestos; re-curadoria e redeploy SD.

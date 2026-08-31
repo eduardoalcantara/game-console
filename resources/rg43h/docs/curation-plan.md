@@ -96,5 +96,6 @@ Relatorio: `reports/2026-08-30-rg43h-curate-deploy.md`.
 1. ~~Gerar manifestos Tier A/B/C~~ (2026-08-30).
 2. ~~Implementar `curate_rg43h_roms.py`~~ (2026-08-31).
 3. ~~Deploy SD 128 GB FAT32 EEROMS~~ (2026-08-31).
-4. **Operador:** smoke test RG43H — confirmar SNES aparece; 2 jogos/sistema.
-5. Fase 2 (opcional): gamelist/thumbnails SNES a partir de `resources/es-de/downloaded_media/snes/`; alias arcade no manifesto.
+4. ~~**Operador:** smoke test SNES no RG43H~~ (confirmado 2026-08-31 — SNES OK).
+5. **Operador:** capas via `apply_esde_media_rg43h.py` (RGBox sem scraper); sincronizar ES-DE media offline no Drive se faltarem letras F–Z; smoke test outros sistemas.
+6. Fase 2 restante: sets CPS2 no espelho PC se arcade for prioridade.

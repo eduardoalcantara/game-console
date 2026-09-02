@@ -334,6 +334,15 @@ def filter_gamelist(
             src_xml = alt
     if not src_xml.is_file():
         return 0
+
+    # Adicionar suporte p/ preservar as pastas 'media'/'images' baixadas no staging (Skraper)
+    if execute:
+        import shutil
+        for media_folder in ["media", "images", "videos", "boxes", "wheels", "manuals", "tipsandtricks"]:
+            media_src = staging_system / media_folder
+            if media_src.is_dir():
+                pass # Manter a pasta gerada localmente pelo Skraper
+
     try:
         raw = src_xml.read_bytes()
         try:
@@ -439,13 +448,20 @@ def process_manifest(
                 copied_dest.discard(dest_key)
 
     for sd_folder, filenames in copied_by_folder.items():
-        filter_gamelist(
-            sd_original,
-            sd_folder,
-            filenames,
-            staging / sd_folder,
-            execute,
-        )
+        # Antes de sobrescrever o gamelist original do SD (que limpa o que o Skraper fez),
+        # verifica se existe um gamelist no staging ja preenchido pelo Skraper
+        existing_gamelist = staging / sd_folder / "gamelist.xml"
+        if existing_gamelist.is_file():
+            print(f"[{sd_folder}] gamelist.xml ja existe no staging (Skraper). A manter intato.")
+            # Nao sobrescrever com a filtragem
+        else:
+            filter_gamelist(
+                sd_original,
+                sd_folder,
+                filenames,
+                staging / sd_folder,
+                execute,
+            )
 
 
 def copy_bios_and_bezels(
@@ -456,11 +472,26 @@ def copy_bios_and_bezels(
 ) -> None:
     bios_src = repo_root / BIOS_REL
     if bios_src.is_dir():
+        # Copiar preservando estrutura relativa
         for root, _dirs, files in os.walk(bios_src):
             for name in files:
                 src = Path(root) / name
                 rel = src.relative_to(bios_src)
                 copy_file(src, staging / "bios" / rel, execute)
+
+        # Aplanar BIOS essenciais na raiz de staging/bios/
+        # EmuELEC / RetroArch busca BIOS estritamente na raiz de /storage/roms/bios/
+        flatten_folders = ["várias do honda", "PS1", "ps2 do honda", "PS2"]
+        for sub in flatten_folders:
+            sub_dir = bios_src / sub
+            if sub_dir.is_dir():
+                for root, _dirs, files in os.walk(sub_dir):
+                    for name in files:
+                        ext = Path(name).suffix.lower()
+                        if ext in {".bin", ".rom", ".pce", ".img", ".zip", ".dat", ".xml", ".pal", ".sms", ".col", ".chr", ".fnt", ".ini"}:
+                            src = Path(root) / name
+                            dest = staging / "bios" / name
+                            copy_file(src, dest, execute)
 
     bezels_src = sd_original / "bezels"
     if bezels_src.is_dir():
@@ -470,9 +501,58 @@ def copy_bios_and_bezels(
                 rel = src.relative_to(bezels_src)
                 copy_file(src, staging / "bezels" / rel, execute)
 
-    neogeo_zip = repo_root / ANDROID_REL / "neogeo" / "neogeo.zip"
-    if neogeo_zip.is_file():
-        copy_file(neogeo_zip, staging / "neogeo" / "neogeo.zip", execute)
+    # neogeo.zip completo (1.95MB com Uni-BIOS 4.0 e 38 ROM chips)
+    complete_neogeo = bios_src / "várias do honda" / "neogeo.zip"
+    if not complete_neogeo.is_file():
+        complete_neogeo = repo_root / ANDROID_REL / "neogeo" / "neogeo.zip"
+
+    if complete_neogeo.is_file():
+        copy_file(complete_neogeo, staging / "neogeo" / "neogeo.zip", execute)
+        copy_file(complete_neogeo, staging / "bios" / "neogeo.zip", execute)
+
+    # Correcoes especificas de PSX no staging (CUE para bin raw e descompactacao de 7z)
+    fix_psx_staging(staging / "psx", execute)
+
+
+def fix_psx_staging(psx_dir: Path, execute: bool) -> None:
+    if not psx_dir.is_dir():
+        return
+
+    # 1. Crash Bandicoot .cue para .bin raw
+    crash_bin = psx_dir / "Crash Bandicoot.bin"
+    crash_cue = psx_dir / "Crash Bandicoot.cue"
+    if crash_bin.is_file() and not crash_cue.is_file():
+        print("Criando Crash Bandicoot.cue para Crash Bandicoot.bin...")
+        if execute:
+            cue_text = 'FILE "Crash Bandicoot.bin" BINARY\n  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n'
+            crash_cue.write_text(cue_text, encoding="utf-8")
+
+    # 2. Descompactar arquivos 7z mascarados com extensao .zip
+    seven_zip_candidates = [
+        Path(os.environ.get("ProgramFiles", "C:\\Program Files")) / "7-Zip" / "7z.exe",
+        Path("C:\\Program Files\\7-Zip\\7z.exe"),
+        Path("C:\\Program Files (x86)\\7-Zip\\7z.exe"),
+    ]
+    seven_zip_exe = next((p for p in seven_zip_candidates if p.is_file()), None)
+
+    for zip_file in psx_dir.glob("*.zip"):
+        try:
+            with open(zip_file, "rb") as fp:
+                header = fp.read(6)
+            if header.startswith(b"7z\xbc\xaf\x27\x1c"):
+                print(f"Detectado arquivo 7z com extensao .zip em PSX: {zip_file.name}")
+                if execute and seven_zip_exe:
+                    import subprocess
+                    print(f"Extraindo {zip_file.name}...")
+                    cmd = [str(seven_zip_exe), "e", str(zip_file), f"-o{str(psx_dir)}", "-y"]
+                    res = subprocess.run(cmd, capture_output=True, text=True)
+                    if res.returncode == 0:
+                        print(f"Extraido com sucesso. Removendo wrapper {zip_file.name}...")
+                        zip_file.unlink()
+                    else:
+                        print(f"Erro ao extrair {zip_file.name}: {res.stderr}")
+        except Exception as e:
+            print(f"Aviso ao verificar {zip_file.name}: {e}")
 
 
 def write_reports(staging: Path, report: CurateReport, execute: bool) -> None:

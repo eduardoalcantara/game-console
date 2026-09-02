@@ -136,11 +136,7 @@ games:
   - base: "Top Gear 2"
   - base: "Uniracers"
   - base: "Rock n' Roll Racing"
-    note: "favorito operador"
-  - base: "Rock 'N' Roll Racing"
-    include_all_regions: true
-  - base: "Rock & Roll Racing"
-    include_all_regions: true
+    note: "favorito operador (versao USA limpa .smc)"
   - base: "Super Off Road"
   - base: "Super Punch-Out"
   - base: "NBA Jam"

@@ -4,6 +4,39 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-09-02 — RG43H: Correção de BIOS, NeoGeo, PSX e Rock N Roll Racing
+
+**Evento:** Diagnóstico e correção de falhas de execução no RG43H Pro:
+1. **Neo Geo:** `neogeo.zip` FBNeo completo (1.95MB, 38 chips de ROM e Uni-BIOS 4.0) sincronizado para `bios/` e `neogeo/` (antes havia uma versão antiga de 1.48MB com 26 chips sem a Uni-BIOS 4.0 exigida pelo core).
+2. **BIOS aplanadas:** arquivos de BIOS essenciais (PS1 `scph1001.bin`, `scph5500.bin`, `scph5501.bin`, `scph7001.bin`, etc.) foram copiados diretamente para a raiz de `bios/`, permitindo que os cores do RetroArch/EmuELEC encontrem os arquivos sem falhar por subpastas.
+3. **PSX:** arquivos 7z compactados que estavam com extensão `.zip` (Tekken 3, Metal Gear Solid, Gran Turismo) foram descompactados em `.bin`/`.cue` nativos e foi gerado o arquivo `Crash Bandicoot.cue` para o `.bin` raw.
+4. **SNES:** removidas as variantes europeias com defeito de Rock N Roll Racing (`Rock 'N' Roll Racing (Europe).zip` e `Rock & Roll Racing (Europe) (Beta).zip`), mantendo apenas a ROM USA limpa (`Rock n' Roll Racing.smc`).
+5. **Redeploy SD:** `deploy_rg43h_sd.ps1 -SkipFormat -Yes` executado com sucesso para o cartão `H:`, totalizando 8.602 ficheiros (15.01 GB).
+
+**Arquivos afetados:** `resources/rg43h/manifests/snes.yaml`, `scripts/tooling/curate_rg43h_roms.py`, `scripts/tooling/fix_rg43h_staging.py`, `resources/rg43h/staging/`, SD `H:\`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-09-01 — Deploy Staging RG43H para SD 128 GB (H:)
+
+**Evento:** Envio completo do staging atualizado (ROMs, BIOS, gamelist.xml, imagens e videos) para o cartao SD 128 GB (`H:`).
+
+**Resultado:** `deploy_rg43h_sd.ps1 -SkipFormat -Yes` executado com sucesso. Sincronizados 6.887 ficheiros (14.06 GB). Validacao confirmou presenca de `bios/` (2.893), `snes/` (902), `megadrive/` (538), `neogeo/` (347), favoritos SNES e flag `.firstDownload`.
+
+**Arquivos afetados:** SD `H:\*`, `status.md`, `timeline.md`.
+
+---
+
+## 2026-08-31 — Skraper → staging RG43H
+
+**Evento:** Operador executou Skraper apontando para `resources/rg43h/staging/`.
+
+**Resultado:** `gamelist.xml` + `images/` (e `videos/` em Neo Geo/PSX) actualizados no staging. Cobertura estimada ~**172/458** ROMs com capa (Neo Geo 43/45; NES 44/45; SNES continua 14/115). Deploy SD pendente.
+
+**Arquivos afetados:** `resources/rg43h/staging/**/gamelist.xml`, `images/`, `videos/`, `status.md`, `timeline.md`.
+
+---
+
 ## 2026-08-31 — Capas ES-DE → staging RG43H
 
 **Evento:** Implementar copia de capas do ES-DE PC para layout EmuELEC (RGBox sem scraper).

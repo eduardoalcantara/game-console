@@ -59,6 +59,21 @@ Savestate de outro core/versao do emulador pode falhar. Nao e backup portavel ga
 
 Pastas tipicas no SD original: `savestates/`, `screenshots/` na raiz EEROMS (conforme build).
 
+### 1.4 Backup de saves no cartao (antes de formatar)
+
+Script: `scripts/tooling/pull_rg43h_saves.py`
+
+```bash
+python scripts/tooling/pull_rg43h_saves.py              # so verifica (dry-run)
+python scripts/tooling/pull_rg43h_saves.py --execute --yes
+python scripts/tooling/pull_rg43h_saves.py --uninstall --execute --yes
+```
+
+- Destino: `core/rg43h-pro/saves-backup/<timestamp>/` (gitignored).
+- `deploy_rg43h_sd.ps1` **sem** `-SkipFormat` corre o pull automaticamente antes de formatar.
+- Com `-SkipFormat` (actualizacao normal): so reporta; nao apaga o cartao.
+- Se o script nao encontrar nada no SD: saves provavelmente no **interno** — formatar o cartao e seguro para o progresso.
+
 ---
 
 ## 2. Capas e metadados (scrape no launcher)
@@ -147,7 +162,7 @@ Se encontrares um item com nome diferente (ex.: chines/ingles misturado), anotar
 Script: `scripts/tooling/apply_esde_media_rg43h.py`
 
 Copia capas de `resources/es-de/downloaded_media/` para
-`resources/rg43h/staging/<sistema>/images/` e gera `gamelist.xml`.
+`core/rg43h-pro/staging/<sistema>/images/` e gera `gamelist.xml`.
 
 ```bash
 python scripts/tooling/apply_esde_media_rg43h.py              # dry-run
@@ -194,6 +209,26 @@ Relatorio: `reports/2026-08-31-rg43h-esde-media.md` / `staging/media-report.md`.
 | Sem Wi‑Fi | Network Settings |
 | ScreenScraper busy | Tentar mais tarde |
 | Tema sem capa mas XML tem dados | Tema pede screenshot vs box — mudar tipo de media |
+| Neo Geo mostra `fatfury3` no carrossel | Ver 2.6 — deploy `gamelist.xml` com `<name>` correcto; **nao** renomear o `.zip` |
+
+### 2.6 Metadados Skraper (todos os sistemas) + regra Arcade
+
+**Skraper (todos os sistemas — SNES, MD, NES, PSX, Neo Geo, etc.):**
+
+- O Skraper (frontend Recalbox) e a **fonte de verdade** para `gamelist.xml` (`<name>`, capas, videos, descricoes) e pastas `media/` / `images/` / `videos/`.
+- `curate_rg43h_roms.py` **nao altera** um `gamelist.xml` ja presente no staging: nao regenera, nao reescreve `<name>`, nao toca em media.
+- No aparelho: apos deploy do XML curado pelo Skraper, evitar rescan que regenere nomes so a partir do ficheiro.
+
+**Arcade / Neo Geo / MAME / CPS (extra):**
+
+| Camada | O que usar | Exemplo |
+|---|---|---|
+| Ficheiro ROM (`.zip`) | Set MAME/FBNeo **curto** — **nunca renomear** | `fatfury3.zip` |
+| Nome no carrossel | Tag `<name>` do Skraper no `gamelist.xml` | `Fatal Fury 3` |
+
+- Renomear `fatfury3.zip` → `Fatal Fury 3.zip` **quebra** o core FBNeo/MAME.
+- Pastas: `neogeo/`, `mame/`, `cps1/`, `cps2/`, `cps3/` (e equivalentes).
+- Se o carrossel mostrar `fatfury3`: falta o `gamelist.xml` do Skraper no SD — recolocar cartao no PC e redeploy (nao renomear o `.zip`).
 
 ---
 
@@ -211,6 +246,6 @@ Relatorio: `reports/2026-08-31-rg43h-esde-media.md` / `staging/media-report.md`.
 
 - Analise SD: `reports/2026-08-30-rg43h-sd-analysis.md`
 - Curadoria / deploy: `reports/2026-08-30-rg43h-curate-deploy.md`
-- Plano: `resources/rg43h/docs/curation-plan.md`
+- Plano: `core/rg43h-pro/docs/curation-plan.md`
 - ScreenScraper: https://www.screenscraper.fr/
 - Nota: builds **RGBox** no RG43H podem omitir o item Scraper do menu START; o caminho SELECT → metadata → Scrape e o fallback oficial do EmulationStation.

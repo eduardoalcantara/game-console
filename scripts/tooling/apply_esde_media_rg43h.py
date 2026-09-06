@@ -5,7 +5,7 @@ apply_esde_media_rg43h.py
 game-console — copia capas/metadados do ES-DE PC para layout EmuELEC (RG43H).
 
 Fonte: resources/es-de/downloaded_media/<sistema>/{covers,miximages,...}/
-Destino: resources/rg43h/staging/<sistema>/images/ + gamelist.xml
+Destino: core/rg43h-pro/staging/<sistema>/images/ + gamelist.xml
 
 Dry-run por padrao. --execute --yes para aplicar.
 --uninstall remove images/ e gamelist.xml gerados nos sistemas processados.
@@ -28,7 +28,7 @@ from typing import Dict, List, Optional, Set, Tuple
 from dedupe_roms import find_repo_root, prompt_yes_no  # noqa: E402
 
 REPO_FOLDER_NAME = "game-console"
-STAGING_REL = Path("resources") / "rg43h" / "staging"
+STAGING_REL = Path("core") / "rg43h-pro" / "staging"
 ESDE_MEDIA_REL = Path("resources") / "es-de" / "downloaded_media"
 
 COPY_CHUNK = 1024 * 1024

@@ -6,6 +6,17 @@ game-console — curadoria RG43H: manifestos YAML -> staging EmuELEC (EEROMS).
 
 Requer PyYAML opcional; fallback parser minimo incluido.
 Dry-run por padrao. Nao altera resources/roms/android/ (so copia para staging).
+
+Regras permanentes — metadados (TODOS os sistemas):
+- Se existir gamelist.xml no staging (Skraper), NAO alterar: nem regenerar,
+  nem reescrever <name>/<image>/<video>/<desc>. O Skraper e a fonte de
+  verdade para titulos e media em SNES, MD, NES, PSX, Neo Geo, etc.
+- Pasta media/ (e images/videos do Skraper) permanece intacta.
+
+Regras permanentes — arcade / Neo Geo / MAME / FBNeo / CPS:
+- NUNCA renomear ficheiros ROM (.zip). O stem tem de ser o set MAME
+  (ex.: fatfury3.zip). Renomear para "Fatal Fury 3.zip" quebra o core.
+- O nome de ecran vem de gamelist.xml <name> (Skraper), nao do ficheiro.
 """
 
 from __future__ import annotations
@@ -34,9 +45,9 @@ from dedupe_roms import (  # noqa: E402
 )
 
 REPO_FOLDER_NAME = "game-console"
-STAGING_REL = Path("resources") / "rg43h" / "staging"
-MANIFESTS_REL = Path("resources") / "rg43h" / "manifests"
-SD_ORIGINAL_REL = Path("resources") / "rg43h" / "sd-original"
+STAGING_REL = Path("core") / "rg43h-pro" / "staging"
+MANIFESTS_REL = Path("core") / "rg43h-pro" / "manifests"
+SD_ORIGINAL_REL = Path("core") / "rg43h-pro" / "sd-original"
 ANDROID_REL = Path("resources") / "roms" / "android"
 BIOS_REL = Path("resources") / "roms" / "bios"
 
@@ -49,6 +60,11 @@ MEDIA_SUFFIXES = ("-image.png", "-marquee.png", "-thumb.png", ".png", ".jpg")
 # system arcade -> pastas PC
 ARCADE_PC_SOURCES = ("mame", "fbneo")
 
+# Pastas SD onde o nome do .zip e o set MAME/FBNeo (nao renomear)
+ARCADE_SD_FOLDERS = frozenset(
+    {"neogeo", "mame", "cps1", "cps2", "cps3", "fbneo", "arcade"}
+)
+
 REGION_RANK = {"USA": 3, "World": 2, "Japan": 2, "Europe": 1, "other": 0}
 
 
@@ -60,6 +76,13 @@ class GameEntry:
     include_all_regions: bool = False
     sd_folder: Optional[str] = None
     note: str = ""
+
+
+@dataclass
+class FranchisePack:
+    id: str
+    patterns: List[re.Pattern]
+    exclude: List[re.Pattern]
 
 
 @dataclass
@@ -165,6 +188,61 @@ def _parse_manifest_minimal(text: str) -> Dict[str, Any]:
     if current_game:
         data["games"].append(current_game)
     return data
+
+
+def load_franchise_packs(repo_root: Path) -> List[FranchisePack]:
+    path = repo_root / MANIFESTS_REL / "_franchise_packs.yaml"
+    if not path.is_file():
+        return []
+    data = load_yaml_file(path)
+    packs: List[FranchisePack] = []
+    for raw in data.get("packs") or []:
+        if not isinstance(raw, dict) or not raw.get("id"):
+            continue
+        pats = []
+        for p in raw.get("patterns") or []:
+            try:
+                pats.append(re.compile(str(p)))
+            except re.error as exc:
+                print(f"AVISO: regex invalida em {raw.get('id')}: {p} ({exc})")
+        excl = []
+        for p in raw.get("exclude") or []:
+            try:
+                excl.append(re.compile(str(p)))
+            except re.error as exc:
+                print(f"AVISO: exclude invalido em {raw.get('id')}: {p} ({exc})")
+        if pats:
+            packs.append(FranchisePack(id=str(raw["id"]), patterns=pats, exclude=excl))
+    return packs
+
+
+def rom_matches_franchise(rom: RomFile, pack: FranchisePack) -> bool:
+    name = rom.name
+    if any(ex.search(name) for ex in pack.exclude):
+        return False
+    return any(p.search(name) for p in pack.patterns)
+
+
+def pick_franchise_roms(
+    source_roms: List[RomFile], packs: List[FranchisePack]
+) -> List[Tuple[str, RomFile]]:
+    """Retorna lista (pack_id, rom) com um keeper por grupo de titulo (USA preferido)."""
+    # Agrupar por stem normalizado para plan_group
+    by_key: Dict[str, List[RomFile]] = {}
+    pack_for: Dict[str, str] = {}
+    for rom in source_roms:
+        for pack in packs:
+            if rom_matches_franchise(rom, pack):
+                key = rom.stem.casefold()
+                by_key.setdefault(key, []).append(rom)
+                pack_for[key] = pack.id
+                break
+    picked: List[Tuple[str, RomFile]] = []
+    for key, group in by_key.items():
+        _deletes, keeper = plan_group(group)
+        if keeper is not None:
+            picked.append((pack_for.get(key, "franchise"), keeper))
+    return picked
 
 
 def parse_manifest(path: Path) -> Manifest:
@@ -320,6 +398,75 @@ def copy_file(src: Path, dst: Path, execute: bool) -> bool:
     return False
 
 
+def looks_like_mame_set_name(display: Optional[str], path_stem: str) -> bool:
+    """True se <name> ainda for o set curto (ex.: fatfury3) em vez do titulo."""
+    if not display or not display.strip():
+        return True
+    d = display.strip()
+    if d.casefold() == path_stem.casefold():
+        return True
+    # set MAME tipico deixado como nome: minusculas, sem espacos, curto
+    if (
+        " " not in d
+        and d.islower()
+        and len(d) <= 20
+        and re.fullmatch(r"[a-z0-9_]+", d) is not None
+    ):
+        return True
+    return False
+
+
+def enrich_gamelist_display_names(
+    gamelist_path: Path,
+    name_by_filename: Dict[str, str],
+    execute: bool,
+) -> int:
+    """
+    Actualiza apenas <name> no gamelist.xml a partir do manifesto.
+    Nunca renomeia ficheiros ROM. Preserva path/image/video/desc do Skraper.
+    So substitui quando o nome actual ainda parece set MAME curto.
+    """
+    if not gamelist_path.is_file() or not name_by_filename:
+        return 0
+    try:
+        raw = gamelist_path.read_bytes()
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            text = raw.decode("gb2312", errors="replace")
+        root = ET.fromstring(text)
+    except (ET.ParseError, OSError) as exc:
+        print(f"AVISO: nao foi possivel enriquecer {gamelist_path}: {exc}")
+        return 0
+
+    updated = 0
+    for game in root.findall("game"):
+        path_el = game.find("path")
+        if path_el is None or not path_el.text:
+            continue
+        fname = Path(path_el.text.replace("\\", "/")).name
+        display = name_by_filename.get(fname)
+        if not display:
+            continue
+        stem = Path(fname).stem
+        name_el = game.find("name")
+        current = name_el.text if name_el is not None else None
+        if not looks_like_mame_set_name(current, stem):
+            continue
+        if name_el is None:
+            name_el = ET.SubElement(game, "name")
+        if (name_el.text or "").strip() != display:
+            name_el.text = display
+            updated += 1
+
+    if updated and execute:
+        ET.indent(root, space="  ")
+        xml_body = ET.tostring(root, encoding="unicode")
+        header = '<?xml version="1.0" encoding="UTF-8"?>\n'
+        gamelist_path.write_text(header + xml_body, encoding="utf-8")
+    return updated
+
+
 def filter_gamelist(
     sd_original: Path,
     sd_folder: str,
@@ -334,14 +481,6 @@ def filter_gamelist(
             src_xml = alt
     if not src_xml.is_file():
         return 0
-
-    # Adicionar suporte p/ preservar as pastas 'media'/'images' baixadas no staging (Skraper)
-    if execute:
-        import shutil
-        for media_folder in ["media", "images", "videos", "boxes", "wheels", "manuals", "tipsandtricks"]:
-            media_src = staging_system / media_folder
-            if media_src.is_dir():
-                pass # Manter a pasta gerada localmente pelo Skraper
 
     try:
         raw = src_xml.read_bytes()
@@ -377,7 +516,7 @@ def filter_gamelist(
         header = '<?xml version="1.0" encoding="UTF-8"?>\n'
         dst_xml.write_text(header + xml_body, encoding="utf-8")
 
-    # Copiar imagens referenciadas
+    # Copiar imagens referenciadas (nao sobrescrever media/ do Skraper)
     src_images = sd_original / sd_folder / "images"
     if src_images.is_dir() and execute:
         dst_images = staging_system / "images"
@@ -400,11 +539,14 @@ def process_manifest(
     report: CurateReport,
     execute: bool,
     copied_dest: Set[str],
+    franchise_packs: Optional[List[FranchisePack]] = None,
 ) -> None:
     source_roots = resolve_pc_sources(manifest, repo_root)
     source_roms = collect_source_roms(source_roots)
 
     copied_by_folder: Dict[str, Set[str]] = {}
+    # Nome de ecran por ficheiro ROM (base do manifesto) — nunca altera o .zip
+    display_by_folder: Dict[str, Dict[str, str]] = {}
 
     for entry in manifest.games:
         sd_folder = resolve_sd_folder(manifest, entry)
@@ -421,9 +563,12 @@ def process_manifest(
 
         for rom in picked:
             dest_dir = staging / sd_folder
+            # Arcade/Neo Geo: manter sempre o nome do set MAME (rom.name)
             dest_file = dest_dir / rom.name
             dest_key = str(dest_file)
             if dest_key in copied_dest:
+                # Mesmo assim registar nome de ecran preferido do manifesto
+                display_by_folder.setdefault(sd_folder, {})[rom.name] = entry.base
                 continue
             copied_dest.add(dest_key)
             status = "all_regions" if entry.include_all_regions else "matched"
@@ -442,25 +587,90 @@ def process_manifest(
             if rom.size > FAT32_LIMIT:
                 report.fat32_violations.append(str(rom.path))
             copied_by_folder.setdefault(sd_folder, set()).add(rom.name)
+            display_by_folder.setdefault(sd_folder, {})[rom.name] = entry.base
             if not copy_file(rom.path, dest_file, execute):
                 report.copy_errors.append(f"{rom.path} -> {dest_file}")
                 copied_by_folder[sd_folder].discard(rom.name)
                 copied_dest.discard(dest_key)
+                display_by_folder.get(sd_folder, {}).pop(rom.name, None)
+
+    # Franchise packs (Mario, Sonic, Mega Man, corrida) — alem da lista YAML
+    if franchise_packs:
+        sd_folder = manifest.sd_folder
+        franchise_hits = pick_franchise_roms(source_roms, franchise_packs)
+        added = 0
+        for pack_id, rom in franchise_hits:
+            dest_file = staging / sd_folder / rom.name
+            dest_key = str(dest_file)
+            if dest_key in copied_dest:
+                continue
+            # Arcade: so incluir se o stem for set curto tipico (ja no folder)
+            if sd_folder in ARCADE_SD_FOLDERS and not rom.name.lower().endswith(".zip"):
+                continue
+            copied_dest.add(dest_key)
+            report.matched.append(
+                MatchResult(
+                    manifest=manifest.path.name,
+                    base=f"[franchise:{pack_id}] {rom.stem}",
+                    status="franchise",
+                    source=str(rom.path),
+                    dest=str(dest_file),
+                    size=rom.size,
+                )
+            )
+            report.total_bytes += rom.size
+            report.by_sd_folder[sd_folder] = report.by_sd_folder.get(sd_folder, 0) + 1
+            if rom.size > FAT32_LIMIT:
+                report.fat32_violations.append(str(rom.path))
+            copied_by_folder.setdefault(sd_folder, set()).add(rom.name)
+            display_by_folder.setdefault(sd_folder, {})[rom.name] = rom.stem
+            if not copy_file(rom.path, dest_file, execute):
+                report.copy_errors.append(f"{rom.path} -> {dest_file}")
+                copied_by_folder[sd_folder].discard(rom.name)
+                copied_dest.discard(dest_key)
+            else:
+                added += 1
+        if added:
+            print(f"[{sd_folder}] franchise packs: +{added} ROM(s)")
 
     for sd_folder, filenames in copied_by_folder.items():
-        # Antes de sobrescrever o gamelist original do SD (que limpa o que o Skraper fez),
-        # verifica se existe um gamelist no staging ja preenchido pelo Skraper
         existing_gamelist = staging / sd_folder / "gamelist.xml"
         if existing_gamelist.is_file():
-            print(f"[{sd_folder}] gamelist.xml ja existe no staging (Skraper). A manter intato.")
-            # Nao sobrescrever com a filtragem
-        else:
-            filter_gamelist(
-                sd_original,
-                sd_folder,
-                filenames,
-                staging / sd_folder,
+            # Skraper (qualquer sistema): nao tocar no XML nem em media/
+            print(
+                f"[{sd_folder}] gamelist.xml do Skraper presente — "
+                "nao alterar nomes/metadados (todos os sistemas)."
+            )
+            if sd_folder in ARCADE_SD_FOLDERS:
+                print(
+                    f"[{sd_folder}] regra arcade: ROMs mantem set MAME "
+                    "(.zip); ecran = <name> do Skraper."
+                )
+            continue
+
+        # Sem Skraper: filtrar gamelist do SD original (fallback)
+        filter_gamelist(
+            sd_original,
+            sd_folder,
+            filenames,
+            staging / sd_folder,
+            execute,
+        )
+        # Fallback arcade: so se nao houve Skraper, preencher <name> curto
+        if sd_folder in ARCADE_SD_FOLDERS:
+            n = enrich_gamelist_display_names(
+                staging / sd_folder / "gamelist.xml",
+                display_by_folder.get(sd_folder, {}),
                 execute,
+            )
+            if n:
+                print(
+                    f"[{sd_folder}] fallback (sem Skraper): "
+                    f"{n} titulo(s) <name> a partir do manifesto"
+                )
+            print(
+                f"[{sd_folder}] regra arcade: ROMs mantem set MAME "
+                "(.zip); ecran = gamelist <name>."
             )
 
 
@@ -617,7 +827,7 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         "--staging",
         type=str,
         default=None,
-        help="Pasta staging (default: resources/rg43h/staging)",
+        help="Pasta staging (default: core/rg43h-pro/staging)",
     )
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--yes", action="store_true")
@@ -657,11 +867,22 @@ def main(argv: Optional[List[str]] = None) -> int:
         if not paths[0].is_absolute():
             paths = [repo_root / args.manifest]
     else:
-        paths = sorted(manifests_dir.glob("*.yaml"))
+        paths = sorted(
+            p for p in manifests_dir.glob("*.yaml") if not p.name.startswith("_")
+        )
 
     if not paths:
         print("ERRO: nenhum manifesto encontrado.")
         return 1
+
+    franchise_packs = load_franchise_packs(repo_root)
+    if franchise_packs:
+        print(
+            "Franchise packs: "
+            + ", ".join(p.id for p in franchise_packs)
+            + " (Mario/Sonic/Mega Man/corrida)"
+        )
+        print()
 
     if args.execute and not args.yes:
         if prompt_yes_no("Confirmar copia para staging?", default=0) != 1:
@@ -677,7 +898,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(f"Processando: {mp.name}")
         manifest = parse_manifest(mp)
         process_manifest(
-            manifest, repo_root, staging, sd_original, report, args.execute, copied_dest
+            manifest,
+            repo_root,
+            staging,
+            sd_original,
+            report,
+            args.execute,
+            copied_dest,
+            franchise_packs,
         )
 
     copy_bios_and_bezels(repo_root, staging, sd_original, args.execute)

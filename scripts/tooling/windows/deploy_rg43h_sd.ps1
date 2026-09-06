@@ -1,6 +1,6 @@
 # deploy_rg43h_sd.ps1
 # game-console — formata SD RG43H (FAT32 EEROMS) e copia staging EmuELEC
-# Uso: .\deploy_rg43h_sd.ps1 -DriveLetter H -StagingPath "...\resources\rg43h\staging" -Yes
+# Uso: .\deploy_rg43h_sd.ps1 -DriveLetter H -StagingPath "...\core\rg43h-pro\staging" -Yes
 # Volumes >32GB: requer fat32format (winget install Ridgecrop.fat32format)
 
 param(
@@ -114,7 +114,7 @@ if (-not $RepoRoot) {
 Write-Host "REPO_ROOT=$RepoRoot"
 
 if (-not $StagingPath) {
-    $StagingPath = Join-Path $RepoRoot "resources\rg43h\staging"
+    $StagingPath = Join-Path $RepoRoot "core\rg43h-pro\staging"
 }
 $TargetRoot = "${DriveLetter}:\"
 $Volume = Get-Volume -DriveLetter $DriveLetter -ErrorAction SilentlyContinue
@@ -159,7 +159,32 @@ if (-not $SkipFormat) {
             exit 0
         }
     }
+    # Backup de saves no SD antes de formatar
+    Write-Host "A verificar saves no SD (pull_rg43h_saves)..."
+    $pullScript = Join-Path $RepoRoot "scripts\tooling\pull_rg43h_saves.py"
+    if (Test-Path $pullScript) {
+        $pullArgs = @($pullScript, "--drive", $DriveLetter, "--execute", "--yes")
+        & python @pullArgs
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "AVISO: pull_rg43h_saves exit $LASTEXITCODE — continuar a formatar? (saves podem estar so no interno)"
+            if (-not $Yes) {
+                if ((Prompt-YesNo "Continuar formatacao mesmo assim?" 0) -ne 1) {
+                    Write-Host "Cancelado."
+                    exit 0
+                }
+            }
+        }
+    } else {
+        Write-Host "AVISO: pull_rg43h_saves.py nao encontrado — sem backup automatico de saves."
+    }
     Format-Rg43hVolume -Letter $DriveLetter
+} else {
+    # Mesmo com SkipFormat: reportar se ha saves no cartao
+    Write-Host "SkipFormat: a verificar saves no SD (dry-run informativo)..."
+    $pullScript = Join-Path $RepoRoot "scripts\tooling\pull_rg43h_saves.py"
+    if (Test-Path $pullScript) {
+        & python $pullScript --drive $DriveLetter
+    }
 }
 
 Write-Host "A copiar staging -> ${DriveLetter}:\ ..."

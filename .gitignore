@@ -78,10 +78,16 @@ resources/es-de/downloaded_media/
 resources/es-de/gamelists/
 resources/rg43h/sd-original/
 resources/rg43h/staging/
+core/rg43h-pro/sd-original/
+core/rg43h-pro/staging/
+core/rg43h-pro/saves-backup/
 
 # Platform-tools extraidos (manter so os ZIPs locais; pasta de trabalho)
 resources/android/platform-tools-win/
 resources/android/platform-tools-linux/
+
+# Ferramentas locais de conversao (chdman / MAME unpack)
+scripts/tooling/_tools/
 
 # Pacotes Android locais (nao versionar; manter README e .gitkeep)
 *.apk

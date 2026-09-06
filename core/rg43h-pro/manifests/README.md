@@ -16,6 +16,12 @@ Listas YAML versionadas. Cada ficheiro define titulos-alvo para match contra `re
 | `games[].note` | Notas para o operador / script de match |
 | `games[].include_all_regions` | Opcional; `true` = incluir JP/EU/USA (ex.: serie Parodius) |
 
+## Franchise packs (Mario / Sonic / Mega Man / corrida)
+
+Ficheiro `_franchise_packs.yaml` (prefixo `_` = nao e manifesto de sistema).
+
+`curate_rg43h_roms.py` aplica estes packs a **todos** os sistemas: copia ROMs cujo nome casa com os regex (preferencia USA via `plan_group`), alem das listas `games:` de cada YAML.
+
 ## Favoritos operador
 
 Registados em manifestos com `note: "favorito operador"`:
@@ -33,6 +39,7 @@ Cobertura multi-sistema — ver `docs/parodius-inventory.md`:
 
 | Manifesto | Tier | Meta | Entradas |
 |---|---|---:|---:|
+| `_franchise_packs.yaml` | — | packs | mario, sonic, megaman, racing |
 | `snes.yaml` | A | 120 | 120 |
 | `megadrive.yaml` | A | 80 | ~80 |
 | `nes.yaml` | A | 60 | ~60 |
@@ -54,7 +61,7 @@ Cobertura multi-sistema — ver `docs/parodius-inventory.md`:
 ## Uso (futuro)
 
 ```bash
-python scripts/tooling/curate_rg43h_roms.py --manifest resources/rg43h/manifests/snes.yaml
+python scripts/tooling/curate_rg43h_roms.py --manifest core/rg43h-pro/manifests/snes.yaml
 python scripts/tooling/curate_rg43h_roms.py --all
 ```
 

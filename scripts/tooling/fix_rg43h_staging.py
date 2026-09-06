@@ -21,7 +21,7 @@ def main() -> int:
         print("ERRO: pasta game-console nao encontrada.")
         return 1
 
-    staging = repo_root / "resources" / "rg43h" / "staging"
+    staging = repo_root / "core" / "rg43h-pro" / "staging"
     bios_staging = staging / "bios"
     neogeo_staging = staging / "neogeo"
     psx_staging = staging / "psx"

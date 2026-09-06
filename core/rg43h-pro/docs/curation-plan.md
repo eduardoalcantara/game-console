@@ -14,7 +14,7 @@ No PC temos **7.173** ROMs SNES (~3,9 GB) pos-mesclagem. A curadoria corrige ist
 
 1. **Manifesto** — lista curada de titulos canonicos por sistema (YAML versionado no repo).
 2. **Match** — cruzar manifesto com `resources/roms/android/<sistema>/` (nomes No-Intro; prioridade USA ja aplicada).
-3. **Staging** — copiar so ROMs matched para `resources/rg43h/staging/` (layout EmuELEC).
+3. **Staging** — copiar so ROMs matched para `core/rg43h-pro/staging/` (layout EmuELEC).
 4. **Metadados** — filtrar `gamelist.xml` + `images/` do SD original; preencher lacunas (ex.: SNES) com media ES-DE ou scrape novo.
 
 ---
@@ -57,17 +57,32 @@ Cada entrada do manifesto:
 
 | Fonte | Conteudo | SNES |
 |---|---|---|
-| SD original (`resources/rg43h/sd-original/`) | `gamelist.xml` + `images/` por sistema | XML sim, imagens **nao** |
+| SD original (`core/rg43h-pro/sd-original/`) | `gamelist.xml` + `images/` por sistema | XML sim, imagens **nao** |
 | ES-DE Razr (`resources/es-de/downloaded_media/snes/`) | boxart/screenshot scrape | **1.643** ficheiros (~1,5 GB) |
-| Scrape novo no RG43H | fallback | se faltar match |
+| Skraper (PC, frontend Recalbox) | `gamelist.xml` + `media/` / `images/` no staging | **fonte de verdade** para `<name>` e capas em **todos** os sistemas |
+| Scrape novo no RG43H | fallback | se faltar match; RGBox costuma bloquear |
 
-Script futuro converte paths ES-DE → `./images/<nome>.png` do EmuELEC.
+Script `apply_esde_media_rg43h.py` e/ou Skraper alimentam media + `<name>` no EmuELEC.
+
+### Metadados Skraper (todos os sistemas)
+
+- `curate_rg43h_roms.py` **nao** sobrescreve nem reescreve `<name>` num `gamelist.xml` ja presente no staging (SNES, MD, NES, PSX, Neo Geo, …).
+- Pasta `media/` / imagens do Skraper permanece intacta.
+- Sem Skraper: fallback = filtrar gamelist do `sd-original/` (e, so em arcade, preencher `<name>` a partir do `base` do manifesto).
+
+### Arcade / Neo Geo (obrigatorio — ficheiros)
+
+- Ficheiros `.zip` = **set MAME/FBNeo** (`fatfury3.zip`, `mslug.zip`). **Nunca renomear** para o titulo comercial.
+- Titulo no ecran = `<name>` no `gamelist.xml` gerado pelo **Skraper**.
+- Pastas afectadas pela regra de nao renomear ZIP: `neogeo/`, `mame/`, `cps1/`, `cps2/`, `cps3/`.
+
+Localizacao de produto: staging e docs em **`core/rg43h-pro/`** (nao em `resources/`). `resources/` fica para ROMs/BIOS brutos.
 
 ---
 
 ## Extracao SD original (sem formatar)
 
-Copiar para `resources/rg43h/sd-original/`:
+Copiar para `core/rg43h-pro/sd-original/`:
 
 - `gamelist.xml` de cada pasta de sistema
 - `images/` e `videos/` onde existirem
@@ -80,14 +95,13 @@ Copiar para `resources/rg43h/sd-original/`:
 ## Pipeline (scripts)
 
 ```text
-1. extract_rg43h_metadata    H:\ → resources/rg43h/sd-original/     [feito]
-2. manifests/*.yaml          listas curadas (versionadas)           [feito]
-3. curate_rg43h_roms.py      match + staging + gamelist filtrado    [feito 2026-08-31]
-4. deploy_rg43h_sd.ps1       FAT32 EEROMS + robocopy → SD 128 GB    [feito 2026-08-31]
-5. smoke test RG43H          2 jogos/sistema no aparelho            [pendente operador]
+1. curate_rg43h_roms.py      match + franchise packs → staging     [ROMs]
+2. Skraper (Recalbox)        gamelist.xml + media no staging       [metadados]
+3. pull_rg43h_saves.py       so se for formatar o SD               [opcional]
+4. deploy_rg43h_sd.ps1 -SkipFormat   staging → SD                  [copia]
 ```
 
-Relatorio: `reports/2026-08-30-rg43h-curate-deploy.md`.
+Nao reexecutar curate depois do Skraper (apaga metadados). Formatar SD so com pull de saves antes.
 
 ---
 

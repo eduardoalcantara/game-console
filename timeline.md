@@ -4,6 +4,119 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-09-06 — Deploy SD H: apos Skraper
+
+**Evento:** `deploy_rg43h_sd.ps1 -DriveLetter H -SkipFormat -Yes`.
+
+**Resultado:** exit 0; staging ~10.952 ficheiros / 21.71 GB → `H:\` (EEROMS FAT32). Total SD reportado: **10972** ficheiros. Saves no cartao detectados (dry-run; nao formatado). Retry robocopy em `Mega Man 8 [T-BR].PBP` (erro transitorio). Orphan SA2 `.7z` removido de `H:\dreamcast\` apos deploy.
+
+**Pendente:** smoke test no RG43H (MAME com CPS1, Dreamcast SA1, nomes/capas).
+
+---
+
+## 2026-09-06 — CPS1 zips movidos para mame/
+
+**Evento:** Mover sets CPS1 do staging `cps1/` → `mame/` para scrape Skraper; `arcade.yaml` passa `sd_folder: mame` nos jogos CPS1.
+
+**Resultado:** `ffight`, `captcomm`, `dino`, `punisher` movidos; `gng` ja existia em `mame/` (copia em cps1 removida). Pasta `cps1/` sem ROMs (media/XML antigos podem ficar).
+
+**Pendente:** re-scrapar **MAME** no Skraper para incluir estes titulos.
+
+---
+
+## 2026-09-06 — Removido SA2 Dreamcast 7z corrompido
+
+**Evento:** Apagado `Sonic Adventure 2 (Japan) (En,Ja,Fr,De,Es).7z` de staging e `resources/roms/android/dreamcast/` (Data Error confirmado).
+
+**Restante Dreamcast:** apenas `Sonic Adventure (En,Ja,Fr,De,Es).chd`.
+
+---
+
+## 2026-09-06 — Dreamcast: Sonic Adventure 7z -> CHD
+
+**Evento:** Conversao GDI/7z para CHD com 7-Zip + `chdman` (MAME 0.289).
+
+**Resultado:**
+- OK: `Sonic Adventure (En,Ja,Fr,De,Es).chd` (~872 MB) em staging e `resources/roms/android/dreamcast/`; `.7z` removido.
+- FALHA: `Sonic Adventure 2 (Japan)...7z` — Data Error no Track 3/.gdi (arquivo corrompido); sem copia alternativa em `D:\play\rom` nem no espelho.
+
+**Arquivos afetados:** `core/rg43h-pro/staging/dreamcast/`, `resources/roms/android/dreamcast/`, `.gitignore` (`scripts/tooling/_tools/`), `status.md`, `timeline.md`.
+
+**Pendente:** obter dump SA2 valido (preferivel `.chd` ou GDI intacto); Skraper so no Dreamcast (agora ve o `.chd` do SA1).
+
+---
+
+## 2026-09-05 — Curate RG43H apos import D:\play\rom
+
+**Evento:** `python scripts/tooling/curate_rg43h_roms.py --all --execute --yes`.
+
+**Resultado:** Matched **956**, Missing **234**, total **12,20 GB**. Franchise packs activos. Todos os `gamelist.xml` do Skraper preservados (nao alterados). Fix PSX 7z-as-zip reaplicado (MGS, Tekken 3, GT, NFS3).
+
+**Arquivos afetados:** `core/rg43h-pro/staging/` (ROMs), `status.md`, `timeline.md`.
+
+**Pendente:** operador corre Skraper no staging; depois deploy `-SkipFormat` com SD em `H:`.
+
+---
+
+## 2026-09-05 — Import em massa USA/World de D:\play\rom
+
+**Evento:** Importar ROMs em falta de `D:\play\rom` para `resources/roms/android/` (sem EU/JP exclusivos).
+
+**Resultado:** `copied=512` (`megadrive` 290, `mastersystem` 84, `nes` 99, `sega32x` 33, `snes` 6); skipped `eu_only` 335, `jp_only` 28, `already_have` 1863; `errors=0`.
+
+**Arquivos afetados:** `resources/roms/android/{megadrive,mastersystem,nes,sega32x,snes}/`, `timeline.md`.
+
+**Pendente:** curate + Skraper para levar novos titulos ao staging RG43H (nota: `sega32x` ainda sem manifesto RG43H).
+
+---
+
+## 2026-09-05 — Import Sonic USA/World de D:\play\rom
+
+**Evento:** Explorar biblioteca externa `D:\play\rom` e importar Sonic em falta (sem EU/JP exclusivos).
+
+**Resultado:**
+- Sistemas na pasta externa: mastersystem, megadrive, n64, nes, sega32x, snes.
+- **Copiados para `resources/roms/android/`:** 9 Sonic (MS + Mega Drive USA/World) + Chaotix 32X (Japan, USA).
+- **Omitidos:** Sonic Chaos/Spinball/S2 SMS só Europe; Aerobiz/Blast Man (falsos positivos); duplicados ja no repo.
+- **Gap restante (USA/World ou untagged, ainda nao importado em massa):** megadrive ~293, mastersystem ~84, nes ~99, **sega32x ~34** (sistema quase ausente no repo), snes ~7.
+
+**Arquivos afetados:** `resources/roms/android/megadrive/*Sonic*`, `mastersystem/Sonic The Hedgehog (USA, Europe).sms`, `sega32x/Chaotix (Japan, USA).32x`.
+
+**Pendente:** operador decidir importacao em massa USA de megadrive/mastersystem/sega32x; depois curate + Skraper.
+
+---
+
+## 2026-09-05 — RG43H: saves pull + franchise packs (Mario/Sonic/Mega Man/corrida)
+
+**Evento:** Backup de saves no SD; expandir curadoria com packs de franchise.
+
+**Resultado:**
+- Novo `scripts/tooling/pull_rg43h_saves.py` (verificar/backup → `core/rg43h-pro/saves-backup/`; `--uninstall`); `deploy_rg43h_sd.ps1` corre o pull antes de formatar.
+- `_franchise_packs.yaml` + `curate_rg43h_roms.py`: packs mario/sonic/megaman/racing em todos os sistemas.
+- Curate `--execute`: **954** matched (~12,2 GB); gamelists Skraper intactos. Destaques: GBA +138, SNES +63, PSX +49, GBC +48, NES +33, MD +21.
+- Pipeline documentado: curate → Skraper → deploy `-SkipFormat`.
+
+**Arquivos afetados:** `pull_rg43h_saves.py`, `curate_rg43h_roms.py`, `deploy_rg43h_sd.ps1`, `_franchise_packs.yaml`, docs, `.gitignore`, `status.md`, `timeline.md`.
+
+**Pendente:** Skraper nas ROMs novas; SD `H:` para deploy.
+
+---
+
+## 2026-09-05 — RG43H: regra Arcade/Neo Geo + curate preserva Skraper
+
+**Evento:** Documentar e corrigir o pipeline para nomes Neo Geo/MAME e metadados Skraper.
+
+**Resultado:**
+- **Todos os sistemas:** se existir `gamelist.xml` do Skraper no staging, `curate_rg43h_roms.py` **nao altera** nomes/metadados/media (SNES, MD, NES, PSX, Neo Geo, …).
+- **Arcade:** ficheiro `.zip` = set MAME (`fatfury3.zip`); titulo no ecran = `<name>` do Skraper. **Nunca** renomear ROMs arcade. Enrich de `<name>` so como fallback se nao houver Skraper.
+- Paths canonicos em `core/rg43h-pro/`. Docs: `operator-guide.md` §2.6, `curation-plan.md`, `README.md`.
+
+**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `apply_esde_media_rg43h.py`, `fix_rg43h_staging.py`, `core/rg43h-pro/docs/*`, `status.md`, `timeline.md`.
+
+**Pendente:** operador recolocar SD `H:` para deploy do `gamelist.xml` ao aparelho.
+
+---
+
 ## 2026-09-02 — RG43H: Correção de BIOS, NeoGeo, PSX e Rock N Roll Racing
 
 **Evento:** Diagnóstico e correção de falhas de execução no RG43H Pro:
@@ -13,7 +126,7 @@ Historico em ordem cronologica decrescente.
 4. **SNES:** removidas as variantes europeias com defeito de Rock N Roll Racing (`Rock 'N' Roll Racing (Europe).zip` e `Rock & Roll Racing (Europe) (Beta).zip`), mantendo apenas a ROM USA limpa (`Rock n' Roll Racing.smc`).
 5. **Redeploy SD:** `deploy_rg43h_sd.ps1 -SkipFormat -Yes` executado com sucesso para o cartão `H:`, totalizando 8.602 ficheiros (15.01 GB).
 
-**Arquivos afetados:** `resources/rg43h/manifests/snes.yaml`, `scripts/tooling/curate_rg43h_roms.py`, `scripts/tooling/fix_rg43h_staging.py`, `resources/rg43h/staging/`, SD `H:\`, `status.md`, `timeline.md`.
+**Arquivos afetados:** `core/rg43h-pro/manifests/snes.yaml`, `scripts/tooling/curate_rg43h_roms.py`, `scripts/tooling/fix_rg43h_staging.py`, `core/rg43h-pro/staging/`, SD `H:\`, `status.md`, `timeline.md`.
 
 ---
 
@@ -29,11 +142,11 @@ Historico em ordem cronologica decrescente.
 
 ## 2026-08-31 — Skraper → staging RG43H
 
-**Evento:** Operador executou Skraper apontando para `resources/rg43h/staging/`.
+**Evento:** Operador executou Skraper apontando para `core/rg43h-pro/staging/`.
 
 **Resultado:** `gamelist.xml` + `images/` (e `videos/` em Neo Geo/PSX) actualizados no staging. Cobertura estimada ~**172/458** ROMs com capa (Neo Geo 43/45; NES 44/45; SNES continua 14/115). Deploy SD pendente.
 
-**Arquivos afetados:** `resources/rg43h/staging/**/gamelist.xml`, `images/`, `videos/`, `status.md`, `timeline.md`.
+**Arquivos afetados:** `core/rg43h-pro/staging/**/gamelist.xml`, `images/`, `videos/`, `status.md`, `timeline.md`.
 
 ---
 
@@ -43,7 +156,7 @@ Historico em ordem cronologica decrescente.
 
 **Resultado:** Script `apply_esde_media_rg43h.py` (dry-run/execute/uninstall/deploy). Staging: 126/458 ROMs com capa; NES quase completo (44/45); SNES 14/115 por sincronizacao parcial do Google Drive (pastas A–E). H: nao montado — deploy SD pendente. Relatorio `reports/2026-08-31-rg43h-esde-media.md`.
 
-**Arquivos afetados:** `scripts/tooling/apply_esde_media_rg43h.py`, `resources/rg43h/staging/**/images/`, `gamelist.xml`, `media-report.*`, docs RG43H, `status.md`, `timeline.md`.
+**Arquivos afetados:** `scripts/tooling/apply_esde_media_rg43h.py`, `core/rg43h-pro/staging/**/images/`, `gamelist.xml`, `media-report.*`, docs RG43H, `status.md`, `timeline.md`.
 
 ---
 
@@ -51,9 +164,9 @@ Historico em ordem cronologica decrescente.
 
 **Evento:** Operador confirmou SNES no RG43H Pro; documentar saves e scrape de capas no launcher.
 
-**Resultado:** Criado `resources/rg43h/docs/operator-guide.md` (SRAM vs savestate SELECT+R1/L1; scrape EmulationStation via ScreenScraper + Update Game Lists). README e plano de curadoria actualizados.
+**Resultado:** Criado `core/rg43h-pro/docs/operator-guide.md` (SRAM vs savestate SELECT+R1/L1; scrape EmulationStation via ScreenScraper + Update Game Lists). README e plano de curadoria actualizados.
 
-**Arquivos afetados:** `resources/rg43h/docs/operator-guide.md`, `resources/rg43h/README.md`, `resources/rg43h/docs/curation-plan.md`, `status.md`, `timeline.md`.
+**Arquivos afetados:** `core/rg43h-pro/docs/operator-guide.md`, `core/rg43h-pro/README.md`, `core/rg43h-pro/docs/curation-plan.md`, `status.md`, `timeline.md`.
 
 ---
 
@@ -63,7 +176,7 @@ Historico em ordem cronologica decrescente.
 
 **Resultado:** `curate_rg43h_roms.py` passa a priorizar `rom_set` (stem exacto do zip). `neogeo.yaml` 45/45 matched; `arcade.yaml` 20/70 (sets CPS2/CPS3/classics ausentes no espelho). Total **526** jogos matched (+60 vs v1). Redeploy `H:` FAT32 EEROMS sem reformatar (`-SkipFormat`), 3447 ficheiros (~8,9 GB). Neo Geo no SD: 45 ROMs + BIOS.
 
-**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `resources/rg43h/manifests/neogeo.yaml`, `resources/rg43h/manifests/arcade.yaml`, staging, SD `H:\`, `status.md`, `timeline.md`.
+**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `core/rg43h-pro/manifests/neogeo.yaml`, `core/rg43h-pro/manifests/arcade.yaml`, staging, SD `H:\`, `status.md`, `timeline.md`.
 
 ---
 
@@ -71,9 +184,9 @@ Historico em ordem cronologica decrescente.
 
 **Evento:** Gerar staging EmuELEC a partir de 16 manifestos YAML e copiar para cartao novo 128 GB.
 
-**Resultado:** `curate_rg43h_roms.py` executado (`--execute --yes`): 466 matched, 291 missing, ~7,46 GB ROMs. Staging em `resources/rg43h/staging/` (gitignored). `deploy_rg43h_sd.ps1`: formatacao FAT32 via `fat32format -c128` (Windows nao suporta FAT32 nativo >32 GB), rotulo EEROMS, robocopy 3375 ficheiros para `H:\`. Favoritos SNES OK (Metal Warriors, Rock n' Roll Racing, Parodius). Arcade largely missing (nomes MAME). SNES sem gamelist.xml filtrado (paths sd-original incompativeis — ROMs presentes).
+**Resultado:** `curate_rg43h_roms.py` executado (`--execute --yes`): 466 matched, 291 missing, ~7,46 GB ROMs. Staging em `core/rg43h-pro/staging/` (gitignored). `deploy_rg43h_sd.ps1`: formatacao FAT32 via `fat32format -c128` (Windows nao suporta FAT32 nativo >32 GB), rotulo EEROMS, robocopy 3375 ficheiros para `H:\`. Favoritos SNES OK (Metal Warriors, Rock n' Roll Racing, Parodius). Arcade largely missing (nomes MAME). SNES sem gamelist.xml filtrado (paths sd-original incompativeis — ROMs presentes).
 
-**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `scripts/tooling/windows/deploy_rg43h_sd.ps1`, `resources/rg43h/staging/`, SD `H:\`; `reports/2026-08-30-rg43h-curate-deploy.md`, `status.md`, `timeline.md`, `resources/rg43h/docs/curation-plan.md`.
+**Arquivos afetados:** `scripts/tooling/curate_rg43h_roms.py`, `scripts/tooling/windows/deploy_rg43h_sd.ps1`, `core/rg43h-pro/staging/`, SD `H:\`; `reports/2026-08-30-rg43h-curate-deploy.md`, `status.md`, `timeline.md`, `core/rg43h-pro/docs/curation-plan.md`.
 
 ---
 

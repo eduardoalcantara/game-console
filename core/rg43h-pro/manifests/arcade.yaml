@@ -39,49 +39,49 @@ games:
     sd_folder: cps2
     note: "Power Battle"
 
-  # --- CPS1 (fonte mame/ ou fbneo/) ---
+  # --- CPS1 (destino mame/: Skraper Recalbox nao reconhece pasta cps1) ---
   - base: "Final Fight"
     rom_set: ffight
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Final Fight 2"
     rom_set: ffight2
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Final Fight 3"
     rom_set: ffight3
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Captain Commando"
     rom_set: captcomm
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Knights of the Round"
     rom_set: knights
-    sd_folder: cps1
+    sd_folder: mame
   - base: "The King of Dragons"
     rom_set: kod
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Cadillacs and Dinosaurs"
     rom_set: dino
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Punisher"
     rom_set: punisher
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Ghouls'n Ghosts"
     rom_set: gng
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Strider"
     rom_set: strider
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Forgotten Worlds"
     rom_set: forgottn
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Mercs"
     rom_set: mercs
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Magic Sword"
     rom_set: msword
-    sd_folder: cps1
+    sd_folder: mame
   - base: "Carrier Air Wing"
     rom_set: uawing
-    sd_folder: cps1
+    sd_folder: mame
 
   # --- CPS3 (ausentes no espelho) ---
   - base: "Red Earth"

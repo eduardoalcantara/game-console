@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 extract_rg43h_metadata.py
-game-console — copia metadados EmuELEC do SD original (H:) para resources/rg43h/sd-original/
+game-console — copia metadados EmuELEC do SD original (H:) para core/rg43h-pro/sd-original/
 Sem tocar em ROMs; SD fisico permanece intacto.
 """
 
@@ -17,7 +17,7 @@ from typing import List, Optional, Tuple
 
 REPO_FOLDER_NAME = "game-console"
 DEFAULT_SRC = Path("H:/")
-DEFAULT_DST_REL = Path("resources") / "rg43h" / "sd-original"
+DEFAULT_DST_REL = Path("core") / "rg43h-pro" / "sd-original"
 
 EXTRA_ROOT_DIRS = ("bezels", "savestates", "splash", "BGM")
 META_NAMES = ("gamelist.xml", "gamelist.xml-bak")

@@ -6,7 +6,7 @@
 
 ## Resumo do estado atual
 
-Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em `resources/es-de/` (~10,8 GB; fora do Git). **Biblioteca ROMs mesclada (2026-08-30)** em `resources/roms/`. **Import `D:\play\rom` (2026-09-05):** +512 ROMs USA/World em `resources/roms/android/`. **RG43H PRO (2026-09-06):** produto em **`core/rg43h-pro/`**. Staging scrapado; deploy SD `H:` (`-SkipFormat`) concluido. **Operador confirma: aparelho a funcionar normalmente com o cartao actualizado.** Recuperacao remota de inputs do RetroArch via rede (SMB porta 445) implementada e aplicada no aparelho (`172.16.201.25`). Rock n' Roll Racing: apagadas a beta europeia e a versao Mega Drive (biblioteca, staging e SD). Ficam as SNES `Rock 'N' Roll Racing (Europe).zip` e `Rock n' Roll Racing.smc`, ambas com remap nitro L2 / tiro R2 / mina R1. Guia: `core/rg43h-pro/docs/operator-guide.md`.
+Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em `resources/es-de/` (~10,8 GB; fora do Git). **Biblioteca ROMs mesclada (2026-08-30)** em `resources/roms/`. **Import `D:\play\rom` (2026-09-05):** +512 ROMs USA/World em `resources/roms/android/`. **RG43H PRO (2026-09-06):** produto em **`core/rg43h-pro/`**. Staging scrapado; deploy SD `H:` (`-SkipFormat`) concluido. **Operador confirma: aparelho a funcionar normalmente com o cartao actualizado.** Recuperacao remota de inputs do RetroArch via rede (SMB porta 445) implementada e aplicada no aparelho (`172.16.201.25`). Rock n' Roll Racing: apagadas a beta europeia e a versao Mega Drive (biblioteca, staging e SD). Ficam as SNES `Rock 'N' Roll Racing (Europe).zip` e `Rock n' Roll Racing.smc`, ambas com remap nitro L2 / tiro R2 / mina R1. Snapshot de saves (~1 MB, 20 ficheiros) versionado em `core/rg43h-pro/saves-backup/20261102_221257/`. Guia: `core/rg43h-pro/docs/operator-guide.md`.
 
 ## Tarefas pendentes
 
@@ -42,6 +42,7 @@ Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em 
 
 ## Mudancas recentes
 
+- **RG43H saves no remoto (2026-11-02):** `saves-backup/20261102_221257/` deixa de ser ignorado. A pasta `roms/` dentro do snapshot era apanhada pela regra `ROMs/` (Windows ignora maiusculas); excecao no `.gitignore` so para esse backup.
 - **RG43H smoke test OK (2026-09-06):** operador confirma funcionamento normal no aparelho com SD actualizado pos-Skraper/deploy.
 - **Dreamcast CHD (2026-09-06):** Sonic Adventure convertido para `.chd` (Skraper-ready); SA2 `.7z` corrompido removido.
 - **RG43H curate (2026-09-05):** `curate_rg43h_roms.py --all --execute --yes` → **956** matched / 234 missing / **12,20 GB**; gamelists Skraper intactos; PSX 7z-as-zip re-extraidos.

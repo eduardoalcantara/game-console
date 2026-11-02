@@ -8,7 +8,7 @@ Espelho local para migracao RG43H PRO (EmuELEC / RGBox).
 | `manifests/` | Listas curadas por sistema (YAML) | versionado |
 | `staging/` | ROMs + media filtrados prontos para SD 128 GB | ignorado |
 | `config/` | Configuracao de referencia do RetroArch (`retroarch.cfg`) com binds funcionais | versionado |
-| `saves-backup/` | Backups locais de saves (.srm) e savestates (.state) | ignorado |
+| `saves-backup/` | Saves (.srm) e savestates (.state) puxados do aparelho | versionado |
 | `docs/` | Plano de curadoria, guia do operador (saves + scrape/capas + rede) | versionado |
 
 Scripts:

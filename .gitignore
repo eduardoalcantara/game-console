@@ -61,6 +61,11 @@ target/
 !**/docs/**/*.bin
 roms/
 ROMs/
+# Saves do RG43H ficam numa pasta chamada roms/; nao sao dumps de ROM.
+!core/rg43h-pro/saves-backup/
+!core/rg43h-pro/saves-backup/**
+!core/rg43h-pro/saves-backup/**/roms/
+!core/rg43h-pro/saves-backup/**/roms/**
 isos/
 ISOs/
 
@@ -82,7 +87,6 @@ resources/rg43h/sd-original/
 resources/rg43h/staging/
 core/rg43h-pro/sd-original/
 core/rg43h-pro/staging/
-core/rg43h-pro/saves-backup/
 
 # Platform-tools extraidos (manter so os ZIPs locais; pasta de trabalho)
 resources/android/platform-tools-win/

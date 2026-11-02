@@ -8,7 +8,7 @@ Historico em ordem cronologica decrescente.
 
 **Evento:** Operador pediu para apagar a ROM europeia beta (defeituosa), manter a Europe nao-beta e a sem pais, e aplicar o remap (nitro L2, tiro R2, mina R1) nessas duas. O Mega Drive tambem sai: o operador nao joga essa versao.
 
-**Resultado:** Beta e Mega Drive removidos da biblioteca `resources/roms/android/`, do staging e do SD no aparelho (`172.16.200.156`), incluindo entradas de `gamelist.xml`. Exclude no pack `racing` para a beta e para `Rock n' Roll Racing.md`. Remap Snes9x nas duas ROMs. Primeiro teste inverteu tiro e mina (R1/R2); corrigido no mesmo dia. GBA nao foi mexido.
+**Resultado:** Beta e Mega Drive removidos da biblioteca `resources/roms/android/`, do staging e do SD no aparelho (`172.16.200.156`), incluindo entradas de `gamelist.xml`. Exclude no pack `racing` para a beta e para `Rock n' Roll Racing.md`. Remap Snes9x nas duas ROMs. Primeiro teste inverteu tiro e mina (R1/R2); corrigido no mesmo dia. GBA nao foi mexido. Saves do aparelho (~1 MB, 20 ficheiros) em `core/rg43h-pro/saves-backup/20261102_221257/` passam a ser versionados.
 
 ---
 

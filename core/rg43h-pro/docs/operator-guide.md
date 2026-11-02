@@ -69,7 +69,7 @@ python scripts/tooling/pull_rg43h_saves.py --execute --yes
 python scripts/tooling/pull_rg43h_saves.py --uninstall --execute --yes
 ```
 
-- Destino: `core/rg43h-pro/saves-backup/<timestamp>/` (gitignored).
+- Destino: `core/rg43h-pro/saves-backup/<timestamp>/` (versionado; saves pequenos vao para o remoto).
 - `deploy_rg43h_sd.ps1` **sem** `-SkipFormat` corre o pull automaticamente antes de formatar.
 - Com `-SkipFormat` (actualizacao normal): so reporta; nao apaga o cartao.
 - Se o script nao encontrar nada no SD: saves provavelmente no **interno** — formatar o cartao e seguro para o progresso.

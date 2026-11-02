@@ -39,7 +39,7 @@ Estes exigiriam **nova aquisicao/dump** se o operador quiser 100% da serie; MSX 
 | Titulo | Ficheiro |
 |---|---|
 | Metal Warriors | `Metal Warriors.smc` |
-| Rock n' Roll Racing | `Rock n' Roll Racing.smc` (+ variantes EU `.zip`) |
+| Rock n' Roll Racing | `Rock n' Roll Racing.smc` e `Rock 'N' Roll Racing (Europe).zip` (beta europeia removida) |
 
 ## Flag `include_all_regions`
 

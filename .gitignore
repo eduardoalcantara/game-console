@@ -4,6 +4,8 @@
 *.temp
 *.swp
 *.swo
+*.bak
+*.backup*
 .DS_Store
 Thumbs.db
 desktop.ini

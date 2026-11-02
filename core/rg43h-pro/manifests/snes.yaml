@@ -136,7 +136,7 @@ games:
   - base: "Top Gear 2"
   - base: "Uniracers"
   - base: "Rock n' Roll Racing"
-    note: "favorito operador (versao USA limpa .smc)"
+    note: "favorito operador: Rock n' Roll Racing.smc e Rock 'N' Roll Racing (Europe).zip. Beta europeia excluida."
   - base: "Super Off Road"
   - base: "Super Punch-Out"
   - base: "NBA Jam"

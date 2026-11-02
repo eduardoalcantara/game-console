@@ -2,23 +2,20 @@
 
 ## Data da ultima atualizacao
 
-2026-09-05
+2026-11-02
 
 ## Resumo do estado atual
 
-Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em `resources/es-de/` (~10,8 GB; fora do Git). **Biblioteca ROMs mesclada (2026-08-30)** em `resources/roms/`. **Import `D:\play\rom` (2026-09-05):** +512 ROMs USA/World em `resources/roms/android/`. **RG43H PRO (2026-09-06):** produto em **`core/rg43h-pro/`**. Staging scrapado; **deploy SD `H:`** (`-SkipFormat`) concluido — ~10.972 ficheiros no cartao. Guia: `core/rg43h-pro/docs/operator-guide.md`.
+Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em `resources/es-de/` (~10,8 GB; fora do Git). **Biblioteca ROMs mesclada (2026-08-30)** em `resources/roms/`. **Import `D:\play\rom` (2026-09-05):** +512 ROMs USA/World em `resources/roms/android/`. **RG43H PRO (2026-09-06):** produto em **`core/rg43h-pro/`**. Staging scrapado; deploy SD `H:` (`-SkipFormat`) concluido. **Operador confirma: aparelho a funcionar normalmente com o cartao actualizado.** Recuperacao remota de inputs do RetroArch via rede (SMB porta 445) implementada e aplicada no aparelho (`172.16.201.25`). Rock n' Roll Racing: apagadas a beta europeia e a versao Mega Drive (biblioteca, staging e SD). Ficam as SNES `Rock 'N' Roll Racing (Europe).zip` e `Rock n' Roll Racing.smc`, ambas com remap nitro L2 / tiro R2 / mina R1. Guia: `core/rg43h-pro/docs/operator-guide.md`.
 
 ## Tarefas pendentes
 
-- **RG43H:** smoke test no aparelho (MAME/CPS1, Dreamcast SA1, capas/nomes, saves intactos).
 - **Dreamcast:** obter dump SA2 valido (CHD/GDI) quando disponivel.
-- **RG43H:** smoke test nomes/capas/saves; se for formatar o cartao, correr `pull_rg43h_saves.py --execute --yes` antes.
 - Smoke test PC (RetroArch/DuckStation): 2 jogos por sistema (complementar).
 - Verificar pasta externa `Recursos/Jogos/roms/ROMs/` (6 arquivos nao mapeados).
 - Limpar placeholders vazios em `resources/new-roms/` (opcional).
 - Operador: rescan/reabrir ES-DE no Razr (carrossel so MD + SNES).
 - ADB (quando decidir): reenviar Switch / outros sistemas a partir do espelho local (incl. Neon Apex).
-- Operador: obter `neogeo.zip` com CRCs FBNeo; diagnosticar MAME (core/set) antes de reenviar arcade.
 - Operador: first-run ES-DE / cores RetroArch / layout / smoke test legado (checklist).
 - Executar `setup-adb.md` no Poco X3 NFC e validar checklist (celular).
 - Repetir no tablet (modelo ainda nao registrado).
@@ -32,21 +29,21 @@ Pacote documental Android (passo 1) concluido. Espelho local de scrape ES-DE em 
 - ES-DE Android e pago e nao redistribuivel; o APK esta local e coberto por `.gitignore` (nunca commitar).
 - Package ids do ES-DE podem variar por canal (Patreon vs Galaxy Store).
 - DuckStation Android sem suporte ativo; regressoes futuras de OS sao risco.
-- Set MAME / Neo Geo no Razr: operador reportou tela preta antes da limpeza; BIOS mesclada tem CRC FBNeo correto — revalidar em emulador antes de reenviar.
 - Assinatura Play Store vs APK oficial do RetroArch exige desinstalacao previa.
-- `psx`, `n64`, `psp` etc. agora populados no espelho PC; smoke test ainda nao executado.
+- `psx`, `n64`, `psp` etc. agora populados no espelho PC; smoke test PC ainda nao executado.
 - O espelho `resources/roms/` e `resources/es-de/downloaded_media/` ocupam espaco no Google Drive.
+- Dreamcast: so Sonic Adventure (CHD) no cartao; SA2 ausente (dump anterior corrompido).
 
 ## Proximos passos
 
-1. Operador: recolocar SD 128 GB em `H:` → `deploy_rg43h_sd.ps1 -SkipFormat -Yes` (sincronizar `neogeo/gamelist.xml` com titulos legiveis).
-2. No RG43H: smoke test Neo Geo (nomes no carrossel + jogos) sem regenerar lista a partir dos ficheiros.
-3. Operador: rescan/reabrir ES-DE no Razr (so Mega Drive + SNES).
-4. Poco X3 NFC: resolver "Instalar via USB" e repetir faixa Android padrao.
+1. Opcional: obter SA2 Dreamcast valido e re-deploy `-SkipFormat`.
+2. Operador: rescan/reabrir ES-DE no Razr (so Mega Drive + SNES).
+3. Poco X3 NFC: resolver "Instalar via USB" e repetir faixa Android padrao.
 
 ## Mudancas recentes
 
-- **Dreamcast CHD (2026-09-06):** Sonic Adventure convertido para `.chd` (Skraper-ready); SA2 `.7z` corrompido (Data Error Track 3) — falta dump valido.
+- **RG43H smoke test OK (2026-09-06):** operador confirma funcionamento normal no aparelho com SD actualizado pos-Skraper/deploy.
+- **Dreamcast CHD (2026-09-06):** Sonic Adventure convertido para `.chd` (Skraper-ready); SA2 `.7z` corrompido removido.
 - **RG43H curate (2026-09-05):** `curate_rg43h_roms.py --all --execute --yes` → **956** matched / 234 missing / **12,20 GB**; gamelists Skraper intactos; PSX 7z-as-zip re-extraidos.
 - **Import D:\play\rom (2026-09-05):** 512 ROMs USA/World → `resources/roms/android/` (sem EU/JP exclusivos); 0 erros.
 - **RG43H franchise + saves (2026-09-05):** packs Mario/Sonic/Mega Man/corrida → 954 ROMs no staging; `pull_rg43h_saves.py` + deploy chama pull antes de formatar.

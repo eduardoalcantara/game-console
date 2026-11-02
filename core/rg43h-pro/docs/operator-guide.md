@@ -242,6 +242,65 @@ Relatorio: `reports/2026-08-31-rg43h-esde-media.md` / `staging/media-report.md`.
 
 ---
 
+## 4. Recuperacao de Botoes e Configuracao RetroArch via Rede (SMB)
+
+Caso as configuracoes de controle do RetroArch sejam alteradas ou desmapeadas acidentalmente (exemplo: botao de confirmacao `A` passar para `nul`):
+
+### 4.1 Comportamento do botao fisico Reset
+- O botao fisico de reset (**RST** / orificio lateral) e um **reboot forcado de hardware** (corte de energia no SoC).
+- **Nao apaga saves** (desde que nao seja acionado no segundo exato em que um jogo estiver gravando no SD).
+- **Nao resolve problemas de configuracao**: o sistema reinicia preservando os ficheiros de configuracao existentes em `/storage/.config/`.
+
+### 4.2 Restauracao automatica via rede (SMB)
+Com o console conectado a rede Wi-Fi local:
+1. Obter o IP do aparelho em `START` → `NETWORK` (exemplo: `172.16.201.25`).
+2. No PC, executar o script de correcao:
+   ```bash
+   python scripts/tooling/fix_rg43h_retroarch_network.py --ip 172.16.201.25
+   ```
+3. O script conecta via SMB na porta 445 (compartilhamento `Storage`), gera backup de seguranca em `retroarch.cfg.bak` e restaura os mapeamentos nativos do controlador `play_joystick`:
+   - `input_player1_a_btn = "1"` (A = confirm / OK)
+   - `input_player1_b_btn = "0"` (B = cancel / voltar)
+   - `input_player1_x_btn = "2"`
+   - `input_player1_y_btn = "3"`
+   - `input_player1_a = "x"` (tecla X no teclado USB)
+   - `input_player1_b = "z"` (tecla Z no teclado USB)
+
+### 4.3 SSH
+
+Neste firmware **nao ha servidor SSH**. Confirmado em `172.16.200.156` a 2026-11-02, com o log `/storage/ssh-boot.log` gerado ao abrir um jogo:
+
+- `sshd`, `ssh-keygen` e `dropbear` nao existem em `/usr/bin` nem `/usr/sbin`
+- `systemctl start sshd` responde `Unit sshd.service not found`
+- `ee_ssh.enabled=1` e o ficheiro `/storage/.cache/services/sshd.conf` nao criam o servico
+
+O menu RGBox tambem nao tem interruptor de SSH. A porta 22 fica fechada. O acesso remoto que funciona e o Samba (porta 445, partilhas `Storage`, `roms` e `emuelec`).
+
+Os hooks de arranque experimentados (`custom_start.sh` e `profile.d`) foram removidos depois deste teste, para nao correrem em cada jogo.
+
+### 4.4 Remap de um jogo sem mexer no menu
+
+O menu do RetroArch usa os binds globais de `retroarch.cfg` (`input_player1_a_btn` e companhia). Um remap de jogo fica em `config/remappings/<Core>/<ROM>.rmp` e so vale dentro desse jogo.
+
+Rock 'N' Roll Racing no SNES, core Snes9x, nas duas ROMs que ficam no cartao:
+
+- `Rock 'N' Roll Racing (Europe).zip`
+- `Rock n' Roll Racing.smc`
+
+Gravado em 2026-11-02 no aparelho `172.16.200.156`:
+
+| Accao no jogo | Botao |
+|---|---|
+| Tiro laser (era A) | R2 |
+| Nitro (era X) | L2 |
+| Mina (era Y) | R1 |
+
+No primeiro teste o tiro ficou no R1 e a mina no R2. Os ids desses dois ombros neste comando estao trocados em relacao ao rotulo; o ficheiro foi corrigido a seguir. O nitro no L2 ja estava certo.
+
+O botao B (acelerar) e o A de confirmacao do menu ficam como estavam. E preciso sair do jogo e voltar a abri-lo para o remap carregar. Copia no repo: `core/rg43h-pro/config/remappings/Snes9x/`.
+
+---
+
 ## Referencias
 
 - Analise SD: `reports/2026-08-30-rg43h-sd-analysis.md`

@@ -7,12 +7,16 @@ Espelho local para migracao RG43H PRO (EmuELEC / RGBox).
 | `sd-original/` | Metadados extraidos do SD de fabrico (gamelist.xml, images/) | ignorado |
 | `manifests/` | Listas curadas por sistema (YAML) | versionado |
 | `staging/` | ROMs + media filtrados prontos para SD 128 GB | ignorado |
-| `docs/` | Plano de curadoria, guia do operador (saves + scrape/capas) | versionado |
+| `config/` | Configuracao de referencia do RetroArch (`retroarch.cfg`) com binds funcionais | versionado |
+| `saves-backup/` | Backups locais de saves (.srm) e savestates (.state) | ignorado |
+| `docs/` | Plano de curadoria, guia do operador (saves + scrape/capas + rede) | versionado |
 
 Scripts:
 - `scripts/tooling/extract_rg43h_metadata.py`
 - `scripts/tooling/curate_rg43h_roms.py` — copia ROMs + franchise packs; **nao** altera `gamelist.xml`/media do Skraper; **nao** renomeia sets arcade
-- `scripts/tooling/pull_rg43h_saves.py` — verifica/backup saves do SD → `saves-backup/`
+- `scripts/tooling/pull_rg43h_saves.py` — verifica/backup saves do SD local → `saves-backup/`
+- `scripts/tooling/pull_rg43h_network_saves.py` — verifica/backup saves e savestates via rede (SMB) → `saves-backup/`
+- `scripts/tooling/fix_rg43h_retroarch_network.py` — restaura configuracao de botoes do RetroArch via rede (SMB)
 - `scripts/tooling/apply_esde_media_rg43h.py` — capas ES-DE → staging/SD
 - `scripts/tooling/fix_rg43h_staging.py` — BIOS aplanadas + correccoes PSX
 - `scripts/tooling/windows/deploy_rg43h_sd.ps1` — copia staging; pull saves antes de formatar

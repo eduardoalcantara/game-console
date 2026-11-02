@@ -4,13 +4,47 @@ Historico em ordem cronologica decrescente.
 
 ---
 
+## 2026-11-02 — Rock n' Roll Racing: beta fora, remap nas duas SNES
+
+**Evento:** Operador pediu para apagar a ROM europeia beta (defeituosa), manter a Europe nao-beta e a sem pais, e aplicar o remap (nitro L2, tiro R2, mina R1) nessas duas. O Mega Drive tambem sai: o operador nao joga essa versao.
+
+**Resultado:** Beta e Mega Drive removidos da biblioteca `resources/roms/android/`, do staging e do SD no aparelho (`172.16.200.156`), incluindo entradas de `gamelist.xml`. Exclude no pack `racing` para a beta e para `Rock n' Roll Racing.md`. Remap Snes9x nas duas ROMs. Primeiro teste inverteu tiro e mina (R1/R2); corrigido no mesmo dia. GBA nao foi mexido.
+
+---
+
+## 2026-11-02 — SSH preparado no RG43H Pro via SMB
+
+**Evento:** `ee_ssh.enabled=1` ja estava em `emuelec.conf`, mas `/storage/.cache/services/sshd.conf` nao existia e a porta 22 estava fechada. O menu RGBox nao expoe o interruptor de SSH.
+
+**Resultado:** a porta 22 permanece fechada. O log `/storage/ssh-boot.log` (gerado ao abrir um jogo) mostra que o firmware nao inclui `sshd`, `ssh-keygen` nem `dropbear`, e que `sshd.service` nao existe. `ee_ssh.enabled=1` nao cria o servico. Hooks temporarios em `custom_start.sh` e `profile.d` foram removidos. Acesso remoto que funciona: Samba na porta 445.
+
+---
+
+## 2026-09-06 — Recuperacao remota de inputs RetroArch no RG43H Pro via rede (SMB)
+
+**Evento:** Operador reportou desmapeamento acidental do botao de confirmacao `A` dentro do RetroArch (`input_player1_a_btn = "nul"`). Criado script `scripts/tooling/fix_rg43h_retroarch_network.py` e executada correcao remota via protocolo SMB (porta 445) no IP `172.16.201.25`.
+
+**Resultado:** Acesso ao compartilhamento `Storage\.config\retroarch` realizado com sucesso. Backup gerado em `retroarch.cfg.bak` e no PC. Restaurados mapeamentos fisicos do driver `play_joystick` (A=1, B=0, X=2, Y=3, etc.) e teclado USB fallback. Confirmado que o botao fisico RST e apenas corte eletrico de hardware e nao apaga saves nem altera configuracoes. Documentado no `operator-guide.md`.
+
+---
+
+## 2026-09-06 — Smoke test RG43H Pro OK (operador)
+
+**Evento:** Operador confirma que o RG43H Pro funciona normalmente com o cartao SD actualizado (pos curate + Skraper + deploy `-SkipFormat`).
+
+**Resultado:** Validacao em aparelho OK (relato do operador). Ciclo de actualizacao do cartao encerrado sem regressao reportada.
+
+**Pendente:** opcional — dump SA2 Dreamcast valido.
+
+---
+
 ## 2026-09-06 — Deploy SD H: apos Skraper
 
 **Evento:** `deploy_rg43h_sd.ps1 -DriveLetter H -SkipFormat -Yes`.
 
 **Resultado:** exit 0; staging ~10.952 ficheiros / 21.71 GB → `H:\` (EEROMS FAT32). Total SD reportado: **10972** ficheiros. Saves no cartao detectados (dry-run; nao formatado). Retry robocopy em `Mega Man 8 [T-BR].PBP` (erro transitorio). Orphan SA2 `.7z` removido de `H:\dreamcast\` apos deploy.
 
-**Pendente:** smoke test no RG43H (MAME com CPS1, Dreamcast SA1, nomes/capas).
+**Validacao posterior:** smoke test no aparelho OK (ver entrada acima).
 
 ---
 

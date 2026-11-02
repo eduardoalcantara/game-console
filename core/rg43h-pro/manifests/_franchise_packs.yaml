@@ -141,3 +141,5 @@ packs:
       - "(?i)controller kensa"
       - "(?i)stamp rally"
       - "(?i)world rally championship.*proto"
+      - "(?i)rock & roll racing.*\\(beta\\)"
+      - "(?i)rock n.? ?roll racing\\.md"

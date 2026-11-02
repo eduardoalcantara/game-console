@@ -27,7 +27,7 @@ Ficheiro `_franchise_packs.yaml` (prefixo `_` = nao e manifesto de sistema).
 Registados em manifestos com `note: "favorito operador"`:
 
 - **Metal Warriors** (`snes.yaml`)
-- **Rock n' Roll Racing** (`snes.yaml` + variantes EU)
+- **Rock n' Roll Racing** (`snes.yaml`: `.smc` sem pais + Europe nao-beta; beta e Mega Drive excluidos)
 
 ## Serie Parodius
 
